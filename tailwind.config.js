@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        'mainudin': '0 0 10px hsla(0, 0%, 0%, 0.1)',
+        // box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.1);
+      }
+    },
   },
   plugins: [
     require('daisyui'),

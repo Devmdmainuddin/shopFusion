@@ -9,8 +9,8 @@ const Footer = () => {
             <Container>
 
 
-                <div className=" flex lg:gap-x-36 gap-x-14">
-                    <div className="flex justify-between lg:gap-x-36 gap-x-14">
+                <div className=" flex flex-col md:flex-row items-center md:items-start justify-center lg:gap-x-36 gap-x-14">
+                    <div className=" flex  justify-between lg:gap-x-36 gap-x-14">
                         <ul>
                             <h4 className='font-DM font-bold text-base text-[#262626] leading-6  md:mb-4 mb-2'>MENU</h4>
 
@@ -34,7 +34,7 @@ const Footer = () => {
                         </ul>
 
                         <ul>
-                            <h4 className='font-DM font-bold text-base text-[#262626] leading-6 md:mb-4 mb-2 mt-7 md:mt-0'>SHOP</h4>
+                            <h4 className='font-DM font-bold text-base text-[#262626] leading-6 md:mb-4 mb-2 '>SHOP</h4>
 
                             <li>
                                 <Link className='font-DM text-sm text-[#6D6D6D]leading-6'>Category 1</Link>
@@ -56,7 +56,7 @@ const Footer = () => {
                         </ul>
 
                         <ul>
-                            <h4 className='font-DM font-bold text-base text-[#262626] leading-6  md:mb-4 mb-2 mt-7 md:mt-0'>HELP</h4>
+                            <h4 className='font-DM font-bold text-base text-[#262626] leading-6  md:mb-4 mb-2 '>HELP</h4>
 
                             <li>
                                 <Link className='font-DM text-sm text-[#6D6D6D]leading-6'>Privacy Policy</Link>

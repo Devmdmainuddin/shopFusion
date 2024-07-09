@@ -2,6 +2,7 @@ import Ads from "../components/ads/Ads";
 import Banner from "../components/banner/Banner";
 import HerroBanner from "../components/banner/HerroBanner";
 import Card from "../components/card/Card";
+import Company from "../components/Company";
 import Searchbar from '../components/share/Searchbar'
 import Product from "./Product";
 const Home = () => {
@@ -19,6 +20,7 @@ const Home = () => {
            </div>
           
            <Ads></Ads>
+           <Company></Company>
         </div>
     );
 };

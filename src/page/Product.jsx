@@ -144,7 +144,7 @@ const Product = () => {
                             <Card></Card>
                         </div>
                         <div className='mt-[53px]'>
-                            <div className='flex justify-between items-center'>
+                            <div className='flex justify-center md:justify-between items-center flex-col md:flex-row gap-y-8'>
                                 <ul className='flex items-center gap-4 '>
                                     <li className='inline-block py-2 px-4 bg-black text-white'>1</li>
                                     <li className='inline-block py-2 px-4 border border-[#F0F0F0] text-[#767676]'>2</li>

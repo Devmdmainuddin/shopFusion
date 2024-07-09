@@ -10,6 +10,7 @@ const Card = () => {
     return (
         <div className='py-12'>
             <Container>
+            <h1 className=' mt-[128px] mb-12 text-[#262626] text-[39px] font-bold'>New Arrivals</h1>
                 <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10'>
                     <div className='group'>
                         <div className="image relative overflow-hidden">

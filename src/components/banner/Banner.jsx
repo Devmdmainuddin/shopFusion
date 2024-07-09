@@ -4,7 +4,7 @@ import banner_2 from '/banner-2.jpg'
 import banner_3 from '/banner-3.jpg'
 const Banner = () => {
     return (
-        <div className="my-[128px]">
+        <div className="mt-[128px]">
             <Container>
                 <div className="flex justify-between flex-col md:flex-row gap-6">
                     <div>
@@ -13,8 +13,8 @@ const Banner = () => {
                     </div>
                     <div className="flex flex-col  gap-6">
                         {/* className="w-full h-auto md:w-[784] md:h-[370px] " */}
-                    <img src={banner_2} alt=""  className="w-full h-auto md:max-w-[784] md:max-h-[370px] "  />
-                    <img src={banner_3} alt="" className="w-full h-auto md:max-w-[784] md:max-h-[370px] " />
+                        <img src={banner_2} alt="" className="w-full h-auto md:max-w-[784] md:max-h-[370px] " />
+                        <img src={banner_3} alt="" className="w-full h-auto md:max-w-[784] md:max-h-[370px] " />
                     </div>
 
                 </div>

@@ -8,10 +8,9 @@ import { LuRefreshCcw } from 'react-icons/lu';
 import { FaCartShopping } from 'react-icons/fa6';
 const Card = () => {
     return (
-        <div className='py-12'>
-            <Container>
-            <h1 className=' mt-[128px] mb-12 text-[#262626] text-[39px] font-bold'>New Arrivals</h1>
-                <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10'>
+        <>
+       
+            
                     <div className='group'>
                         <div className="image relative overflow-hidden">
                             <p className='md:py-2 md:px-8 p-2 text-sm font-bold text-white bg-black absolute top-3 left-3'>10%</p>
@@ -181,9 +180,8 @@ const Card = () => {
                         </div>
 
                     </div>
-                </div>
-            </Container>
-        </div>
+                    </>
+          
     );
 };
 

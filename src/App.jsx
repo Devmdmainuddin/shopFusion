@@ -10,6 +10,7 @@ import About from './page/About';
 import Contacts from './page/Contacts';
 import Shop from './page/Shop';
 import Journal from './page/Journal';
+import DashboardLayout from './Layout/DashboardLayout';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
         path: "/journal",
         element: <Journal/>,
       },
+      {
+        path: "/dashboard",
+        element: <DashboardLayout></DashboardLayout>,
+      }
     ],
   },
 ]);

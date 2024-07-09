@@ -27,7 +27,7 @@ const HeroBanner = () => {
                     delay: 5000,
                     disableOnInteraction: false,
                 }}
-                modules={[Navigation, Autoplay]} className="mySwiper z-50 ">
+                modules={[Navigation, Autoplay]} className="mySwiper z-0 ">
                 {/* {banner} */}
                 <SwiperSlide className=''>
                 {/* className={`h-[328px] rounded-xl carousel-item relative w-full bg-[url('${banner}')] bg-cover bg-center`} */}

@@ -6,12 +6,12 @@ import Card from '../components/card/Card'
 import { Link } from 'react-router-dom';
 const Product = () => {
     const [round, setRound] = useState(false)
-    useEffect(()=>{
-        function rounded(){
+    useEffect(() => {
+        function rounded() {
             setRound(true)
         }
         rounded()
-    },[])
+    }, [])
     return (
         <div>
             <Container>
@@ -20,8 +20,8 @@ const Product = () => {
                     <ul className='flex items-center gap-2 mt-3'>
                         <li className='text-[12px] font-normal text-[#767676]'><Link>Home</Link></li>
                         <li><IoIosArrowForward className='text-[12px]' /></li>
-                       <li className='text-[12px] font-normal text-[#767676]'> <Link> Products</Link></li>
-                        </ul>
+                        <li className='text-[12px] font-normal text-[#767676]'> <Link> Products</Link></li>
+                    </ul>
                 </div>
                 <div className='sm:flex justify-center md:justify-between mt-[130px] gap-4'>
                     {/* sidebar */}
@@ -127,7 +127,7 @@ const Product = () => {
                                     <option value="featured">featured</option>
                                     <option value="new">new</option>
                                     <option value="old">old</option>
-                                    
+
                                 </select>
                             </div>
                             <div className='flex  items-center gap-4'>
@@ -136,7 +136,7 @@ const Product = () => {
                                     <option value="36" >36</option>
                                     <option value="16">16</option>
                                     <option value="8">8</option>
-                                    
+
                                 </select>
                             </div>
                         </div>
@@ -152,13 +152,14 @@ const Product = () => {
                                     <li className='inline-block py-2 px-4 border border-[#F0F0F0] text-[#767676]'>4</li>
                                     <li className='inline-block py-2 px-4  text-#D8D8D8]'>...</li>
                                     <li className='inline-block py-2 px-4 border border-[#F0F0F0] text-[#767676]'>10</li>
-    
+
                                 </ul>
                                 <p className='text-sm font-normal text-[#767676]'>Products from 1 to 12 of 80</p>
                             </div>
                         </div>
                     </div>
                 </div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1826.084438858369!2d90.38142416210259!3d23.741356493429844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b7a55cd36f%3A0xfcc5b021faff43ea!2sCreative%20IT%20Institute!5e0!3m2!1sen!2sbd!4v1720523410960!5m2!1sen!2sbd" width="600" height="450" allowfullscreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
             </Container>
 
         </div>

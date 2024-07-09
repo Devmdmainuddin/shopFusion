@@ -5,13 +5,11 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 const Footer = () => {
     return (
-        <div className="bg-[#F5F5F3] pt-[53px]">
+        <footer className="bg-[#F5F5F3] pt-[53px]">
             <Container>
-
-
-                <div className=" flex flex-col md:flex-row items-center md:items-start justify-center lg:gap-x-36 gap-x-14">
-                    <div className=" flex  justify-between lg:gap-x-36 gap-x-14">
-                        <ul>
+                <div className=" flex flex-col md:flex-row items-center md:items-start  lg:gap-x-36 gap-x-14">
+                    <div className=" w-1/3 flex  justify-between lg:gap-x-36 gap-x-14">
+                        <ul >
                             <h4 className='font-DM font-bold text-base text-[#262626] leading-6  md:mb-4 mb-2'>MENU</h4>
 
                             <li>
@@ -33,7 +31,7 @@ const Footer = () => {
 
                         </ul>
 
-                        <ul>
+                        <ul >
                             <h4 className='font-DM font-bold text-base text-[#262626] leading-6 md:mb-4 mb-2 '>SHOP</h4>
 
                             <li>
@@ -55,7 +53,7 @@ const Footer = () => {
 
                         </ul>
 
-                        <ul>
+                        <ul >
                             <h4 className='font-DM font-bold text-base text-[#262626] leading-6  md:mb-4 mb-2 '>HELP</h4>
 
                             <li>
@@ -77,7 +75,7 @@ const Footer = () => {
 
                         </ul>
                     </div>
-                    <div>
+                    <div className=" w-1/3">
                         <ul className=' mt-7 md:mt-0'>
 
                             <li>
@@ -94,12 +92,9 @@ const Footer = () => {
 
                         </ul>
                     </div>
-                    <div>
+                    <div className=" w-1/3">
                         <img src={logo} alt="" />
                     </div>
-
-
-
                 </div>
                 <div className="flex justify-between pt-16 pb-[59px]">
                     <div className="icons flex gap-6 text-[#262626]">
@@ -112,7 +107,7 @@ const Footer = () => {
                 </div>
             </Container>
 
-        </div>
+        </footer>
     );
 };
 

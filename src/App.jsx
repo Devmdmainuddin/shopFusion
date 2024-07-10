@@ -11,6 +11,7 @@ import Contacts from './page/Contacts';
 import Shop from './page/Shop';
 import Journal from './page/Journal';
 import DashboardLayout from './Layout/DashboardLayout';
+import Account from './page/Account';
 
 const router = createBrowserRouter([
   {
@@ -38,11 +39,16 @@ const router = createBrowserRouter([
         element: <Journal/>,
       },
       {
-        path: "/dashboard",
-        element: <DashboardLayout></DashboardLayout>,
-      }
+        path: "/account",
+        element: <Account/>,
+      },
+      
     ],
   },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout></DashboardLayout>,
+  }
 ]);
 
 function App() {

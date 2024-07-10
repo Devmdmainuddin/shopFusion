@@ -2,7 +2,7 @@ import Container from "../layer/Container";
 import ads from '/ads_2.jpg'
 const Ads = () => {
     return (
-        <div>
+        <div className="mt-[130px]">
             <Container>
                 <div>
                     <img src={ads} alt="" />

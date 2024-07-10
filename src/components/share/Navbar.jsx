@@ -27,7 +27,7 @@ const Navbar = () => {
     }, [])
     return (
         <div className="">
-            <Container className='  '>
+            <Container >
                 <div className="flex justify-end md:justify-center items-center relative md:py-8 py-3 px-3 md:px-0">
                     <div className="logo">
                         <Image src={logo} alt="logo image" className="absolute left-6 top-1/2 -translate-y-1/2" ></Image>
@@ -46,7 +46,7 @@ const Navbar = () => {
                             <div className=" absolute z-50 top-full right-12 ">
                                 <div className="w-[263px] block  bg-[#ffffff] ">
                                     <div className="button flex flex-col  w-full">
-                                        <Link to='/dashboard' className="py-4  px-3 lg:px-10 bg-[#262626]  w-full text-white ">My Account</Link>
+                                        <Link to='/account' className="py-4  px-3 lg:px-10 bg-[#262626]  w-full text-white ">My Account</Link>
                                         <button className="py-4 px-3 lg:px-10 text-[#262626]  w-full mt-0 bg-[#F0F0F0] border ">logOut</button>
 
                                     </div>

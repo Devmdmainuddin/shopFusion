@@ -7,8 +7,8 @@ const Footer = () => {
     return (
         <footer className="bg-[#F5F5F3] pt-[53px]">
             <Container>
-                <div className=" flex flex-col md:flex-row items-center md:items-start  lg:gap-x-36 gap-x-14">
-                    <div className=" w-1/3 flex  justify-between lg:gap-x-36 gap-x-14">
+                <div className=" flex flex-col md:flex-row items-center md:items-start text-center md:text-start md:gap-x-12 lg:gap-x-36 gap-y-8">
+                    <div className=" left  flex  justify-center  md:justify-between lg:gap-x-[140px] gap-x-16">
                         <ul >
                             <h4 className='font-DM font-bold text-base text-[#262626] leading-6  md:mb-4 mb-2'>MENU</h4>
 
@@ -35,19 +35,19 @@ const Footer = () => {
                             <h4 className='font-DM font-bold text-base text-[#262626] leading-6 md:mb-4 mb-2 '>SHOP</h4>
 
                             <li>
-                                <Link className='font-DM text-sm text-[#6D6D6D]leading-6'>Category 1</Link>
+                                <Link className='font-DM text-sm text-[#6D6D6D] leading-6'>Category 1</Link>
                             </li>
-                            <li>
-                                <Link className='font-DM text-sm text-[#6D6D6D]leading-6'>Category 2</Link>
+                            <li className="mt-2">
+                                <Link className='font-DM text-sm text-[#6D6D6D] leading-6'>Category 2</Link>
                             </li>
-                            <li>
-                                <Link className='font-DM text-sm text-[#6D6D6D]leading-6'>Category 3</Link>
+                            <li className="mt-2">
+                                <Link className='font-DM text-sm text-[#6D6D6D] leading-6'>Category 3</Link>
                             </li>
-                            <li>
-                                <Link className='font-DM text-sm text-[#6D6D6D]leading-6'>Category 4</Link>
+                            <li className="mt-2">
+                                <Link className='font-DM text-sm text-[#6D6D6D] leading-6'>Category 4</Link>
                             </li>
-                            <li>
-                                <Link className='font-DM text-sm text-[#6D6D6D]leading-6'>Category 5</Link>
+                            <li className="mt-2">
+                                <Link className='font-DM text-sm text-[#6D6D6D] leading-6'>Category 5</Link>
                             </li>
 
 
@@ -75,7 +75,7 @@ const Footer = () => {
 
                         </ul>
                     </div>
-                    <div className=" w-1/3">
+                    <div className="right  ">
                         <ul className=' mt-7 md:mt-0'>
 
                             <li>
@@ -92,18 +92,18 @@ const Footer = () => {
 
                         </ul>
                     </div>
-                    <div className=" w-1/3">
+                    <div className="flex justify-center items-center">
                         <img src={logo} alt="" />
                     </div>
                 </div>
-                <div className="flex justify-between pt-16 pb-[59px]">
+                <div className="flex flex-col lg:flex-row items-center justify-between pt-8 lg:pt-16 pb-[59px] gap-y-8 ">
                     <div className="icons flex gap-6 text-[#262626]">
                     <FaFacebookF />
                     <FaLinkedinIn />
                     <FaInstagram />
 
                     </div>
-                    <p className="text-sm font-normal text-[#6D6D6D]">2020 Orebi Minimal eCommerce Figma Template by Adveits</p>
+                    <p className="text-sm font-normal text-center lg:text-start text-[#6D6D6D]">2020 Orebi Minimal eCommerce Figma Template by Adveits</p>
                 </div>
             </Container>
 

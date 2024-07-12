@@ -1,13 +1,15 @@
 import { IoIosArrowForward } from "react-icons/io";
 import Container from "../components/layer/Container";
 import { Link } from "react-router-dom";
-import { FaStar } from "react-icons/fa";
+import { FaMinus, FaPlus, FaStar } from "react-icons/fa";
 import { ImStarHalf } from "react-icons/im";
+import { useState } from "react";
 
 
 const ProductDetails = () => {
+    let [Quantity, setQuantity] = useState(1);
     return (
-        <div>
+        <div >
             <Container>
                 <div className='mt-[93px]'>
                     <h2 className='text-[#262626] text-6xl font-bold'>Products</h2>
@@ -17,7 +19,7 @@ const ProductDetails = () => {
                         <li className='text-[12px] font-normal text-[#767676]'> <Link> Products</Link></li>
                     </ul>
                 </div>
-                <div>
+                <div className="max-w-[782px]">
                     <div>
                         <h2 className="text-[39px] font-bold text-[#262626]">Product</h2>
                         <div className="flex gap-6 mt-4">
@@ -53,8 +55,59 @@ const ProductDetails = () => {
 
                             </select>
                         </div>
+                        <div className='flex mt-[30px] items-center gap-4  '>
+                            <p className="text-[#262626] text-[16px] font-bold">QUANTITY:</p>
+                            <div className="w-[139px]  bg-[#F0F0F0] text-[#767676] flex justify-between items-center p-3">
+                                <span
+                                    className="cursor-pointer inline-block   text-lg font-normal "
+                                    onClick={() =>
+                                        setQuantity((data) => {
+                                            if (data >= 2) {
+                                                return data - 1;
+                                            } else {
+                                                return 1;
+                                            }
+                                        })
+                                    }
+                                >
+                                    <FaMinus />
+                                </span>
+                                <span className="inline-block px-2 text-lg font-normal">{Quantity}</span>
+                                <span
+                                    className="cursor-pointer inline-block  text-lg "
+                                    onClick={() => setQuantity(Quantity + 1)}
+                                >
+                                    <FaPlus />
+                                </span>
+                            </div>
 
+                        </div>
+                        <div className="divider"></div>
+                        <div className='flex mt-[30px] items-center gap-4'>
+                            <h2 className="text-[#262626] text-[16px] font-bold">STATUS:</h2>
+                            <p className="text-[#767676]">In stock</p>
 
+                        </div>
+                        <div className="divider"></div>
+                        <div className="flex gap-5">
+
+                            <button className="py-4 px-10 border border-[#262626] text-[#262626] hover:border-[#262626] hover:text-white hover:bg-[#262626] transition-all duration-500 ease-in-out">Add to Wish List</button>
+                            <button className="py-4 px-10 border border-[#262626] bg-[#262626] text-white hover:text-[#262626] hover:border-[#262626] hover:bg-transparent transition-all duration-500 ease-in-out">Add to Cart</button>
+                        </div>
+                        <div tabIndex={0} className="collapse collapse-plus ">
+                            <div className="collapse-title text-[#262626] text-[16px] font-bold">FEATURES  & DETAILS</div>
+                            <div className="collapse-content text-[#767676]">
+                                {/* <p>tabindex={0} attribute is necessary to make the div focusable</p> */}
+                            </div>
+                        </div>
+                        <div tabIndex={0} className="collapse collapse-plus ">
+                            <div className="collapse-title text-[#262626] text-[16px] font-bold">SHIPPING & RETURNS</div>
+                            <div className="collapse-content text-[#767676]">
+                                <p>tabindex={0} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+</p>
+                            </div>
+                        </div>
 
                     </div>
                 </div>

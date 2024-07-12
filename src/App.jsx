@@ -13,6 +13,7 @@ import Journal from './page/Journal';
 import DashboardLayout from './Layout/DashboardLayout';
 import Account from './page/Account';
 import Dashboard from './page/dashboard/Dashboard';
+import ProductDetails from './page/ProductDetails';
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/account",
         element: <Account/>,
+      },
+      {
+        path: "/details",
+        element: <ProductDetails/>,
       },
       
     ],

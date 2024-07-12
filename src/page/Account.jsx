@@ -8,7 +8,7 @@ const Account = () => {
         <>
         <div>
             <Container>
-                <div className='mt-[93px]'>
+                <div className='mt-[304px]'>
                     <h2 className='text-[#262626] text-6xl font-bold'>My Account</h2>
                     <ul className='flex items-center gap-2 mt-3'>
                         <li className='text-[12px] font-normal text-[#767676]'><Link to='/'>Home</Link></li>

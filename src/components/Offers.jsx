@@ -5,6 +5,7 @@ import card_3 from '/card-3.jpg'
 import card_4 from '/card-4.jpg'
 import { LuRefreshCcw } from 'react-icons/lu';
 import { FaCartShopping } from 'react-icons/fa6';
+import { Link } from 'react-router-dom';
 const Offers = () => {
     return (
         <>
@@ -21,14 +22,14 @@ const Offers = () => {
                     <button className=' flex items-center gap-x-4 mt-5'>Add to Cart <FaCartShopping /></button>
                 </div>
             </div>
-            <div className="content bg-white ">
-                <div className=' py-6 flex justify-between items-center'>
-                    <h2 className='text-[#262626]'>Basic Crew Neck Tee</h2>
-                    <p className='text-[#767676]'>$44.00</p>
-                </div>
-                <p className='text-[#767676]'>Black</p>
+            <Link to='/details' className="content bg-white ">
+                            <div className=' py-6 flex justify-between items-center'>
+                                <h2 className='text-[#262626]'>Basic Crew Neck Tee</h2>
+                                <p className='text-[#767676]'>$44.00</p>
+                            </div>
+                            <p className='text-[#767676]'>Black</p>
 
-            </div>
+                        </Link>
 
 
         </div>
@@ -43,14 +44,14 @@ const Offers = () => {
                     <button className=' flex items-center gap-x-4 mt-5'>Add to Cart <FaCartShopping /></button>
                 </div>
             </div>
-            <div className="content bg-white ">
-                <div className=' py-6 flex justify-between items-center'>
-                    <h2 className='text-[#262626]'>Basic Crew Neck Tee</h2>
-                    <p className='text-[#767676]'>$44.00</p>
-                </div>
-                <p className='text-[#767676]'>Black</p>
+            <Link to='/details' className="content bg-white ">
+                            <div className=' py-6 flex justify-between items-center'>
+                                <h2 className='text-[#262626]'>Basic Crew Neck Tee</h2>
+                                <p className='text-[#767676]'>$44.00</p>
+                            </div>
+                            <p className='text-[#767676]'>Black</p>
 
-            </div>
+                        </Link>
 
         </div>
         <div className='group'>
@@ -64,14 +65,14 @@ const Offers = () => {
                     <button className=' flex items-center gap-x-4 mt-5'>Add to Cart <FaCartShopping /></button>
                 </div>
             </div>
-            <div className="content bg-white ">
-                <div className=' py-6 flex justify-between items-center'>
-                    <h2 className='text-[#262626]'>Basic Crew Neck Tee</h2>
-                    <p className='text-[#767676]'>$44.00</p>
-                </div>
-                <p className='text-[#767676]'>Black</p>
+            <Link to='/details' className="content bg-white ">
+                            <div className=' py-6 flex justify-between items-center'>
+                                <h2 className='text-[#262626]'>Basic Crew Neck Tee</h2>
+                                <p className='text-[#767676]'>$44.00</p>
+                            </div>
+                            <p className='text-[#767676]'>Black</p>
 
-            </div>
+                        </Link>
 
         </div>
         <div className='group'>
@@ -85,14 +86,14 @@ const Offers = () => {
                     <button className=' flex items-center gap-x-4 mt-5'>Add to Cart <FaCartShopping /></button>
                 </div>
             </div>
-            <div className="content bg-white ">
-                <div className=' py-6 flex justify-between items-center'>
-                    <h2 className='text-[#262626]'>Basic Crew Neck Tee</h2>
-                    <p className='text-[#767676]'>$44.00</p>
-                </div>
-                <p className='text-[#767676]'>Black</p>
+            <Link to='/details' className="content bg-white ">
+                            <div className=' py-6 flex justify-between items-center'>
+                                <h2 className='text-[#262626]'>Basic Crew Neck Tee</h2>
+                                <p className='text-[#767676]'>$44.00</p>
+                            </div>
+                            <p className='text-[#767676]'>Black</p>
 
-            </div>
+                        </Link>
 
         </div>
         

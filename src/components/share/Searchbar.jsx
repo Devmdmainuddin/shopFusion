@@ -7,6 +7,7 @@ import Li from "../layer/Li";
 import { IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Container from "../layer/Container";
+import MegaMenuLi from "../layer/MegaMenuLi";
 
 const Searchbar = () => {
     const [catOpen, setCatOpen] = useState(false)
@@ -14,32 +15,319 @@ const Searchbar = () => {
     const [cartOpen, setCartOpen] = useState(false);
     return (
         <div className="lg:py-6 py-2   bg-[#F5F5F3]  w-full">
-<Container className={`flex flex-row px-6 justify-between items-center  relative`}>
+            <Container className={`flex flex-row px-6 justify-between items-center  relative`}>
 
-                
-                    <div onClick={() => setCatOpen(!catOpen)} className="left flex items-center gap-2  text-sm font-DM  ">
-                        <HiBars2 />
-                        <p className="ml-2 hidden md:block">Shop by Category</p>
 
-                    </div>
+                <div onClick={() => setCatOpen(!catOpen)} className="left flex items-center gap-2  text-sm font-DM  ">
+                    <HiBars2 />
+                    <p className="ml-2 hidden md:block">Shop by Category</p>
 
-                    <div className={`${catOpen ? 'opacity-100 visible' : 'opacity-0 invisible'} categoryUl w-[163px] lg:w-[263px] bg-[#2D2D2D] p-6   absolute left-6 top-full translate-y-6 `}>
-                        <ul className="">
+                </div>
 
-                            <Li to='/' content='Accesories' className='text-[#ffffffc7] hover:text-white py-4 font-normal hover:pl-8 block' >
 
-                            </Li>
 
-                            <Li to='/' content='Furniture' className='text-[#ffffffc7] hover:text-white py-4 font-normal hover:px-8 block' ></Li>
+                {/* <ul className={`${catOpen?"opacity-100 visible":"opacity-0 invisible"} categoryUl w-[263px]  bg-primary absolute left-0 top-full translate-y-1.5 z-50`}>
+                <Li megaMenu='hidden' className="hover:text-white transition-all duration-200 block py-4 px-5 group  hover:pl-8" liContent='Accesories'>
+                </Li>
+                <Li megaMenu='h-full' className="hover:text-white transition-all duration-200 block py-4 px-5 group  hover:pl-8" liContent='Accesories'>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone "/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  
+                </Li>
+                <Li megaMenu='h-full' className="hover:text-white transition-all duration-200 block py-4 px-5 group  hover:pl-8" liContent='Accesories'>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone "/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  
+                </Li>
+                <Li megaMenu='h-full' className="hover:text-white transition-all duration-200 block py-4 px-5 group  hover:pl-8" liContent='Accesories'>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone "/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  
+                </Li>
+                <Li megaMenu='h-full' className="hover:text-white transition-all duration-200 block py-4 px-5 group  hover:pl-8" liContent='Accesories'>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone "/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  
+                </Li>
+                <Li megaMenu='h-full' className="hover:text-white transition-all duration-200 block py-4 px-5 group  hover:pl-8" liContent='Accesories'>
+                  
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  <ul>
+                    <h3>Cameras</h3>
+                    
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    <MegaMenuLi MegaMenuLiName="Phone 01"/>
+                    
+                  </ul>
+                  
+                </Li>
+            </ul> */}
+                <ul className={`${catOpen ? 'opacity-100 visible' : 'opacity-0 invisible'} categoryUl w-[163px] lg:w-[263px] bg-[#2D2D2D] p-6   absolute left-6 top-full translate-y-6 `}>
 
-                            <Li to='/' content='Electronics' className='text-[#ffffffc7] hover:text-white py-4 font-normal hover:px-8 block' ></Li>
-
-                            <Li to='/' content='Clothes' className='text-[#ffffffc7] hover:text-white py-4 font-normal hover:pl-8 block' ></Li>
+                    <Li to='/' megaMenu='h-full' content='Accesories' className='text-[#ffffffc7] hover:text-white py-4 font-normal hover:pl-8 block' >
+                        <ul>
+                            <h3>camera</h3>
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
 
                         </ul>
-                    </div>
+                        <ul>
+                            <h3>camera</h3>
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
 
-               
+                        </ul>
+                        <ul>
+                            <h3>camera</h3>
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
+
+                        </ul>
+                    </Li>
+
+                    <Li to='/' megaMenu='h-full' content='Furniture' className='text-[#ffffffc7] hover:text-white py-4 font-normal hover:px-8 block' >
+                  
+                        <ul>
+                            <h3>camera</h3>
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
+
+                        </ul>
+                        <ul>
+                            <h3>camera</h3>
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
+                            <MegaMenuLi content="Phone 01" />
+
+                        </ul>
+                    </Li>
+
+                    <Li to='/' megaMenu='hidden' content='Electronics' className='text-[#ffffffc7] hover:text-white py-4 font-normal hover:px-8 block' ></Li>
+
+                    <Li to='/' megaMenu='hidden' content='Clothes' className='text-[#ffffffc7] hover:text-white py-4 font-normal hover:pl-8 block' ></Li>
+
+                </ul>
+
+
+
 
                 <div className="relative w-full lg:w-[600px] ml-5 hover:shadow-mainudin">
                     <label htmlFor="search" className="absolute right-5 top-1/2 -translate-y-1/2"><FaSearch /></label>
@@ -82,9 +370,9 @@ const Searchbar = () => {
                 </div>
 
 
-        
-</Container>
-            
+
+            </Container>
+
 
 
 

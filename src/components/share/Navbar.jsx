@@ -14,6 +14,7 @@ const Navbar = () => {
     const [proOpen, setProOpen] = useState(false);
     const [cartOpen, setCartOpen] = useState(false);
     const [show, setShow] = useState(false)
+    
     useEffect(() => {
         function resize() {
             if (window.innerWidth > 767.99) {
@@ -24,11 +25,21 @@ const Navbar = () => {
         }
         resize()
         window.addEventListener("resize", resize)
+       
+        var cursor = document.querySelector(".cursor");
+        var cursor2 = document.querySelector(".cursor2");
+        document.addEventListener("mousemove",function(e){
+          cursor.style.cssText = cursor2.style.cssText = "left: " + e.clientX + "px; top: " + e.clientY + "px;";
+        });
+        
+
     }, [])
     return (
-        <div className="">
+        <div className="nav fixed top-0 left-0 right-0 w-full bg-slate-300 z-50">
             <Container >
-                <div className="flex justify-end md:justify-center items-center relative md:py-8 py-3 px-3 md:px-0">
+            <div className="cursor"></div>
+            <div className="cursor2"></div>
+                <div className="  flex justify-end md:justify-center items-center relative md:py-8 py-3 px-3 md:px-0">
                     <div className="logo">
                         <Image src={logo} alt="logo image" className="absolute left-6 top-1/2 -translate-y-1/2" ></Image>
                         {/* <img src={logo} alt="" className="absolute left-6 top-1/2 -translate-y-1/2" /> */}

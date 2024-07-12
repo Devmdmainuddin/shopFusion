@@ -12,6 +12,7 @@ import Shop from './page/Shop';
 import Journal from './page/Journal';
 import DashboardLayout from './Layout/DashboardLayout';
 import Account from './page/Account';
+import Dashboard from './page/dashboard/Dashboard';
 
 const router = createBrowserRouter([
   {
@@ -47,8 +48,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    // element: <DashboardLayout></DashboardLayout>,
+    element: <Dashboard/>,
   }
+  
 ]);
 
 function App() {

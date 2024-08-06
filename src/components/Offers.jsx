@@ -14,19 +14,15 @@ const Offers = () => {
         <>
             <Container>
                 <Heading className='mt-[128px] mb-12' text='Special Offers'></Heading>
-
+                <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-3'>
+                    <Card src='/card-1.jpg' offer='10%' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></Card>
+                    <Card src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></Card>
+                    <Card src='/card-1.jpg' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></Card>
+                    <Card src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></Card>
+                </div>
             </Container>
 
-            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-3'>
 
-                <Card src='/card-1.jpg' offer='10%' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></Card>
-                <Card src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></Card>
-                <Card src='/card-1.jpg' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></Card>
-                <Card src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></Card>
-                <Card src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></Card>
-                <Card src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></Card>
-
-            </div>
             {/* <div className='group '>
                 <div className="image w-[370px] h-[370px] relative overflow-hidden">
                     <p className='md:py-2 md:px-8 p-2 text-sm font-bold text-white bg-black absolute top-3 left-3'>New</p>

@@ -13,14 +13,14 @@ const OverlayLi =({text,icon})=>{
     )
 
 }
-const ProductCard = ({ src, alt, className, offer, title, price, brand }) => {
+const ProductCard = ({ src, alt,  offer, title, price, brand }) => {
     return (
-        <div className="w-[370px] group">
+        <div className={`w-[370px] group mx-auto`}>
             <div className="image w-full h-[370px] relative">
             <button className={`absolute top-5 left-5 bg-primary text-white text-sm py-2  ${offer ? 'px-8' : 'px-0'}`}>{offer}</button>
                 <img className='w-full h-full object-cover' src={src} alt={alt} />
                 <div className="overlay w-full absolute  bottom-0 left-0 opacity-0 py-6 px-7 bg-white group-hover:opacity-100 transition-all duration-300">
-                    <ul className='flex gap-5 flex-col'>
+                    <ul className='flex gap-3 flex-col'>
                         <OverlayLi text='Add to Wish List' icon={<FaHeart />}></OverlayLi>
                         <OverlayLi text='Compare' icon={<LuRefreshCcw />}></OverlayLi>
                         <OverlayLi text=' Add to Cart' icon={<FaShoppingCart />}></OverlayLi>  

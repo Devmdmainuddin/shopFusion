@@ -4,8 +4,8 @@
 
 .cursor{
     position: fixed;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border: 1px solid #0ae9cf;
     border-radius: 50%;
     left: 0;
@@ -41,4 +41,8 @@
     opacity: 0.5;
     background-color: #e90a0a;
   
+  }
+  
+  .active{
+    @apply text-teal-500
   }

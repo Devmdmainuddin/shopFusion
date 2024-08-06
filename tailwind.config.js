@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      colors:{
+        "primary":"#262626"
+      },
       boxShadow: {
         'mainudin': '0 0 10px hsla(0, 0%, 0%, 0.1)',
         // box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.1);

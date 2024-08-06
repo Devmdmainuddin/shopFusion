@@ -105,9 +105,10 @@ const ProductDetails = () => {
                             <div className="collapse-content text-[#767676]">
                                 <p>tabindex={0} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
-</p>
+                                </p>
                             </div>
                         </div>
+                      
 
                     </div>
                 </div>

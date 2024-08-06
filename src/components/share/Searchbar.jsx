@@ -27,7 +27,7 @@ const Searchbar = () => {
 
 
                 
-                <ul className={`${catOpen ? 'opacity-100 visible' : 'opacity-0 invisible'} categoryUl w-[163px] lg:w-[263px] bg-[#2D2D2D] p-6   absolute left-6 top-full translate-y-6 `}>
+                <ul className={`${catOpen ? 'opacity-100 visible' : 'opacity-0 invisible'} categoryUl w-[163px] lg:w-[263px] bg-[#2D2D2D] p-6   absolute left-6 top-full translate-y-6 z-50`}>
 
                     <Li to='/' megaMenu='h-full' content='Accesories' className='text-[#ffffffc7] hover:text-white py-4 font-normal hover:pl-8 block' >
                         <ul>

@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
 import { register } from "swiper/element/bundle";
-import { LuRefreshCcw } from 'react-icons/lu';
-import { FaCartShopping } from 'react-icons/fa6';
-import { FaHeart } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import card_img from '../../public/card-1.jpg'
+// import { LuRefreshCcw } from 'react-icons/lu';
+// import { FaCartShopping } from 'react-icons/fa6';
+// import { FaHeart } from 'react-icons/fa';
+// import { Link } from 'react-router-dom';
+// import card_img from '../../public/card-1.jpg'
 
 import Card from './card/Card';
 register();
@@ -37,7 +37,8 @@ const NewProduct = () => {
                 `
               .swiper-button-next,
               .swiper-button-prev {
-              
+              width:20px;
+              height:20px;
                 background-color: #979797;
                 padding: 8px 16px;
                 border-radius: 100%;

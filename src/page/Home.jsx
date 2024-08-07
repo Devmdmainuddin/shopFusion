@@ -11,6 +11,9 @@ import Card from "../components/card/Card";
 import Slider01 from "../components/banner/Slider01";
 import Offers from "../components/Offers";
 import Arrivals from "../components/Arrivals";
+import Intro from "../components/Intro";
+import NewProduct from "../components/NewProduct";
+import Bestsellers from "../components/Bestsellers";
 
 
 const Home = () => {
@@ -27,11 +30,14 @@ const Home = () => {
     return (
         <div>
             <Slider01></Slider01>
+            <Intro></Intro>
+            {/* <NewProduct/> */}
             <Banner></Banner>
             <Arrivals></Arrivals>
+            <Bestsellers></Bestsellers>
             <Ads></Ads>
             <Offers></Offers>
-            <Company></Company>
+            {/* <Company></Company> */}
             {/* <section>
                 <div className=" lg:container lg:mx-auto lg:py-16 md:py-12 md:px-6 py-12 px-4">
                     <h1 className="text-center lg:text-4xl text-3xl lg:leading-9 leading-7 text-gray-800 font-semibold">FAQ's</h1>

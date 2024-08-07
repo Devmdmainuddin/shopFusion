@@ -9,7 +9,7 @@ const Slider01 = () => {
 
   var settings = {
     dots: true,
-    arrows: true,
+    arrows: false,
     infinite: true,
     autoplay: true,
     speed: 2000,
@@ -113,7 +113,7 @@ const Slider01 = () => {
     ],
   };
   return (
-    <div>
+
       <Slider {...settings}>
         <div className=' bg-slate-400'>
           <Image className="w-full" src={b1} href="#" />
@@ -126,7 +126,7 @@ const Slider01 = () => {
         </div>
 
       </Slider>
-    </div>
+
   );
 };
 

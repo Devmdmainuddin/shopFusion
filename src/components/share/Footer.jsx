@@ -3,7 +3,21 @@ import Container from "../layer/Container";
 import logo from '/logo.png'
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
+const FooterLi = ({ text,to, className }) => {
+    return (
+        <li className=''>
+            <Link to={to} className={`font-DM text-sm text-[#6D6D6D]leading-6 ${className}`}>
+                {text}
+            </Link>
+        </li>
+    )
+
+}
+
 const Footer = () => {
+
+
+
     return (
         <footer className="bg-[#F5F5F3] pt-[53px]">
             <Container>
@@ -12,67 +26,33 @@ const Footer = () => {
                         <ul >
                             <h4 className='font-DM font-bold text-base text-[#262626] leading-6  md:mb-4 mb-2'>MENU</h4>
 
-                            <li>
-                                <Link className='font-DM text-sm text-[#6D6D6D]leading-6'>Home</Link>
-                            </li>
-                            <li>
-                                <Link className='font-DM text-sm text-[#6D6D6D]leading-6' to="/shop">Shop</Link>
-                            </li>
-                            <li>
-                                <Link className='font-DM text-sm text-[#6D6D6D]leading-6' to="/about">About</Link>
-                            </li>
-                            <li>
-                                <Link className='font-DM text-sm text-[#6D6D6D]leading-6' to="/contacts">Contact</Link>
-                            </li>
-                            <li>
-                                <Link className='font-DM text-sm text-[#6D6D6D]leading-6 ' to="/productInside">Journal</Link>
-                            </li>
-
-
+                            <FooterLi to='' text ='Home'></FooterLi>
+                            <FooterLi to='/shop' text ='Shop'></FooterLi>
+                            <FooterLi to='/about' text ='About'></FooterLi>
+                            <FooterLi to='/contacts' text ='Contact'></FooterLi>
+                            <FooterLi to='/productInside' text ='Journal'></FooterLi>
                         </ul>
 
                         <ul >
                             <h4 className='font-DM font-bold text-base text-[#262626] leading-6 md:mb-4 mb-2 '>SHOP</h4>
 
-                            <li>
-                                <Link className='font-DM text-sm text-[#6D6D6D] leading-6'>Category 1</Link>
-                            </li>
-                            <li className="mt-2">
-                                <Link className='font-DM text-sm text-[#6D6D6D] leading-6'>Category 2</Link>
-                            </li>
-                            <li className="mt-2">
-                                <Link className='font-DM text-sm text-[#6D6D6D] leading-6'>Category 3</Link>
-                            </li>
-                            <li className="mt-2">
-                                <Link className='font-DM text-sm text-[#6D6D6D] leading-6'>Category 4</Link>
-                            </li>
-                            <li className="mt-2">
-                                <Link className='font-DM text-sm text-[#6D6D6D] leading-6'>Category 5</Link>
-                            </li>
-
-
+                            <FooterLi to='/' text ='Category 1'></FooterLi>
+                            <FooterLi to='/' text ='Category 2'></FooterLi>
+                            <FooterLi to='/' text ='Category 3'></FooterLi>
+                            <FooterLi to='/' text ='Category 4'></FooterLi>
+                            <FooterLi to='/' text ='Category 5'></FooterLi>
+                            
                         </ul>
 
                         <ul >
                             <h4 className='font-DM font-bold text-base text-[#262626] leading-6  md:mb-4 mb-2 '>HELP</h4>
 
-                            <li>
-                                <Link className='font-DM text-sm text-[#6D6D6D]leading-6'>Privacy Policy</Link>
-                            </li>
-                            <li>
-                                <Link className='font-DM text-sm text-[#6D6D6D]leading-6'>Terms & Conditions</Link>
-                            </li>
-                            <li>
-                                <Link className='font-DM text-sm text-[#6D6D6D]leading-6'>Special E-shop</Link>
-                            </li>
-                            <li>
-                                <Link className='font-DM text-sm text-[#6D6D6D]leading-6'>Shipping</Link>
-                            </li>
-                            <li>
-                                <Link className='font-DM text-sm text-[#6D6D6D]leading-6'>Secure Payments</Link>
-                            </li>
-
-
+                            <FooterLi to='/' text ='Privacy Policy'></FooterLi>
+                            <FooterLi to='/' text ='Terms & Conditions'></FooterLi>
+                            <FooterLi to='/' text ='Special E-shop'></FooterLi>
+                            <FooterLi to='/' text ='Shipping'></FooterLi>
+                            <FooterLi to='/' text ='Secure Payments'></FooterLi>
+                           
                         </ul>
                     </div>
                     <div className="right  ">
@@ -98,9 +78,9 @@ const Footer = () => {
                 </div>
                 <div className="flex flex-col lg:flex-row items-center justify-between pt-8 lg:pt-16 pb-[59px] gap-y-8 ">
                     <div className="icons flex gap-6 text-[#262626]">
-                    <FaFacebookF />
-                    <FaLinkedinIn />
-                    <FaInstagram />
+                        <FaFacebookF />
+                        <FaLinkedinIn />
+                        <FaInstagram />
 
                     </div>
                     <p className="text-sm font-normal text-center lg:text-start text-[#6D6D6D]">2020 Orebi Minimal eCommerce Figma Template by Adveits</p>

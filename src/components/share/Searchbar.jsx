@@ -8,13 +8,14 @@ import { IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Container from "../layer/Container";
 import MegaMenuLi from "../layer/MegaMenuLi";
+import Login from "../../page/Login";
 
 const Searchbar = () => {
     const [catOpen, setCatOpen] = useState(false)
     const [proOpen, setProOpen] = useState(false);
     const [cartOpen, setCartOpen] = useState(false);
     return (
-        <div className="lg:py-6 py-2   bg-[#F5F5F3]  w-full">
+        <div className=" lg:py-6 py-2   bg-[#F5F5F3]  w-full">
             <Container className={`flex flex-row px-6 justify-between items-center  relative`}>
 
 
@@ -100,6 +101,7 @@ const Searchbar = () => {
                         <div className=" absolute z-50 top-full right-12 translate-y-6">
                             <div className="w-[263px] block  bg-[#ffffff] ">
                                 <div className="button flex flex-col  w-full">
+                                   <Link to='/login' className="py-4 px-3 lg:px-10 text-[#262626]  w-full mt-0 bg-[#F0F0F0] border">login</Link>
                                     <Link to='/account' className="py-4  px-3 lg:px-10 bg-[#262626]  w-full text-white ">My Account</Link>
                                     <button className="py-4 px-3 lg:px-10 text-[#262626]  w-full mt-0 bg-[#F0F0F0] border ">logOut</button>
 
@@ -112,7 +114,7 @@ const Searchbar = () => {
                     {cartOpen && (
                         <div className="w-[360px] absolute z-50 top-full right-3 bg-slate-50 border translate-y-6">
                             <div className="flex justify-between  gap-2 bg-[#F5F5F3] p-5">
-                                <img src="#" alt="" className="bg-[#979797] w-20 h-20" />
+                                <img src="/card-4.jpg" alt="" className="bg-[#979797] w-20 h-20" />
                                 <div><h2>Black Smart Watch</h2>
                                     <p>$44.00</p>
                                 </div>
@@ -120,9 +122,9 @@ const Searchbar = () => {
                             </div>
                             <div className="p-5">
                                 <p >Subtotal: <span className="text-[#262626] font-bold">$44.00</span></p>
-                                <div className="flex  gap-5 mt-3">
-                                    <button className="w-full block py-4  px-3 lg:px-10 text-[#262626] border border-[#262626]">View Cart</button>
-                                    <button className="w-full block py-4 px-3 lg:px-10 bg-[#262626] text-white">Checkout</button>
+                                <div className="flex  lg:gap-x-5 gap gap-x-1 mt-3">
+                                    <button className="w-full block lg:py-4 py-2 lg:px-8 px-3 text-[#262626] border border-[#262626]">View Cart </button>
+                                    <button className="w-full block lg:py-4 py-2 lg:px-10 px-3 bg-[#262626] text-white">Checkout</button>
                                 </div>
                             </div>
 

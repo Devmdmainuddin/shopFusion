@@ -30,10 +30,11 @@ const Slider01 = () => {
           left: "10%",
           top: "50%",
           transform: "translateY(-50%)",
-          textAlign:"start"
+          // textAlign:"start",
         }}
       >
-        <ul style={{ margin: "0px",display:"flex", flexDirection:"column" }}> {dots} </ul>
+        {/* display:"flex", flexDirection:"column" */}
+        <ul style={{ margin: "0px" }}> {dots} </ul>
       </div>
     ),
     customPaging: i => (
@@ -59,6 +60,10 @@ const Slider01 = () => {
     ),
 
     responsive: [
+      {
+        breakpoint: 1024,
+        settings: {}
+      },
     
       {
         breakpoint: 768,
@@ -75,7 +80,7 @@ const Slider01 = () => {
               <ul
                 style={{
                   margin: "0px",
-                  // display: "flex",
+                  display: "flex",
                 }}
               >
                 {" "}
@@ -87,23 +92,7 @@ const Slider01 = () => {
               className={`text-xs ${i == active
                   ? "text-[#262626] border-b-2 border-[#262626] px-1.5 pb-1 " : "text-transparent border-b-2 border-[#fff] px-1.5 pb-1 "
                 }`}
-            // style=
-            // {
-
-            //   i == active 
-            //   ? {
-            //     color: "#262626",
-            //     borderBottom: "2px #262626 solid",
-            //     padding: "0px 5px 4px 5px"
-            //   } 
-            //   : 
-            //   {
-            //     color: "transparent",
-            //     borderBottom: "2px white solid",
-            //     padding: "0px 5px 4px 5px"
-            //   }
-
-            // }
+          
             >
               0{i + 1}
             </div>
@@ -114,7 +103,8 @@ const Slider01 = () => {
   };
   return (
 
-      <Slider {...settings}>
+      <div>
+        <Slider {...settings}>
         <div className=' bg-slate-400'>
           <Image className="w-full" src={b1} href="#" />
         </div>
@@ -126,6 +116,7 @@ const Slider01 = () => {
         </div>
 
       </Slider>
+      </div>
 
   );
 };

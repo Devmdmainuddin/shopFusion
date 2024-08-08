@@ -7,9 +7,9 @@ const Banner02 = () => {
         <div>
             <Container>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                   <Image  src='/b1.jpg' alt=''></Image>
-                   <Image  src='/b2.jpg' alt=''></Image>
-                   <Image  src='/b3.jpg' alt=''></Image>
+                   <Image className='' href='/details'  src='/b1.jpg' alt='banner01'></Image>
+                   <Image className='' href='/details'  src='/b2.jpg' alt='banner02'></Image>
+                   <Image className='' href='/details' src='/b3.jpg' alt='banner03'></Image>
 
                 </div>
             </Container>

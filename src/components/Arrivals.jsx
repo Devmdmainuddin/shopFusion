@@ -132,7 +132,7 @@ const Arrivals = () => {
 
     responsive: [
       {
-        breakpoint: 1400,
+        breakpoint: 1480,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
@@ -198,11 +198,21 @@ const Arrivals = () => {
 
         </swiper-container> */}
         <Slider {...settings}>
-          <ProductCard src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
-          <ProductCard src='/card-2.jpg' offer='10%' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
+          <div >
+          <ProductCard  src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
+          </div>
+          
+          <div >
+          <ProductCard  src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
+          </div>
+          <div >
+          <ProductCard  src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
+          </div>
+          {/* <ProductCard src='/card-2.jpg' offer='10%' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
           <ProductCard src='/card-3.jpg' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
           <ProductCard src='/card-2.jpg' offer='10%' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
           <ProductCard src='/card-4.jpg' offer='25%' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
+         */}
         </Slider>
       </div>
 

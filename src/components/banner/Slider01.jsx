@@ -30,11 +30,11 @@ const Slider01 = () => {
           left: "10%",
           top: "50%",
           transform: "translateY(-50%)",
-          // textAlign:"start",
+          textAlign:"start",
         }}
       >
         {/* display:"flex", flexDirection:"column" */}
-        <ul style={{ margin: "0px" }}> {dots} </ul>
+        <ul style={{ margin: "0px",display:"flex", flexDirection:"column" }}> {dots} </ul>
       </div>
     ),
     customPaging: i => (
@@ -80,7 +80,7 @@ const Slider01 = () => {
               <ul
                 style={{
                   margin: "0px",
-                  display: "flex",
+                  // display: "flex",
                 }}
               >
                 {" "}

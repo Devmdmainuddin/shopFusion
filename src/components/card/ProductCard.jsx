@@ -15,7 +15,7 @@ const OverlayLi =({text,icon})=>{
 }
 const ProductCard = ({ src, alt,  offer, title,className, price, brand }) => {
     return (
-        <div className={`w-[370px] group mx-auto ${className}`}>
+        <div className={`w-[350px] group mx-auto ${className}`}>
             <div className="image w-full h-[370px] relative">
             <button className={`absolute top-5 left-5 bg-primary text-white text-sm py-2  ${offer ? 'px-8' : 'px-0'}`}>{offer}</button>
                 <img className='w-full h-full object-cover' src={src} alt={alt} />

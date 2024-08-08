@@ -11,8 +11,11 @@ export default {
       },
       boxShadow: {
         'mainudin': '0 0 10px hsla(0, 0%, 0%, 0.1)',
+        'shadow':'0 35px 60px -15px rgba(0, 0, 0, 0.3)'
         // box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.1);
-      }
+       
+      },
+     
     },
   },
   plugins: [

@@ -16,6 +16,8 @@ import NewProduct from "../components/NewProduct";
 import Bestsellers from "../components/Bestsellers";
 import Collaps from "../components/Collaps";
 import Banner02 from "../components/banner/Banner02";
+import Banner03 from "../components/banner/Banner03";
+import ProductCard01 from "../components/card/ProductCard01";
 
 
 
@@ -31,10 +33,19 @@ const Home = () => {
         <div>
             <Slider01></Slider01>
             <Intro></Intro>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01>
+            <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01>
+            <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01>
+            <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01>
+            <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01>
+            
+            </div>
             {/* <NewProduct/> */}
             <Banner></Banner>
             <Arrivals></Arrivals>
             <Banner02></Banner02>
+            <Banner03></Banner03>
             <Bestsellers></Bestsellers>
             <Ads></Ads>
             <Offers></Offers>

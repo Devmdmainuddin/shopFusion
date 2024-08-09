@@ -18,6 +18,8 @@ import Collaps from "../components/Collaps";
 import Banner02 from "../components/banner/Banner02";
 import Banner03 from "../components/banner/Banner03";
 import ProductCard01 from "../components/card/ProductCard01";
+import ProductCard02 from "../components/card/ProductCard02";
+import Heading01 from "../components/layer/Heading01";
 
 
 
@@ -28,18 +30,19 @@ const Home = () => {
     // const [open3, setOpen3] = useState(false);
     // const [open4, setOpen4] = useState(false);
     // const [open5, setOpen5] = useState(false);
-    
+
     return (
         <div>
             <Slider01></Slider01>
             <Intro></Intro>
+            <Heading01></Heading01>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01>
-            <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01>
-            <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01>
-            <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01>
-            <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01>
-            
+                <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01>
+                <ProductCard02 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard02>
+                <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01>
+                <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01>
+               
+
             </div>
             {/* <NewProduct/> */}
             <Banner></Banner>
@@ -200,7 +203,7 @@ const Home = () => {
                             <img src="https://i.ibb.co/gZMfQJq/pexels-ron-lach-8128069-1-1.png" alt="Img of Glass bottle" className="w-full md:hidden block " />
                         </div>
                         <div className=" md:w-7/12 lg:w-8/12 w-full md:mt-0 sm:mt-14 mt-10">
-                        <Collaps></Collaps>
+                            <Collaps></Collaps>
                         </div>
                     </div>
                 </div>

@@ -15,7 +15,7 @@ const Sidebar = () => {
         <div className='bg-gray-700 text-gray-800 flex justify-between md:hidden'>
           <div>
             <div className='block cursor-pointer p-4 font-bold'>
-              <Link to='' className="flex items-center">
+              <Link to='/' className="flex items-center">
                 <img
                   src={logo}
                   alt='logo'

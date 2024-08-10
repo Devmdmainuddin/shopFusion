@@ -11,7 +11,7 @@ const OverlayLi = ({ src, icon }) => {
     )
 
 }
-const ProductCard01 = ({ src, hoverSrc, alt, offer, title, className, price }) => {
+const ProductCard01 = ({ src,to, hoverSrc, alt, offer, title, className, price }) => {
     return (
         <div className={`w-[350px] group mx-auto ${className} overflow-hidden hover:shadow-shadow `}>
             <div className="image w-full h-[370px] relative">
@@ -31,7 +31,7 @@ const ProductCard01 = ({ src, hoverSrc, alt, offer, title, className, price }) =
                 </div>
             </div>
             <div className="text py-6 relative">
-                <Link to='/details' className="">
+                <Link to={to} className="">
                     <h3 className=" font-normal text-center text-[#444] text-lg">{title}</h3>
                 </Link>
                 <p className="price text-center font-DM text-[#f3283d] my-3">{price}</p>

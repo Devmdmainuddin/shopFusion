@@ -17,6 +17,8 @@ import ProductDetails from './page/ProductDetails';
 import Login from './page/Login';
 // import SignUp from './page/SignUp';
 import Registation from './page/Registation';
+import ManageUsers from './page/dashboard/Admin/ManageUsers';
+import AddProducts from './components/form/AddProducts';
 
 const router = createBrowserRouter([
   {
@@ -60,9 +62,14 @@ const router = createBrowserRouter([
         element: <Registation/>,
       },
       {
-        path: "/details",
-        element: <ProductDetails/>,
+        path: "/product/:id",
+        element:<ProductDetails /> ,
+        loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/product/${params.id}`)
       },
+      // {
+      //   path: "/details",
+      //   element: <ProductDetails/>,
+      // },
       
     ],
   },
@@ -70,6 +77,16 @@ const router = createBrowserRouter([
     path: "/dashboard",
     // element: <DashboardLayout></DashboardLayout>,
     element: <Dashboard/>,
+    children:[
+      {
+        path: "/dashboard/addProduct",
+        element: <AddProducts/>,
+      },
+      {
+        path: "/dashboard/manageUsers",
+        element: <ManageUsers/>,
+      },
+    ]
   }
   
 ]);

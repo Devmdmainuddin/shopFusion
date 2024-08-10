@@ -54,16 +54,16 @@ const AuthProvider = ({ children }) => {
       photoURL: photo,
     })
   }
-//  const saveUser = async user =>{
-//     const currentUser= {
-//       name:user?.displayName,
-//       email:user?.email,
-//       role:'user',
-//       status:'verified',
-//     }
-//     const {data} = await axiosCommon.put(`/user`,currentUser)
-//     return data
-//   }
+ const saveUser = async user =>{
+    const currentUser= {
+      name:user?.displayName,
+      email:user?.email,
+      role:'user',
+      status:'verified',
+    }
+    const {data} = await axiosCommon.put(`/user`,currentUser)
+    return data
+  }
 
 
   useEffect(() => {
@@ -75,7 +75,7 @@ const AuthProvider = ({ children }) => {
 
 
       if (currentUser) {
-        // saveUser(currentUser)
+        saveUser(currentUser)
         axiosCommon.post(`/jwt`, loggedUser)
           .then(res => {
             if (res.data.token) {

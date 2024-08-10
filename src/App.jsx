@@ -10,11 +10,13 @@ import About from './page/About';
 import Contacts from './page/Contacts';
 import Shop from './page/Shop';
 import Journal from './page/Journal';
-import DashboardLayout from './Layout/DashboardLayout';
+// import DashboardLayout from './Layout/DashboardLayout';
 import Account from './page/Account';
 import Dashboard from './page/dashboard/Dashboard';
 import ProductDetails from './page/ProductDetails';
 import Login from './page/Login';
+// import SignUp from './page/SignUp';
+import Registation from './page/Registation';
 
 const router = createBrowserRouter([
   {
@@ -48,6 +50,14 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login/>,
+      },
+      // {
+      //   path: "/signup",
+      //   element: <SignUp/>,
+      // },
+      {
+        path: "/registation",
+        element: <Registation/>,
       },
       {
         path: "/details",

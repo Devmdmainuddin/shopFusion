@@ -8,9 +8,11 @@ import { IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Container from "../layer/Container";
 import MegaMenuLi from "../layer/MegaMenuLi";
-import Login from "../../page/Login";
+// import Login from "../../page/Login";
+import useAuth from "../../hooks/useAuth";
 
 const Searchbar = () => {
+    const { user,logOut} = useAuth()
     const [catOpen, setCatOpen] = useState(false)
     const [proOpen, setProOpen] = useState(false);
     const [cartOpen, setCartOpen] = useState(false);
@@ -101,9 +103,17 @@ const Searchbar = () => {
                         <div className=" absolute z-50 top-full right-12 translate-y-6">
                             <div className="w-[263px] block  bg-[#ffffff] ">
                                 <div className="button flex flex-col  w-full">
-                                   <Link to='/login' className="py-4 px-3 lg:px-10 text-[#262626]  w-full mt-0 bg-[#F0F0F0] border">login</Link>
-                                    <Link to='/account' className="py-4  px-3 lg:px-10 bg-[#262626]  w-full text-white ">My Account</Link>
-                                    <button className="py-4 px-3 lg:px-10 text-[#262626]  w-full mt-0 bg-[#F0F0F0] border ">logOut</button>
+                                    {user ? (
+                                        <>
+                                        <Link to='/account' className="py-4  px-3 lg:px-10 bg-[#262626]  w-full text-white ">My Account</Link>
+                                        <button onClick={logOut} className="py-4 px-3 lg:px-10 text-[#262626]  w-full mt-0 bg-[#F0F0F0] border ">logOut</button>
+                                        </>
+                                        )
+                                    :
+                                    (
+                                    <Link   to='/login' className="py-4 px-3 lg:px-10 text-[#262626]  w-full mt-0 bg-[#F0F0F0] border">login</Link>)}
+                                   
+                                    
 
                                 </div>
                             </div>

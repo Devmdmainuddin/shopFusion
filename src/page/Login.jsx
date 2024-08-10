@@ -1,13 +1,14 @@
+import { Link } from "react-router-dom";
 import Image from "../components/layer/Image";
 
 
 const Login = () => {
     return (
-        <div className="flex flex-col md:flex-row items-center gap-6 w-full">
+        <div className="flex flex-col md:flex-row items-center gap-6 w-full bg-gray-100">
             <div className="w-1/2">
                 <Image src='/card-4.jpg'></Image>
             </div>
-        <div className="w-1/2 flex flex-col p-6 rounded-md sm:p-10 bg-gray-50 text-gray-800">
+        <div className="w-1/2 flex flex-col p-6 rounded-md sm:p-10 bg-white text-gray-800">
             <div className="mb-8 text-center">
                 <h1 className="my-3 text-4xl font-bold">Sign in</h1>
                 <p className="text-sm dark:text-gray-600">Sign in to access your account</p>
@@ -28,7 +29,7 @@ const Login = () => {
                 </div>
                 <div className="space-y-2">
                     <div>
-                        <button type="button" className="w-full px-8 py-3 inline-block font-semibold rounded-md border bg-red-100">Sign in</button>
+                        <button type="button" className="w-full px-8 py-3 inline-block font-semibold rounded-md border bg-[#95f0bc]">Sign in</button>
                     </div>
                     <div className="flex items-center pt-4 space-x-1">
                     <div className="flex-1 h-px sm:w-16 bg-gray-300"></div>
@@ -53,7 +54,7 @@ const Login = () => {
                     </button>
                 </div>
                     <p className="px-6 text-sm text-center ">Don't have an account yet?
-                        <a rel="noopener noreferrer" href="#" className="hover:underline ">Sign up</a>.
+                        <Link to='/registation' rel="noopener noreferrer" href="#" className="hover:underline ">Sign up</Link>.
                     </p>
                 </div>
             </form>

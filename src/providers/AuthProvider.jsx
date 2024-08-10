@@ -12,9 +12,7 @@ import {
   updateProfile,
 } from 'firebase/auth'
 import { app } from '../firebase/firebase.config'
-// import axios from 'axios'
 import useAxiosCommon from '../hooks/useAxiosCommon'
-// import axios from 'axios'
 export const AuthContext = createContext(null)
 const auth = getAuth(app)
 const googleProvider = new GoogleAuthProvider()
@@ -56,34 +54,28 @@ const AuthProvider = ({ children }) => {
       photoURL: photo,
     })
   }
+//  const saveUser = async user =>{
+//     const currentUser= {
+//       name:user?.displayName,
+//       email:user?.email,
+//       role:'user',
+//       status:'verified',
+//     }
+//     const {data} = await axiosCommon.put(`/user`,currentUser)
+//     return data
+//   }
 
-  // Get token from server
-
-
-  const saveUser = async user =>{
-    const currentUser= {
-      name:user.displayName,
-      email:user?.email,
-      role:'user',
-      status:'verified',
-    }
-    const {data} = await axiosCommon.put(`/user`,currentUser)
-    return data
-  }
-
-
-  // onAuthStateChange
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, currentUser => {
       const userEmail = currentUser?.email || user?.email;
       const loggedUser = { email: userEmail }
       setUser(currentUser)
-      
-    
-    
+
+
+
       if (currentUser) {
-        saveUser(currentUser)
+        // saveUser(currentUser)
         axiosCommon.post(`/jwt`, loggedUser)
           .then(res => {
             if (res.data.token) {
@@ -120,7 +112,7 @@ const AuthProvider = ({ children }) => {
 
 AuthProvider.propTypes = {
   // Array of children.
-  children: PropTypes.array,
+  children: PropTypes.object,
 }
 
 export default AuthProvider

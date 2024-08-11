@@ -7,11 +7,12 @@ import Button from "../layer/Button";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import useCartItems from "../../hooks/useCartItems";
+import useWishlist from "../../hooks/useWishlist";
 // import { useMutation } from "@tanstack/react-query";
 
-const OverlayLi = ({ src, icon }) => {
+const OverlayLi = ({ src,onClick, icon }) => {
     return (
-        <li >
+        <li onClick={onClick}>
             <Link to={src} className='w-[40px] h-[40px] rounded-full border bg-[#fed700] hover:text-[#fff] hover:bg-[#f3283d] text-center leading-[40px] flex justify-center items-center transition-all duration-300 cursor-pointer' >{icon}</Link>
         </li>
     )
@@ -21,10 +22,39 @@ const ProductCard01 = ({item}) => {
 
     const { user } = useAuth() || {}
     const [, ,refetch]=useCartItems()
+    const [,,refash]= useWishlist()
 const axiosCommon =useAxiosCommon();
 
+// add to whish list
+const handlewishlist = item => {
+       
+    const cartItem = {
+        produdctId: item._id,
+        title: item.title,
+        image: item.image,
+        price: item.price,
+        email: user.email,
+    }
+    console.log(cartItem)
 
+    axiosCommon.post(`/wishlist`, cartItem)
+  
+    .then(res=>{
+        if (res.data?.insertedId) {
+            
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your items has been add to wishlist",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            refash()
+        }
+    })
+}
 
+// add to cart
     const handlecard = item => {
        
             const cartItem = {
@@ -51,10 +81,6 @@ const axiosCommon =useAxiosCommon();
                     refetch()
                 }
             })
-        
-        
-           
- 
         }
     return (
         <div className={`w-[350px] group mx-auto  overflow-hidden hover:shadow-shadow `}>
@@ -68,8 +94,8 @@ const axiosCommon =useAxiosCommon();
                 <div className="overlay  absolute  -top-full right-0 opacity-0 py-6 px-7 group-hover:top-0  group-hover:opacity-100 transition-all duration-1000 ">
 
                     <ul className='flex gap-3 flex-col  '>
-                        <OverlayLi icon={<FaHeart />}></OverlayLi>
-                        <OverlayLi icon={<LuRefreshCcw />}></OverlayLi>
+                        <OverlayLi onClick={() => handlewishlist(item)} icon={<FaHeart />}></OverlayLi>
+                        <OverlayLi  icon={<LuRefreshCcw />}></OverlayLi>
                         <OverlayLi icon={<FaEye />}></OverlayLi>
                     </ul>
                 </div>

@@ -21,6 +21,7 @@ import ProductCard01 from "../components/card/ProductCard01";
 // import ProductCard02 from "../components/card/ProductCard02";
 import Heading01 from "../components/layer/Heading01";
 import useProduct from "../hooks/useProduct";
+import { useState } from "react";
 
 
 
@@ -32,7 +33,7 @@ const [product]=useProduct()
     // const [open3, setOpen3] = useState(false);
     // const [open4, setOpen4] = useState(false);
     // const [open5, setOpen5] = useState(false);
-
+const [datalength,setDatalength]= useState(4)
     return (
         <div>
             <Slider01></Slider01>
@@ -40,7 +41,7 @@ const [product]=useProduct()
             <Heading01></Heading01>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                {
-                product.map(item=> <ProductCard01 key={item._id} item={item}   ></ProductCard01>)
+                product.slice(0,datalength).map(item=> <ProductCard01 key={item._id} item={item}   ></ProductCard01>)
                }
                
                 {/* <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01>

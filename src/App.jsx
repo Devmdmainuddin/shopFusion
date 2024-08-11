@@ -19,6 +19,7 @@ import Login from './page/Login';
 import Registation from './page/Registation';
 import ManageUsers from './page/dashboard/Admin/ManageUsers';
 import AddProducts from './components/form/AddProducts';
+import Cart from './page/dashboard/user/Cart';
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/addProduct",
         element: <AddProducts/>,
+      },
+      {
+        path: "/dashboard/cart",
+        element: <Cart/>,
       },
       {
         path: "/dashboard/manageUsers",

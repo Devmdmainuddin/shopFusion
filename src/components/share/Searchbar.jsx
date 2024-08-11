@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import { FaHeart, FaSearch } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { HiBars2 } from "react-icons/hi2";
 import { RiContactsFill } from "react-icons/ri";
@@ -14,9 +14,11 @@ import useCartItems from "../../hooks/useCartItems";
 import Swal from "sweetalert2";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import { useMutation } from "@tanstack/react-query";
+import useWishlist from "../../hooks/useWishlist";
 
 const Searchbar = () => {
     const { user, logOut } = useAuth()
+    const [wishlist]=useWishlist()
     const [cartItems,,refetch,cartTotal] = useCartItems()
     const [catOpen, setCatOpen] = useState(false)
     const [proOpen, setProOpen] = useState(false);
@@ -148,7 +150,7 @@ const Searchbar = () => {
                 
                 <div className="md:flex gap-6 relative p-4 hidden ">
                     {/* user profile info */}
-                    <button onClick={() => setProOpen(!proOpen)}><RiContactsFill /></button>
+                    <button onClick={() => setProOpen(!proOpen)}><RiContactsFill className="text-xl hover:text-green-500 transition-all duration-500" /></button>
                     {proOpen && (
                         <div className=" absolute z-50 top-full right-12 translate-y-6">
                             <div className="w-[263px] block  bg-[#ffffff] ">
@@ -169,13 +171,15 @@ const Searchbar = () => {
                             </div>
                         </div>
                     )}
+                    <button onClick={() => setCartOpen(!cartOpen)} className=""><FaHeart  className="text-xl hover:text-green-500 transition-all duration-500"/> <span className="text-red-500 bg-white w-9 h-9 border p-2 rounded-full absolute -top-3 ">{wishlist.length}</span></button>
+                    
                     {/* product mini cart section */}
-                    <button onClick={() => setCartOpen(!cartOpen)} className=""><FaCartShopping /> <span className="text-red-500 bg-white w-9 h-9 border p-2 rounded-full absolute -top-3 ">{cartItems.length}</span></button>
+                    <button onClick={() => setCartOpen(!cartOpen)} className=""><FaCartShopping className= "text-xl hover:text-red-500 transition-all duration-500" /> <span className="text-red-500 bg-white w-9 h-9 border p-2 rounded-full absolute -top-3 ">{cartItems.length}</span></button>
 
                     {cartOpen && (
                         <div className="w-[360px] absolute z-50 top-full right-3 bg-slate-50 border translate-y-6">
 
-                            {cartItems.map(item =>
+                            {cartItems.slice(0,4).map(item =>
                                 <div key={item._id} className="flex justify-between  gap-2 bg-[#F5F5F3] p-5">
                                     <img src={item.image} alt="" className="bg-[#979797] w-20 h-20" />
                                     <div>
@@ -190,7 +194,7 @@ const Searchbar = () => {
                             <div className="p-5">
                                 <p >Subtotal: <span className="text-[#262626] font-bold">${cartTotal}</span></p>
                                 <div className="flex  lg:gap-x-5 gap gap-x-1 mt-3">
-                                    <button className="w-full block lg:py-4 py-2 lg:px-8 px-3 text-[#262626] border border-[#262626]">View Cart </button>
+                                    <Link to='/dashboard/cart' className="w-full block lg:py-4 py-2 lg:px-8 px-3 text-[#262626] border border-[#262626]">View Cart </Link>
                                     <button className="w-full block lg:py-4 py-2 lg:px-10 px-3 bg-[#262626] text-white">Checkout</button>
                                 </div>
                             </div>

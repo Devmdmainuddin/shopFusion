@@ -21,7 +21,7 @@ const SitebarLi = ({to, icon, text }) => {
 const Dashboard = () => {
     const [show, setShow] = useState(false)
     return (
-        <div className="w-[1380px] overflow-hidden">
+        <div className="max-w-[1600px] overflow-hidden">
 
             <div className={`sidebar-menu overflow-hidden fixed left-0 top-0  ${show ? 'w-12' : 'w-64'} h-full text-gray-600 bg-gray-100  z-50 transition-all duration-500 `}>
                 <Link to={'/'} className="flex items-center py-2 px-6 border-b ">
@@ -32,7 +32,7 @@ const Dashboard = () => {
                 <ul className="mt-4">
                     <SitebarLi to='' icon={<IoMdSettings />} text='Dashboard'></SitebarLi>
                     <SitebarLi to='/dashboard/addProduct' icon={<RiLockPasswordFill />} text='add product'></SitebarLi>
-                    <SitebarLi to='' icon={<RiLockPasswordFill />} text='Orders'></SitebarLi>
+                    <SitebarLi to='/dashboard/cart' icon={<RiLockPasswordFill />} text='Cart'></SitebarLi>
                     <SitebarLi to='/dashboard/manageUsers' icon={<RiLockPasswordFill />} text='manageUsers'></SitebarLi>
                     <SitebarLi to='' icon={<RiLockPasswordFill />} text='Settings'></SitebarLi>
                     {/* <li className="relative" >
@@ -87,8 +87,8 @@ const Dashboard = () => {
 
 
 
-            <main className={`main w-full  md:w-[calc(100%-256px)] z-40  ${show ? 'ml-12' : 'ml-64'}  bg-gray-200 min-h-screen transition-all  duration-500 z-30`}>
-                <div className="py-2 px-6 text-gray-600 bg-gray-100   hover:text-gray-700 flex items-center  shadow-black/5 sticky top-0 left-0 z-30">
+            <main className={`main   md:max-w-[calc(100%-256px)] z-40   ${show ? 'ml-12' : 'ml-64'}  bg-gray-200 min-h-screen transition-all  duration-500 z-30`}>
+                <div className="py-2  text-gray-600 bg-gray-100   hover:text-gray-700 flex items-center  shadow-black/5 sticky top-0 left-0 z-30">
                     <button onClick={() => setShow(!show)} type="button" className="text-lg text-gray-600 sidebar-toggle">
                         <CiMenuFries />
                     </button>
@@ -101,8 +101,8 @@ const Dashboard = () => {
                     </ul>
 
                 </div>
-                <div>
-                    <Outlet className=''></Outlet>
+                <div className="">
+                    <Outlet className='py-2 '></Outlet>
                 </div>
 
             </main>

@@ -18,7 +18,7 @@ import Collaps from "../components/Collaps";
 import Banner02 from "../components/banner/Banner02";
 import Banner03 from "../components/banner/Banner03";
 import ProductCard01 from "../components/card/ProductCard01";
-import ProductCard02 from "../components/card/ProductCard02";
+// import ProductCard02 from "../components/card/ProductCard02";
 import Heading01 from "../components/layer/Heading01";
 import useProduct from "../hooks/useProduct";
 
@@ -26,7 +26,7 @@ import useProduct from "../hooks/useProduct";
 
 const Home = () => {
 const [product]=useProduct()
-console.log(product.length);
+// console.log(product.length);
     // const [open, setOpen] = useState(false);
     // const [open2, setOpen2] = useState(false);
     // const [open3, setOpen3] = useState(false);
@@ -40,13 +40,13 @@ console.log(product.length);
             <Heading01></Heading01>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                {
-                product.map(item=> <ProductCard01 key={item._id} to={`/product/${item._id}`} offer={`${item.discount}%`} hoverSrc='/card-3.jpg' src={item.image} title={item.title} price={`$${item.price}`}></ProductCard01>)
+                product.map(item=> <ProductCard01 key={item._id} item={item}   ></ProductCard01>)
                }
                
-                <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01>
+                {/* <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01>
                 <ProductCard02 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard02>
                 <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01>
-                <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01>
+                <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01> */}
                
 
             </div>

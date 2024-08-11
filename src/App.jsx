@@ -67,10 +67,10 @@ const router = createBrowserRouter([
         loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/product/${params.id}`)
       },
       // {
-      //   path: "/details",
-      //   element: <ProductDetails/>,
-      // },
-      
+      //   path: "/chackout/:id",
+      //   element:<Chackout></Chackout>,
+      //   loader:({ params })=>fetch(`${import.meta.env.VITE_API_URL}/ScholarShips/${params.id}`)
+      // }, 
     ],
   },
   {

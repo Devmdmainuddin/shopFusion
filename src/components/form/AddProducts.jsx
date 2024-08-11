@@ -94,7 +94,7 @@ const AddProducts = () => {
                         <label htmlFor="price" className="label">
                             <span className="label-text">product price</span>
                         </label>
-                        <input type="number" placeholder="type product price" name="price" id="text" className="input input-bordered" required
+                        <input  type="number" placeholder="type product price" name="price" id="price" className="input input-bordered" required
                            />
 
                     </div>

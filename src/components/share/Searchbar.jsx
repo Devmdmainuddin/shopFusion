@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { HiBars2 } from "react-icons/hi2";
@@ -17,11 +17,11 @@ import { useMutation } from "@tanstack/react-query";
 
 const Searchbar = () => {
     const { user, logOut } = useAuth()
-    const [cartItems,,refetch] = useCartItems()
+    const [cartItems,,refetch,cartTotal] = useCartItems()
     const [catOpen, setCatOpen] = useState(false)
     const [proOpen, setProOpen] = useState(false);
     const [cartOpen, setCartOpen] = useState(false);
-    console.log(cartItems.length);
+  
      const axiosCommon =useAxiosCommon();
 
 
@@ -59,6 +59,14 @@ const Searchbar = () => {
             }
         });
     }
+
+
+    // useEffect(()=>{
+    //     const cartTotal = cartItems.reduce((acc,items)=>  acc + parseInt(items.price) ,0)
+      
+        
+    // },[cartItems])
+    // console.log(cartTotal);
 
 
     return (
@@ -180,7 +188,7 @@ const Searchbar = () => {
 
 
                             <div className="p-5">
-                                <p >Subtotal: <span className="text-[#262626] font-bold">$44.00</span></p>
+                                <p >Subtotal: <span className="text-[#262626] font-bold">${cartTotal}</span></p>
                                 <div className="flex  lg:gap-x-5 gap gap-x-1 mt-3">
                                     <button className="w-full block lg:py-4 py-2 lg:px-8 px-3 text-[#262626] border border-[#262626]">View Cart </button>
                                     <button className="w-full block lg:py-4 py-2 lg:px-10 px-3 bg-[#262626] text-white">Checkout</button>

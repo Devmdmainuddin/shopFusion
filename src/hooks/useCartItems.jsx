@@ -13,7 +13,11 @@ const useCartItems = () => {
           return data
         },
       })
-      return [cartItems,loading,refetch]
+   
+      const cartTotal = cartItems.reduce((acc,items)=> acc + parseInt(items.price),0)
+      console.log(cartTotal);
+   
+      return [cartItems,loading,refetch,cartTotal]
 
     // ..............................
 

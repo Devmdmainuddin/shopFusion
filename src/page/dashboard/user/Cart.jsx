@@ -5,49 +5,51 @@ import { FaTrashAlt } from "react-icons/fa";
 // import useAxiosPublic from "../../hook/useAxiosPublic";
 import { Link } from "react-router-dom";
 import useCartItems from "../../../hooks/useCartItems";
+import Swal from "sweetalert2";
+import useAxiosCommon from "../../../hooks/useAxiosCommon";
 
 
 const Cart = () => {
-    const [cartItems, ,,cartTotal] = useCartItems()
+    const [cartItems, ,refetch,cartTotal] = useCartItems()
     // const totalprice = cart.reduce((total, item) => total + parseInt(item.price), 0)
-    // const axiosPublic = useAxiosPublic()
-    // const handleDelet = id => {
+    const axiosCommon = useAxiosCommon()
+    const handleDelet = id => {
 
 
-    //     Swal.fire({
-    //         title: "Are you sure?",
-    //         text: "You won't be able to revert this!",
-    //         icon: "warning",
-    //         showCancelButton: true,
-    //         confirmButtonColor: "#3085d6",
-    //         cancelButtonColor: "#d33",
-    //         confirmButtonText: "Yes, delete it!"
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             axiosPublic.delete(`/carts/${id}`)
-    //                 .then(res => {
-    //                     if (res.data.deletedCount > 0) {
-    //                         Swal.fire({
-    //                             position: "top-end",
-    //                             icon: "success",
-    //                             title: "Your items has been delete",
-    //                             showConfirmButton: false,
-    //                             timer: 1500
-    //                         });
-    //                         refetch()
-    //                     }
-    //                 })
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosCommon.delete(`/cart/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Your items has been delete",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            refetch()
+                        }
+                    })
 
-    //         }
-    //     });
+            }
+        });
 
-    // }
+    }
 
     return (
         <div>
             <div className="flex justify-evenly mb-8">
-                <h2 className="text-6xl">total cart : {cartItems.length}</h2>
-                <h2 className="text-6xl">total price : {cartTotal}</h2>
+                <h2 className="text-3xl">total cart : {cartItems.length}</h2>
+                <h2 className="text-3xl">total price : ${cartTotal}</h2>
                 {/* {
                     cart.length ? <Link to='/dashboard/payment'><button className="py-2 px-6 bg-[#eba421]">play</button></Link>
                         :
@@ -92,6 +94,7 @@ const Cart = () => {
                                     <td>{item.price}</td>
                                     <th>
                                         <button
+                                        onClick={()=>handleDelet(item._id)}
                                             className="btn btn-ghost btn-xs"><FaTrashAlt className="text-red-600" /></button>
                                     </th>
                                 </tr>

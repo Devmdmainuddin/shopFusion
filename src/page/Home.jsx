@@ -14,12 +14,12 @@ import Arrivals from "../components/Arrivals";
 import Intro from "../components/Intro";
 // import NewProduct from "../components/NewProduct";
 import Bestsellers from "../components/Bestsellers";
-import Collaps from "../components/Collaps";
-import Banner02 from "../components/banner/Banner02";
-import Banner03 from "../components/banner/Banner03";
+// import Collaps from "../components/Collaps";
+// import Banner02 from "../components/banner/Banner02";
+// import Banner03 from "../components/banner/Banner03";
 import ProductCard01 from "../components/card/ProductCard01";
 // import ProductCard02 from "../components/card/ProductCard02";
-import Heading01 from "../components/layer/Heading01";
+// import Heading01 from "../components/layer/Heading01";
 import useProduct from "../hooks/useProduct";
 import { useState } from "react";
 
@@ -38,11 +38,11 @@ const [datalength,setDatalength]= useState(4)
         <div>
             <Slider01></Slider01>
             <Intro></Intro>
-            <Heading01></Heading01>
+            {/* <Heading01></Heading01> */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-               {
+               {/* {
                 product.slice(0,datalength).map(item=> <ProductCard01 key={item._id} item={item}   ></ProductCard01>)
-               }
+               } */}
                
                 {/* <ProductCard01 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard01>
                 <ProductCard02 offer='new' hoverSrc='/card-3.jpg' src='/card-4.jpg' title='Basic Crew Neck Tee' price='$60.00'></ProductCard02>
@@ -54,8 +54,8 @@ const [datalength,setDatalength]= useState(4)
             {/* <NewProduct/> */}
             <Banner></Banner>
             <Arrivals></Arrivals>
-            <Banner02></Banner02>
-            <Banner03></Banner03>
+            {/* <Banner02></Banner02>
+            <Banner03></Banner03> */}
             <Bestsellers></Bestsellers>
             <Ads></Ads>
             <Offers></Offers>
@@ -188,7 +188,7 @@ const [datalength,setDatalength]= useState(4)
                 </div>
             </section> */}
 
-            <section>
+            {/* <section>
                 <div className=" 2xl:container 2xl:mx-auto md:py-12 lg:px-20 md:px-6 py-9 px-4">
                     <h2 className=" font-semibold lg:text-4xl text-3xl lg:leading-9 md:leading-7 leading-9 text-gray-800">Frequently Asked Questions</h2>
                     <div className="mt-4 flex md:justify-between md:items-start md:flex-row flex-col justify-start items-start">
@@ -214,7 +214,7 @@ const [datalength,setDatalength]= useState(4)
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
             {/* <section>
                 <div>
                     <div className="container flex justify-center mx-auto pt-16">
@@ -582,12 +582,6 @@ const [datalength,setDatalength]= useState(4)
                 </div>
 
             </section> */}
-
-            <section>
-
-            </section>
-
-
         </div>
     );
 };

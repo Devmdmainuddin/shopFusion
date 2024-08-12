@@ -3,27 +3,104 @@ import Container from "../components/layer/Container";
 import { Link, useLoaderData } from "react-router-dom";
 import { FaMinus, FaPlus, FaStar } from "react-icons/fa";
 import { ImStarHalf } from "react-icons/im";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Heading from "../components/layer/Heading";
+import useProduct from "../hooks/useProduct";
+import ProductCard from "../components/card/ProductCard";
+import useComment from "../hooks/useComment";
+import useAuth from "../hooks/useAuth";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useMutation } from "@tanstack/react-query";
+import { imageUpload } from "../utils";
 
 
 const ProductDetails = () => {
-    const product = useLoaderData();
+    const { user } = useAuth() || {}
+    const products = useLoaderData();
+    const [product, loading] = useProduct();
+    const [comment, , refetch] = useComment();
+    const [commentItem, setCommentItem] = useState([]);
+    const axiosSecure = useAxiosSecure()
     let [Quantity, setQuantity] = useState(1);
+    const relative = product.filter(item => item.brand === products.brand)
+    const discountp = (parseInt(products.price) * parseInt(products.discount)) / 100
+    const discountPrice = parseInt(products.price) - discountp
+    // console.log(commentItem.length);
+    useEffect(() => {
+        const filteritems = comment.filter(p => p.productId === products._id)
+        setCommentItem(filteritems)
+
+    }, [comment, products])
+
+    const { mutateAsync } = useMutation({
+        mutationFn: async commentData => {
+            const { data } = await axiosSecure.post(`/comment`, commentData)
+            return data
+        },
+        onSuccess: () => {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your comment has been added",
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+            // console.log("data add successfully")
+        }
+    })
+
+
+    const handelComment = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const comment = form.comment.value;
+        const rating = form.rating.value;
+        const image_url = form.image.files[0]
+        const image = await imageUpload(image_url)
+        const productId = products._id;
+        const productTitle = products.title;
+        const userName = user.displayName;
+        const userEmail = user.email;
+        const userImage = user.photoURL;
+        const currentTime = (new Date()).toDateString();
+        const info = { comment, rating, image, productId, productTitle, userName, userEmail, userImage, currentTime };
+        // console.log(info);
+        try {
+            // console.log(reviewData);
+            await mutateAsync(info)
+            refetch()
+            form.reset()
+        }
+        catch (err) {
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: " your comment not add  ",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+
+
+    }
+
     return (
         <div >
             <Container>
                 <div className='mt-[93px]'>
-                    <h2 className='text-[#262626] text-6xl font-bold'>{product.title}</h2>
+                    <h2 className='text-[#262626] text-6xl font-bold'>Product Details</h2>
                     <ul className='flex items-center gap-2 mt-3'>
                         <li className='text-[12px] font-normal text-[#767676]'><Link>Home</Link></li>
                         <li><IoIosArrowForward className='text-[12px]' /></li>
                         <li className='text-[12px] font-normal text-[#767676]'> <Link> Products</Link></li>
                     </ul>
                 </div>
-                <div className="flex justify-center gap-6">
-                    <div className="max-w-[400px]">
+                <div className="flex flex-col md:flex-row justify-between gap-6">
+                    <div className="w-full md:w-[782px]">
                         <div>
-                            <h2 className="text-[39px] font-bold text-[#262626]">Product</h2>
+                            <h2 className="text-[39px] font-bold text-[#262626]">{products.title}</h2>
                             <div className="flex gap-6 mt-4">
                                 <div className="star flex text-[#ffc400fa]">
                                     <FaStar />
@@ -32,10 +109,10 @@ const ProductDetails = () => {
                                     <FaStar />
                                     <ImStarHalf />
                                 </div>
-                                <p className="text-[#767676]"> <span>1</span> Review</p>
+                                <p className="text-[#767676]"> <span>{commentItem.length}</span> Review</p>
                             </div>
                             <div className="divider"></div>
-                            <p className="flex items-center gap-[22px] mt-6"> <span className="text-[#767676]">$88.00</span><span className="text-xl font-bold text-[#262626]">$44.00</span></p>
+                            <p className="flex items-center gap-[22px] mt-6"> {products.discount && <span className="text-[#767676] line-through ">${products.price}</span>}<span className="text-xl font-bold text-[#262626]">${products.discount ? discountPrice : products.price}</span></p>
                             <div className="flex gap-4 mt-7">
                                 <p className="text-[#262626] text-[16px] font-bold">COLOR:</p>
                                 <div className="flex gap-3">
@@ -114,8 +191,77 @@ const ProductDetails = () => {
 
                         </div>
                     </div>
-                    <div className="image">                                
-                        <img src={product.image} alt="" />
+
+                    <div>
+                        <div className="image w-full md:w-[370px]">
+                            <img src={products.image} alt="" />
+                        </div>
+                        <div className="comment">
+                            <div className="py-8 px-4">
+                                <h2 className="text-center text-2xl text-slate-600 my-7">comment</h2>
+                                <form onSubmit={handelComment} className='mt-12 max-w-[768px] mx-auto'>
+                                    <div className="flex gap-8 ">
+                                        <div className="flex-1 items-start">
+                                            <label className="block mb-2 dark:text-white" htmlFor="comment">your comment</label>
+                                            <input
+                                                className="w-full p-2 border rounded-md focus:border-teal-500 focus:outline-none"
+                                                type="text"
+                                                placeholder="type your comment comment"
+                                                id="title"
+                                                name="comment" />
+                                            <label htmlFor='image' className='block mb-2 text-sm'>
+                                                Select Image:
+                                            </label>
+                                            <input
+                                                required
+                                                type='file'
+                                                id='image'
+                                                name='image'
+                                                className="w-full block py-2 px-4   outline-none border rounded-md"
+                                                accept='image/*'
+                                            />
+
+                                            <label className="block mt-4 mb-2 dark:text-white" htmlFor="rating">
+                                                rating this product
+                                            </label>
+                                            <input
+                                                className="w-full p-2 border rounded-md focus:border-teal-500 focus:outline-none"
+                                                type="text"
+                                                placeholder="type your ration in 1 into 5 number"
+                                                id="rating"
+                                                name="rating"
+                                            />
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <input
+                                        className="inline-block w-full rounded bg-teal-500 mt-4 px-4 py-3 text-sm font-medium text-white transition  focus:outline-none focus:ring active:bg-indigo-500"
+                                        type="submit"
+                                        value="Add comment"
+                                    />
+
+                                </form>
+                            </div>
+                            {
+                                commentItem.slice(0,2).map(item => <div key={item._id} className="p-4 border"> 
+                                <h3>{item.userName}</h3>
+                                 <h2>{item.comment}</h2>
+                                 <img className={`${item.image? 'w-16 h-16':'w-0 h-0'} h-16 object-cover`} src={item.image} alt="" /> </div>
+                                )
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <Heading text='realative product'></Heading>
+                    <div className='flex justify-between md:mt-12 mt-5 flex-wrap gap-y-5'>
+                        {
+                            relative.map(item => <ProductCard key={item._id} item={item}   ></ProductCard>)
+                        }
                     </div>
                 </div>
 

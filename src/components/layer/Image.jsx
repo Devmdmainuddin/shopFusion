@@ -1,11 +1,11 @@
 
 import { Link } from 'react-router-dom'
 
-const Image = ({src, alt, href, className}) => {
+const Image = ({src, alt, href, className,imgClassName}) => {
   return (
-    <Link to={href}>
-      <picture className={` block ${className}`}>
-         <img className='w-full h-full object-contain  block'  src={src} alt={alt} />
+    <Link to={href} className={` block ${className}`}>
+      <picture >
+         <img className={`w-full   block ${imgClassName}`}  src={src} alt={alt} />
       </picture>
     </Link>
   )

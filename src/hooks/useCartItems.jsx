@@ -15,7 +15,7 @@ const useCartItems = () => {
       })
    
       const cartTotal = cartItems.reduce((acc,items)=> acc + parseInt(items.price),0)
-      console.log(cartTotal);
+      // console.log(cartTotal);
    
       return [cartItems,loading,refetch,cartTotal]
 

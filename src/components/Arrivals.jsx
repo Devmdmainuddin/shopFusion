@@ -11,6 +11,9 @@ import Heading from "./layer/Heading";
 
 import Slider from "react-slick";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
+import useProduct from "../hooks/useProduct";
+import LoadingSpinner from "./share/LoadingSpinner";
+import ProductCard01 from "./card/ProductCard01";
 
 function SampleNextArrow(props) {
   const { style, onClick } = props;
@@ -110,7 +113,7 @@ const Arrivals = () => {
   //           // color:#0156FF;
   //           // background-color: #A2A6B0;
   //           // }
-          
+
   //       `,
   //     ],
   //   };
@@ -118,7 +121,8 @@ const Arrivals = () => {
   //   Object.assign(swiperContainer, params);
   //   swiperContainer.initialize();
   // }, []);
-
+  const [product, loading] = useProduct()
+  // console.log('arrivals', product);
   var settings = {
     infinite: true,
     slidesToShow: 4,
@@ -131,55 +135,43 @@ const Arrivals = () => {
     prevArrow: <SamplePrevArrow />,
 
     responsive: [
+
       {
-        breakpoint: 1480,
+        breakpoint: 1484,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         }
-      },
-      {
-        breakpoint: 1025,
+      }, {
+        breakpoint: 1160,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
         }
       },
       {
-        breakpoint: 750,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        }
-      },    {
-        breakpoint: 700,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        }
-      }, 
-      {
-        breakpoint: 600,
+        breakpoint: 770,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
         }
       },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+      // {
+      //   breakpoint: 480,
+      //   settings: {
+      //     slidesToShow: 1,
+      //     slidesToScroll: 1,
 
-          nextArrow: <SampleNextArrow2 />,
-          prevArrow: <SamplePrevArrow2 />,
+      //     nextArrow: <SampleNextArrow2 />,
+      //     prevArrow: <SamplePrevArrow2 />,
 
-        }
-      }
+      //   }
+      // }
     ]
 
 
   };
+  if (loading) return <LoadingSpinner />
   return (
     <div className="my-36">
       <Container>
@@ -188,8 +180,8 @@ const Arrivals = () => {
       </Container>
       {/* <div className="flex justify-center gap-6 flex-wrap"> */}
       <div className="max-w-[1640px] mx-auto">
-        
-          {/* <swiper-container ref={swiperRef} init="false" className='flex flex-wrap py-6'>
+
+        {/* <swiper-container ref={swiperRef} init="false" className='flex flex-wrap py-6'>
           <swiper-slide> <ProductCard className='w-full' src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard></swiper-slide>
           <swiper-slide><ProductCard className='w-full' src='/card-2.jpg' offer='10%' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard></swiper-slide>
           <swiper-slide><ProductCard className='w-full' src='/card-2.jpg' offer='10%' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard></swiper-slide>
@@ -197,8 +189,26 @@ const Arrivals = () => {
           <swiper-slide><ProductCard className='w-full' src='/card-2.jpg' offer='10%' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard></swiper-slide>
 
         </swiper-container> */}
+        {/* <div className='flex justify-between md:mt-12 mt-5 flex-wrap gap-y-5'>
+        
+        </div> */}
+       
         <Slider {...settings}>
-          <div >
+        {/* {
+          product.map(item => <ProductCard key={item._id} item={item}   ></ProductCard>)
+        } */}
+        {
+          product.map(item => <ProductCard01 key={item._id} item={item}   ></ProductCard01>)
+        }
+          {/* {
+            product.map(item => {
+             
+              <ProductCard key={item._id} item={item} src={item.image} offer={item.discount} title={item.title} alt={item.title} price={item.price} brand={item.brand} id={item._id}></ProductCard>
+
+            })
+          } */}
+
+          {/* <div >
           <ProductCard  src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
           </div>
           
@@ -207,7 +217,9 @@ const Arrivals = () => {
           </div>
           <div >
           <ProductCard  src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
-          </div>
+          </div> */}
+
+
           {/* <ProductCard src='/card-2.jpg' offer='10%' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
           <ProductCard src='/card-3.jpg' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
           <ProductCard src='/card-2.jpg' offer='10%' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
@@ -226,7 +238,7 @@ const Arrivals = () => {
        */}
     </div>
 
-  
+
   );
 };
 

@@ -13,6 +13,7 @@ const AddProducts = () => {
         const image_url = form.image.files[0]
         const image = await imageUpload(image_url)
         const title = form.title.value;
+        const category = form.category.value;
         const brand = form.brand.value;
         const price = form.price.value;
         const descaption = form.descaption.value;
@@ -27,7 +28,7 @@ const AddProducts = () => {
 
 
 
-        const info = { image, title, brand, price, descaption, createAt, stockStatus, discount, userInfo };
+        const info = { image, title, brand, price, descaption,category, createAt, stockStatus, discount, userInfo };
 
         try {
             const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/product`, info)
@@ -37,7 +38,7 @@ const AddProducts = () => {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: " add Queries items ",
+                    title: " create product  ",
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -48,7 +49,7 @@ const AddProducts = () => {
             Swal.fire({
                 position: "top-end",
                 icon: "error",
-                title: " add Queries items faile",
+                title: " create product items faile",
                 showConfirmButton: false,
                 timer: 1500
             });

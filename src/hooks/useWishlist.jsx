@@ -13,7 +13,7 @@ const useWishlist = () => {
       })
    
       const wishlistTotal = wishlist.reduce((acc,items)=> acc + parseInt(items.price),0)
-      console.log(wishlistTotal);
+      // console.log(wishlistTotal);
    
       return [wishlist,loading,refash,wishlistTotal]
 

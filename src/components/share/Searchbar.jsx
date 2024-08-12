@@ -18,17 +18,34 @@ import useWishlist from "../../hooks/useWishlist";
 
 const Searchbar = () => {
     const { user, logOut } = useAuth()
-    const [wishlist]=useWishlist()
+    const [wishlist, ,refash]=useWishlist()
     const [cartItems,,refetch,cartTotal] = useCartItems()
     const [catOpen, setCatOpen] = useState(false)
     const [proOpen, setProOpen] = useState(false);
+    const [wishlistOpen, setWishListOpen] = useState(false);
     const [cartOpen, setCartOpen] = useState(false);
   
      const axiosCommon =useAxiosCommon();
 
 
-    
-    const { mutateAsync } = useMutation({
+     const { mutateAsync } = useMutation({
+        mutationFn: async id => {
+            const { data } = await axiosCommon.delete(`/wishlist/${id}`)
+            return data
+        },
+        onSuccess:data => {
+            refetch()
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "wishlist items has been delete",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        },
+    })
+
+    const { mutateAsyncCart } = useMutation({
         mutationFn: async id => {
             const { data } = await axiosCommon.delete(`/cart/${id}`)
             return data
@@ -57,6 +74,8 @@ const Searchbar = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 await mutateAsync(id)
+                await mutateAsyncCart(id)
+                refash()
                 refetch()
             }
         });
@@ -171,8 +190,32 @@ const Searchbar = () => {
                             </div>
                         </div>
                     )}
-                    <button onClick={() => setCartOpen(!cartOpen)} className=""><FaHeart  className="text-xl hover:text-green-500 transition-all duration-500"/> <span className="text-red-500 bg-white w-9 h-9 border p-2 rounded-full absolute -top-3 ">{wishlist.length}</span></button>
-                    
+                    <button onClick={() => setWishListOpen(!wishlistOpen)} className=""><FaHeart  className="text-xl hover:text-green-500 transition-all duration-500"/> <span className="text-red-500 bg-white w-9 h-9 border p-2 rounded-full absolute -top-3 ">{wishlist.length}</span></button>
+                    {wishlistOpen && (
+                        <div className="w-[360px] absolute z-50 top-full right-3 bg-slate-50 border translate-y-6">
+
+                            {wishlist.slice(0,4).map(item =>
+                                <div key={item._id} className="flex justify-between  gap-2 bg-[#F5F5F3] p-5">
+                                    <img src={item.image} alt="" className="bg-[#979797] w-20 h-20" />
+                                    <div>
+                                        {/* <h2>Black Smart Watch</h2> */}
+                                        <h2>{item.title}</h2>
+                                        <p>${item.price}</p>
+                                    </div>
+                                    <button onClick={()=>handleDelete(item._id)}><IoMdClose /></button>
+                                </div>)}
+
+
+                            <div className="p-5">
+                                <p >Subtotal: <span className="text-[#262626] font-bold">${cartTotal}</span></p>
+                                <div className="flex  lg:gap-x-5 gap gap-x-1 mt-3">
+                                    <Link to='/dashboard/cart' className="w-full block lg:py-4 py-2 lg:px-8 px-3 text-[#262626] border border-[#262626]">View Cart </Link>
+                                    <button className="w-full block lg:py-4 py-2 lg:px-10 px-3 bg-[#262626] text-white">Checkout</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    )}
                     {/* product mini cart section */}
                     <button onClick={() => setCartOpen(!cartOpen)} className=""><FaCartShopping className= "text-xl hover:text-red-500 transition-all duration-500" /> <span className="text-red-500 bg-white w-9 h-9 border p-2 rounded-full absolute -top-3 ">{cartItems.length}</span></button>
 

@@ -8,18 +8,27 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import useCartItems from "../../hooks/useCartItems";
 import useWishlist from "../../hooks/useWishlist";
+import { Tooltip } from 'react-tooltip'
+import 'react-tooltip/dist/react-tooltip.css'
+import { useState } from "react";
+import QuickviewProduct from "../modal/QuickviewProduct";
 // import { useMutation } from "@tanstack/react-query";
 
-const OverlayLi = ({ src,onClick, icon }) => {
+const OverlayLi = ({ src,onClick,tooltip, icon }) => {
     return (
         <li onClick={onClick}>
-            <Link to={src} className='w-[40px] h-[40px] rounded-full border bg-[#fed700] hover:text-[#fff] hover:bg-[#f3283d] text-center leading-[40px] flex justify-center items-center transition-all duration-300 cursor-pointer' >{icon}</Link>
+            <Link 
+            to={src} 
+            data-tooltip-id="Home"
+            data-tooltip-content="Home!"
+            data-tooltip-place="left"
+            className='w-[40px] h-[40px] rounded-full border bg-[#fed700] hover:text-[#fff] hover:bg-[#f3283d] text-center leading-[40px] flex justify-center items-center transition-all duration-300 cursor-pointer' > <Tooltip id="Home" />  {icon}</Link>
         </li>
     )
 
 }
 const ProductCard01 = ({item}) => {
-
+const [detailsModal,setDetailsModal]= useState(false)
     const { user } = useAuth() || {}
     const [, ,refetch]=useCartItems()
     const [,,refash]= useWishlist()
@@ -85,7 +94,7 @@ const handlewishlist = item => {
     return (
         <div className={`w-[350px] group mx-auto  overflow-hidden hover:shadow-shadow `}>
             <div className="image w-full h-[370px] relative">
-                <button className={`absolute top-5 left-5 bg-[#fed700] z-50 hover:text-[#fff] hover:bg-[#f3283d] text-sm py-2 transition-all duration-700 ${item.discount ? 'px-8' : 'px-0'}`}>{item.discount}</button>
+                <button className={`absolute top-5 left-5 bg-[#fed700] z-50 hover:text-[#fff] hover:bg-[#f3283d] text-sm py-2 transition-all duration-700 ${item.discount? 'px-8' : 'px-0'}`}>{item.discount}</button>
                 <div className="image w-full h-full relative">
                     <img className='w-full h-full object-cover opacity-100 group-hover:opacity-0  transition-all  duration-700' src={item.image} alt='' />
                     {/* <img className=' absolute top-0 left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible  w-full h-full object-cover  transition-all duration-700' src='#' alt='' /> */}
@@ -94,14 +103,15 @@ const handlewishlist = item => {
                 <div className="overlay  absolute  -top-full right-0 opacity-0 py-6 px-7 group-hover:top-0  group-hover:opacity-100 transition-all duration-1000 ">
 
                     <ul className='flex gap-3 flex-col  '>
-                        <OverlayLi onClick={() => handlewishlist(item)} icon={<FaHeart />}></OverlayLi>
+                        <OverlayLi   onClick={() => handlewishlist(item)} icon={<FaHeart />} > </OverlayLi>
                         <OverlayLi  icon={<LuRefreshCcw />}></OverlayLi>
-                        <OverlayLi icon={<FaEye />}></OverlayLi>
+                        <OverlayLi onClick={()=>setDetailsModal(!detailsModal)} icon={<FaEye />}></OverlayLi>
+                       {detailsModal && <QuickviewProduct detailsModal={detailsModal} setDetailsModal={setDetailsModal} image={item.image} title={item.title} brand={item.brand} categorey={item.category} price={item.price} className='z-50'></QuickviewProduct>} 
                     </ul>
                 </div>
             </div>
             <div className="text py-6 relative">
-                <Link to={`/product/${item._id}`} className="">
+                <Link  to={`/product/${item._id}`} className="">
                     <h3 className=" font-normal text-center text-[#444] text-lg">{item.title}</h3>
                 </Link>
                 <p className="price text-center font-DM text-[#f3283d] my-3">${item.price}</p>

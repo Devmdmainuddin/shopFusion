@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaHeart, FaSearch } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { HiBars2 } from "react-icons/hi2";
@@ -18,39 +18,40 @@ import useWishlist from "../../hooks/useWishlist";
 
 const Searchbar = () => {
     const { user, logOut } = useAuth()
-    const [wishlist, ,refash]=useWishlist()
-    const [cartItems,,refetch,cartTotal] = useCartItems()
+    const [wishlist] = useWishlist()
+    const [cartItems, , refetch, cartTotal] = useCartItems()
     const [catOpen, setCatOpen] = useState(false)
     const [proOpen, setProOpen] = useState(false);
     const [wishlistOpen, setWishListOpen] = useState(false);
     const [cartOpen, setCartOpen] = useState(false);
-  
-     const axiosCommon =useAxiosCommon();
+
+    const axiosCommon = useAxiosCommon();
 
 
-     const { mutateAsync } = useMutation({
-        mutationFn: async id => {
-            const { data } = await axiosCommon.delete(`/wishlist/${id}`)
-            return data
-        },
-        onSuccess:data => {
-            refetch()
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "wishlist items has been delete",
-                showConfirmButton: false,
-                timer: 1500
-            });
-        },
-    })
+    //  const { mutateAsync } = useMutation({
+    //     mutationFn: async id => {
+    //         const { data } = await axiosCommon.delete(`/wishlist/${id}`)
+    //         return data
+    //     },
+    //     onSuccess:data => {
+    //         refetch()
+    //         Swal.fire({
+    //             position: "top-end",
+    //             icon: "success",
+    //             title: "wishlist items has been delete",
+    //             showConfirmButton: false,
+    //             timer: 1500
+    //         });
+    //     },
+    // })
 
-    const { mutateAsyncCart } = useMutation({
+
+    const { mutateAsync } = useMutation({
         mutationFn: async id => {
             const { data } = await axiosCommon.delete(`/cart/${id}`)
             return data
         },
-        onSuccess:data => {
+        onSuccess: data => {
             refetch()
             Swal.fire({
                 position: "top-end",
@@ -61,6 +62,8 @@ const Searchbar = () => {
             });
         },
     })
+
+
 
     const handleDelete = async id => {
         Swal.fire({
@@ -73,9 +76,9 @@ const Searchbar = () => {
             confirmButtonText: "Yes, delete it!"
         }).then(async (result) => {
             if (result.isConfirmed) {
+                // await mutateAsync(id)
                 await mutateAsync(id)
-                await mutateAsyncCart(id)
-                refash()
+                // refash()
                 refetch()
             }
         });
@@ -84,8 +87,8 @@ const Searchbar = () => {
 
     // useEffect(()=>{
     //     const cartTotal = cartItems.reduce((acc,items)=>  acc + parseInt(items.price) ,0)
-      
-        
+
+
     // },[cartItems])
     // console.log(cartTotal);
 
@@ -166,7 +169,7 @@ const Searchbar = () => {
                     <input type="search" name="search" id="search" placeholder="Search Products" className="p-4 px-5 w-full rounded-lg outline-none" />
                 </div>
 
-                
+
                 <div className="md:flex gap-6 relative p-4 hidden ">
                     {/* user profile info */}
                     <button onClick={() => setProOpen(!proOpen)}><RiContactsFill className="text-xl hover:text-green-500 transition-all duration-500" /></button>
@@ -190,11 +193,11 @@ const Searchbar = () => {
                             </div>
                         </div>
                     )}
-                    <button onClick={() => setWishListOpen(!wishlistOpen)} className=""><FaHeart  className="text-xl hover:text-green-500 transition-all duration-500"/> <span className="text-red-500 bg-white w-9 h-9 border p-2 rounded-full absolute -top-3 ">{wishlist.length}</span></button>
+                    <button onClick={() => setWishListOpen(!wishlistOpen)} className=""><FaHeart className="text-xl hover:text-green-500 transition-all duration-500" /> <span className="text-red-500 bg-white w-9 h-9 border p-2 rounded-full absolute -top-3 ">{wishlist.length}</span></button>
                     {wishlistOpen && (
                         <div className="w-[360px] absolute z-50 top-full right-3 bg-slate-50 border translate-y-6">
 
-                            {wishlist.slice(0,4).map(item =>
+                            {wishlist.slice(0, 4).map(item =>
                                 <div key={item._id} className="flex justify-between  gap-2 bg-[#F5F5F3] p-5">
                                     <img src={item.image} alt="" className="bg-[#979797] w-20 h-20" />
                                     <div>
@@ -202,7 +205,7 @@ const Searchbar = () => {
                                         <h2>{item.title}</h2>
                                         <p>${item.price}</p>
                                     </div>
-                                    <button onClick={()=>handleDelete(item._id)}><IoMdClose /></button>
+                                    <button onClick={() => handleDelete(item._id)}><IoMdClose /></button>
                                 </div>)}
 
 
@@ -217,12 +220,12 @@ const Searchbar = () => {
                         </div>
                     )}
                     {/* product mini cart section */}
-                    <button onClick={() => setCartOpen(!cartOpen)} className=""><FaCartShopping className= "text-xl hover:text-red-500 transition-all duration-500" /> <span className="text-red-500 bg-white w-9 h-9 border p-2 rounded-full absolute -top-3 ">{cartItems.length}</span></button>
+                    <button onClick={() => setCartOpen(!cartOpen)} className=""><FaCartShopping className="text-xl hover:text-red-500 transition-all duration-500" /> <span className="text-red-500 bg-white w-9 h-9 border p-2 rounded-full absolute -top-3 ">{cartItems.length}</span></button>
 
                     {cartOpen && (
                         <div className="w-[360px] absolute z-50 top-full right-3 bg-slate-50 border translate-y-6">
 
-                            {cartItems.slice(0,4).map(item =>
+                            {cartItems.slice(0, 4).map(item =>
                                 <div key={item._id} className="flex justify-between  gap-2 bg-[#F5F5F3] p-5">
                                     <img src={item.image} alt="" className="bg-[#979797] w-20 h-20" />
                                     <div>
@@ -230,7 +233,7 @@ const Searchbar = () => {
                                         <h2>{item.title}</h2>
                                         <p>${item.price}</p>
                                     </div>
-                                    <button onClick={()=>handleDelete(item._id)}><IoMdClose /></button>
+                                    <button onClick={() => handleDelete(item._id)}><IoMdClose /></button>
                                 </div>)}
 
 

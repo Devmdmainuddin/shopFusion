@@ -13,6 +13,11 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useMutation } from "@tanstack/react-query";
 import { imageUpload } from "../utils";
+import { Rating } from '@smastrom/react-rating'
+import '@smastrom/react-rating/style.css'
+import useAxiosCommon from "../hooks/useAxiosCommon";
+import useWishlist from "../hooks/useWishlist";
+// import useCartItems from "../hooks/useCartItems";
 
 
 const ProductDetails = () => {
@@ -21,6 +26,9 @@ const ProductDetails = () => {
     const [product, loading] = useProduct();
     const [comment, , refetch] = useComment();
     const [commentItem, setCommentItem] = useState([]);
+    //  const [cartItems, , ] = useCartItems()
+    const [, , refash] = useWishlist()
+    const axiosCommon = useAxiosCommon();
     const axiosSecure = useAxiosSecure()
     let [Quantity, setQuantity] = useState(1);
     const relative = product.filter(item => item.brand === products.brand)
@@ -30,8 +38,8 @@ const ProductDetails = () => {
     useEffect(() => {
         const filteritems = comment.filter(p => p.productId === products._id)
         setCommentItem(filteritems)
-
-    }, [comment, products])
+      
+    }, [comment, products,])
 
     const { mutateAsync } = useMutation({
         mutationFn: async commentData => {
@@ -65,6 +73,7 @@ const ProductDetails = () => {
         const userEmail = user.email;
         const userImage = user.photoURL;
         const currentTime = (new Date()).toDateString();
+
         const info = { comment, rating, image, productId, productTitle, userName, userEmail, userImage, currentTime };
         // console.log(info);
         try {
@@ -86,6 +95,67 @@ const ProductDetails = () => {
 
     }
 
+
+    // add to whish list
+    // const handlewishlist = item => {
+
+    //     const cartItem = {
+    //         produdctId: item._id,
+    //         title: item.title,
+    //         image: item.image,
+    //         price: item.price,
+    //         email: user.email,
+    //     }
+    //     console.log(cartItem)
+
+    //     axiosCommon.post(`/wishlist`, cartItem)
+
+    //         .then(res => {
+    //             if (res.data?.insertedId) {
+
+    //                 Swal.fire({
+    //                     position: "top-end",
+    //                     icon: "success",
+    //                     title: "Your items has been add to wishlist",
+    //                     showConfirmButton: false,
+    //                     timer: 1500
+    //                 });
+    //                 refash()
+    //             }
+    //         })
+    // }
+
+    // add to cart
+    const handlecard = item => {
+
+        const cartItem = {
+            produdctId: item._id,
+            title: item.title,
+            image: item.image,
+            price: item.price,
+            email: user.email,
+            // itemQuantity:Quantity,
+        }
+     
+        
+ 
+        axiosCommon.post(`/cart`, cartItem)
+        .then(res => {
+            if (res.data?.insertedId) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Your items has been add to cart",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                refetch()
+            }
+        })       
+    }
+
+
+
     return (
         <div >
             <Container>
@@ -98,7 +168,7 @@ const ProductDetails = () => {
                     </ul>
                 </div>
                 <div className="flex flex-col md:flex-row justify-between gap-6">
-                    <div className="w-full md:w-[782px]">
+                    <div className=" sidebar w-full md:w-[782px]">
                         <div>
                             <h2 className="text-[39px] font-bold text-[#262626]">{products.title}</h2>
                             <div className="flex gap-6 mt-4">
@@ -170,13 +240,13 @@ const ProductDetails = () => {
                             <div className="divider"></div>
                             <div className="flex gap-5">
 
-                                <button className="py-4 px-10 border border-[#262626] text-[#262626] hover:border-[#262626] hover:text-white hover:bg-[#262626] transition-all duration-500 ease-in-out">Add to Wish List</button>
-                                <button className="py-4 px-10 border border-[#262626] bg-[#262626] text-white hover:text-[#262626] hover:border-[#262626] hover:bg-transparent transition-all duration-500 ease-in-out">Add to Cart</button>
+                                <button onClick={()=>handlewishlist(products)} className="py-4 px-10 border border-[#262626] text-[#262626] hover:border-[#262626] hover:text-white hover:bg-[#262626] transition-all duration-500 ease-in-out">Add to Wish List</button>
+                                <button onClick={()=>handlecard(products)} className="py-4 px-10 border border-[#262626] bg-[#262626] text-white hover:text-[#262626] hover:border-[#262626] hover:bg-transparent transition-all duration-500 ease-in-out">Add to Cart</button>
                             </div>
                             <div tabIndex={0} className="collapse collapse-plus ">
                                 <div className="collapse-title text-[#262626] text-[16px] font-bold">FEATURES  & DETAILS</div>
                                 <div className="collapse-content text-[#767676]">
-                                    {/* <p>tabindex={0} attribute is necessary to make the div focusable</p> */}
+                                    {products.descaption} {/* <p>tabindex={0} attribute is necessary to make the div focusable</p> */}
                                 </div>
                             </div>
                             <div tabIndex={0} className="collapse collapse-plus ">
@@ -187,33 +257,51 @@ const ProductDetails = () => {
                                     </p>
                                 </div>
                             </div>
+                            {
+                                commentItem.slice(0, 2).map(item => <div key={item._id} className="p-4 border">
+                                    <div className="flex justify-between items-center gap-6">
+                                        <Rating
+                                            style={{ maxWidth: 120 }}
+                                            value={item.rating}
+                                            readOnly
+                                        />
+                                        <h3>{item.currentTime}</h3>
+                                    </div>
+                                    <div className="flex items-center gap-6 my-2">
+                                        <img className="w-8 h-8 rounded-full" src={item.userImage} alt="" />
+                                        <h3>{item.userName}</h3>
+                                    </div>
+                                    <h2 className="my-2">{item.comment}</h2>
+                                    <img className={`${item.image ? 'w-24 h-24' : 'w-0 h-0'} h-16 object-cover`} src={item.image} alt="" /> </div>
+                                )
+                            }
 
 
                         </div>
                     </div>
 
-                    <div>
+                    <div className="main">
                         <div className="image w-full md:w-[370px]">
                             <img src={products.image} alt="" />
                         </div>
                         <div className="comment">
                             <div className="py-8 px-4">
-                                <h2 className="text-center text-2xl text-slate-600 my-7">comment</h2>
+                                <h2 className="text-center text-2xl text-slate-600 my-7">Reviews</h2>
                                 <form onSubmit={handelComment} className='mt-12 max-w-[768px] mx-auto'>
                                     <div className="flex gap-8 ">
                                         <div className="flex-1 items-start">
-                                            <label className="block mb-2 dark:text-white" htmlFor="comment">your comment</label>
+                                            <label className="block mb-2 dark:text-white" htmlFor="comment">your Reviews</label>
                                             <input
                                                 className="w-full p-2 border rounded-md focus:border-teal-500 focus:outline-none"
                                                 type="text"
-                                                placeholder="type your comment comment"
+                                                placeholder="type your comment "
                                                 id="title"
                                                 name="comment" />
                                             <label htmlFor='image' className='block mb-2 text-sm'>
                                                 Select Image:
                                             </label>
                                             <input
-                                                required
+
                                                 type='file'
                                                 id='image'
                                                 name='image'
@@ -226,7 +314,10 @@ const ProductDetails = () => {
                                             </label>
                                             <input
                                                 className="w-full p-2 border rounded-md focus:border-teal-500 focus:outline-none"
-                                                type="text"
+                                                maxLength={5}
+                                                max={5}
+                                                min={1}
+                                                type="number"
                                                 placeholder="type your ration in 1 into 5 number"
                                                 id="rating"
                                                 name="rating"
@@ -245,20 +336,14 @@ const ProductDetails = () => {
 
                                 </form>
                             </div>
-                            {
-                                commentItem.slice(0,2).map(item => <div key={item._id} className="p-4 border"> 
-                                <h3>{item.userName}</h3>
-                                 <h2>{item.comment}</h2>
-                                 <img className={`${item.image? 'w-16 h-16':'w-0 h-0'} h-16 object-cover`} src={item.image} alt="" /> </div>
-                                )
-                            }
+
 
                         </div>
                     </div>
                 </div>
-                <div>
-                    <Heading text='realative product'></Heading>
-                    <div className='flex justify-between md:mt-12 mt-5 flex-wrap gap-y-5'>
+                <div className="">
+                    <Heading text='relative product'></Heading>
+                    <div className='flex justify-between md:my-12 my-5 flex-wrap gap-y-5'>
                         {
                             relative.map(item => <ProductCard key={item._id} item={item}   ></ProductCard>)
                         }

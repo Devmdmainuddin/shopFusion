@@ -8,6 +8,8 @@ import useAuth from '../../hooks/useAuth';
 import useCartItems from '../../hooks/useCartItems';
 import useWishlist from '../../hooks/useWishlist';
 import useAxiosCommon from '../../hooks/useAxiosCommon';
+import { useState } from 'react';
+
 // import { useState } from 'react';
 const OverlayLi = ({ text, icon, onClick }) => {
     return (
@@ -28,7 +30,7 @@ const {image,_id, discount,title, price, brand}=item;
         const discountp = (parseInt(price) * parseInt(discount)) / 100
         const discountPrice = parseInt(price) - discountp
         // console.log(discountPrice);
-
+        // let [Quantity, setQuantity] = useState(1);
 
     const { user } = useAuth() || {}
     const [, , refetch] = useCartItems()
@@ -43,7 +45,7 @@ const {image,_id, discount,title, price, brand}=item;
             title: item.title,
             image: item.image,
             price: item.price,
-            email: user.email,
+            email: user?.email,
         }
         console.log(cartItem)
 
@@ -66,15 +68,28 @@ const {image,_id, discount,title, price, brand}=item;
 
     // add to cart
     const handlecard = item => {
-
+        
         const cartItem = {
             produdctId: item._id,
             title: item.title,
             image: item.image,
             price: item.price,
-            email: user.email,
+            email: user?.email,
+            itemQuantity: 1,
         }
         console.log(cartItem)
+
+        // const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
+        // if (existingItemIndex >= 0) {
+          
+        //     const updatedCart = [...cart];
+        //     updatedCart[existingItemIndex].quantity += item.quantity; // or just `+= 1` if adding one
+        //     setCart(updatedCart);
+        //   } else {
+           
+        //     setCart([...cart, item]);
+        //   }
+
 
         axiosCommon.post(`/cart`, cartItem)
 

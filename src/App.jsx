@@ -20,6 +20,8 @@ import Registation from './page/Registation';
 import ManageUsers from './page/dashboard/Admin/ManageUsers';
 import AddProducts from './components/form/AddProducts';
 import Cart from './page/dashboard/user/Cart';
+import EdditProductCard from './page/dashboard/Admin/EdditProductCard';
+import ManageProduct from './page/dashboard/Admin/ManageProduct';
 
 const router = createBrowserRouter([
   {
@@ -83,6 +85,16 @@ const router = createBrowserRouter([
         path: "/dashboard/addProduct",
         element: <AddProducts/>,
       },
+      {
+        path: "/dashboard/edditProduct/:id",
+        element: <EdditProductCard/>,
+        loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/product/${params.id}`)
+      },
+      {
+        path: "/dashboard/manageProduct",
+        element: <ManageProduct/>,
+      },
+
       {
         path: "/dashboard/cart",
         element: <Cart/>,

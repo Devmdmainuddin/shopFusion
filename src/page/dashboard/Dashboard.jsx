@@ -32,6 +32,7 @@ const Dashboard = () => {
                 <ul className="mt-4">
                     <SitebarLi to='' icon={<IoMdSettings />} text='Dashboard'></SitebarLi>
                     <SitebarLi to='/dashboard/addProduct' icon={<RiLockPasswordFill />} text='add product'></SitebarLi>
+                    <SitebarLi to='/dashboard/manageProduct' icon={<RiLockPasswordFill />} text='Manage Product'></SitebarLi>
                     <SitebarLi to='/dashboard/cart' icon={<RiLockPasswordFill />} text='Cart'></SitebarLi>
                     <SitebarLi to='/dashboard/manageUsers' icon={<RiLockPasswordFill />} text='manageUsers'></SitebarLi>
                     <SitebarLi to='' icon={<RiLockPasswordFill />} text='Settings'></SitebarLi>

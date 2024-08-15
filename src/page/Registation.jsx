@@ -27,9 +27,9 @@ const Registation = () => {
         const image = form.image.files[0]
         const image_url = await imageUpload(image)
         const userinfo = {
-            name: user ? user?.displayName : name,
-            email: user ? user?.email : email,
-            image: user ? user?.photoURL : image_url,
+            name:  name,
+            email: email,
+            image:  image_url,
             role: 'user',
             status: 'verified',
         }

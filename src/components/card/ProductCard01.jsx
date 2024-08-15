@@ -42,7 +42,7 @@ const handlewishlist = item => {
         title: item.title,
         image: item.image,
         price: item.price,
-        email: user.email,
+        email: user?.email,
     }
     console.log(cartItem)
 
@@ -71,7 +71,7 @@ const handlewishlist = item => {
                 title: item.title,
                 image: item.image,
                 price: item.price,
-                email: user.email,
+                email: user?.email,
             }
             console.log(cartItem)
     
@@ -94,7 +94,7 @@ const handlewishlist = item => {
     return (
         <div className={`w-[350px] group mx-auto  overflow-hidden hover:shadow-shadow `}>
             <div className="image w-full h-[370px] relative">
-                <button className={`absolute top-5 left-5 bg-[#fed700] z-50 hover:text-[#fff] hover:bg-[#f3283d] text-sm py-2 transition-all duration-700 ${item.discount? 'px-8' : 'px-0'}`}>{item.discount}</button>
+                <button className={`absolute top-5 left-5 bg-[#fed700] z-50 hover:text-[#fff] hover:bg-[#f3283d] text-sm py-2 transition-all duration-700 ${item.discount? 'px-8' : 'px-0'}`}>{item.discount}%</button>
                 <div className="image w-full h-full relative">
                     <img className='w-full h-full object-cover opacity-100 group-hover:opacity-0  transition-all  duration-700' src={item.image} alt='' />
                     {/* <img className=' absolute top-0 left-0 opacity-0 invisible group-hover:opacity-100 group-hover:visible  w-full h-full object-cover  transition-all duration-700' src='#' alt='' /> */}

@@ -1,10 +1,12 @@
 
 
+// import useAuth from "./useAuth";
 import useAxiosCommon from "./useAxiosCommon";
 // import useAxiosSecure from "./useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 
 const useCartItems = () => {
+  // const {user}=useAuth();
     const axiosCommon =useAxiosCommon();
     const { data: cartItems = [], isPending:loading, refetch } = useQuery({
         queryKey: ['cartItems'],
@@ -14,10 +16,10 @@ const useCartItems = () => {
         },
       })
    
-      const cartTotal = cartItems.reduce((acc,items)=> acc + parseInt(items.price),0)
+      // const cartTotal = cartItems.reduce((acc,items)=> acc + parseInt(items.price),0)
       // console.log(cartTotal);
    
-      return [cartItems,loading,refetch,cartTotal]
+      return [cartItems,loading,refetch]
 
     // ..............................
 

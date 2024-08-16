@@ -9,6 +9,7 @@ import useCartItems from '../../hooks/useCartItems';
 import useWishlist from '../../hooks/useWishlist';
 import useAxiosCommon from '../../hooks/useAxiosCommon';
 import { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 
 // import { useState } from 'react';
 const OverlayLi = ({ text, icon, onClick }) => {
@@ -26,18 +27,36 @@ const ProductCard = ({ item }) => {
     // console.log( item);
     // const [detailsModal,setDetailsModal]= useState(false)
 
-const {image,_id, discount,title, price, brand}=item;
-        const discountp = (parseInt(price) * parseInt(discount)) / 100
-        const discountPrice = parseInt(price) - discountp
-        // console.log(discountPrice);
-        // let [Quantity, setQuantity] = useState(1);
+    const { image, _id, discount, title, price, brand } = item;
+    const [itemQuantity, setitemQuantity] = useState(1)
+    const discountp = (parseInt(price) * parseInt(discount)) / 100
+    const discountPrice = parseInt(price) - discountp
 
     const { user } = useAuth() || {}
     const [, , refetch] = useCartItems()
     const [, , refash] = useWishlist()
     const axiosCommon = useAxiosCommon();
-    // console.log('products', item);
-    // add to whish list
+
+
+    const { mutateAsync } = useMutation({
+        mutationFn: async updateData => {
+            const { data } = await axiosCommon.put(`/cart`, updateData)
+            return data
+        },
+        onSuccess: () => {
+
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your product has been add to cart",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    })
+
+
+
     const handlewishlist = item => {
 
         const cartItem = {
@@ -67,52 +86,65 @@ const {image,_id, discount,title, price, brand}=item;
     }
 
     // add to cart
-    const handlecard = item => {
-        
+    const handlecard = async item => {
+
         const cartItem = {
             produdctId: item._id,
             title: item.title,
             image: item.image,
-            price: item.price,
             email: user?.email,
-            itemQuantity: 1,
+            itemQuantity: itemQuantity,
+            discount: item.discount,
+            price: item.price
         }
-        console.log(cartItem)
+        // console.log(cartItem)
 
         // const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
         // if (existingItemIndex >= 0) {
-          
+
         //     const updatedCart = [...cart];
         //     updatedCart[existingItemIndex].quantity += item.quantity; // or just `+= 1` if adding one
         //     setCart(updatedCart);
         //   } else {
-           
+
         //     setCart([...cart, item]);
         //   }
-
-
-        axiosCommon.post(`/cart`, cartItem)
-
-            .then(res => {
-                if (res.data?.insertedId) {
-
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Your items has been add to cart",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    refetch()
-                }
+        try {
+            await mutateAsync(cartItem)
+            refetch()
+        } catch (err) {
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: " product  cart not add  ",
+                showConfirmButton: false,
+                timer: 1500
             })
+        }
+
+
+        // axiosCommon.put(`/cart`, cartItem)
+
+        //     .then(res => {
+        //         if (res.data?.insertedId) {
+
+        //             Swal.fire({
+        //                 position: "top-end",
+        //                 icon: "success",
+        //                 title: "Your items has been add to cart",
+        //                 showConfirmButton: false,
+        //                 timer: 1500
+        //             });
+        //             refetch()
+        //         }
+        //     })
     }
     return (
         <>
-        <div className={`w-full md:w-[370px] group mx-auto`}>
+            <div className={`w-full md:w-[370px] group mx-auto`}>
                 <div className="image w-full h-[370px] relative">
-                  
-                    <button className={`absolute top-5 left-5 bg-primary text-white text-sm py-2 ${discount? 'px-8' : 'px-0'}`}>{discount}%</button>
+
+                    <button className={`absolute top-5 left-5 bg-primary text-white text-sm py-2 ${discount ? 'px-8' : 'px-0'}`}>{discount}%</button>
                     <img className='w-full h-full object-cover' src={image} alt='' />
                     <div className="overlay w-full absolute  bottom-0 left-0 opacity-0 py-6 px-7 bg-white group-hover:opacity-100 transition-all duration-300">
                         <ul className='flex gap-3 flex-col'>
@@ -126,8 +158,8 @@ const {image,_id, discount,title, price, brand}=item;
                     <Link to={`/product/${_id}`} className="flex justify-between items-baseline mb-3">
                         <h3 className="text-primary font-bold text-xl">{title}</h3>
                         {discount && <span className="text-base font-DM text-[#ee2121] line-through mr-1"> ${price}</span>}
-                        
-                        <span className="text-base font-DM text-[#767676]">${discount?discountPrice:price}</span>
+
+                        <span className="text-base font-DM text-[#767676]">${discount ? discountPrice : price}</span>
                     </Link>
                     <p className="brand text-base font-DM text-[#767676]">{brand}</p>
                 </div>

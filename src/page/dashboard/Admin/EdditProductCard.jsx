@@ -8,24 +8,24 @@ import { useLoaderData } from "react-router-dom";
 const EdditProductCard = () => {
 
     const product = useLoaderData();
-console.log(product);
-    // const axiosSecure = useAxiosSecure()
-    // const { mutateAsync } = useMutation({
-    //     mutationFn: async updateData => {
-    //         const { data } = await axiosSecure.put(`/ScholarShips/${sholarship._id}`, updateData)
-    //         return data
-    //     },
-    //     onSuccess: () => {
 
-    //         Swal.fire({
-    //             position: "top-end",
-    //             icon: "success",
-    //             title: "Your items has been Edit",
-    //             showConfirmButton: false,
-    //             timer: 1500
-    //         });
-    //     }
-    // })
+    const axiosSecure = useAxiosSecure()
+    const { mutateAsync } = useMutation({
+        mutationFn: async updateData => {
+            const { data } = await axiosSecure.put(`/updateproduct/${product._id}`, updateData)
+            return data
+        },
+        onSuccess: () => {
+
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your items has been Edit",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    })
 
 
     const handleEdditProduct = async (e) => {
@@ -53,29 +53,40 @@ console.log(product);
         const info = {  title, brand, price, descaption,category, update, stockStatus, discount };
 
         try {
-            const { data } = await axios.put(`${import.meta.env.VITE_API_URL}/updateproduct/${product._id}`, info)
-            // console.log(data)
-            if (data?.insertedId) {
-                form.reset();
+            await mutateAsync(info) 
+            } catch (err) {
                 Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: " update product successfuly ",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+                            position: "top-end",
+                            icon: "error",
+                            title: " update product items faile",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
             }
-        }
-        catch (err) {
-            // console.log(err)
-            Swal.fire({
-                position: "top-end",
-                icon: "error",
-                title: " update product items faile",
-                showConfirmButton: false,
-                timer: 1500
-            });
-        }
+        // try {
+        //     const { data } = await axios.put(`${import.meta.env.VITE_API_URL}/updateproduct/${product._id}`, info)
+           
+        //     if (data?.insertedId) {
+        //         form.reset();
+        //         Swal.fire({
+        //             position: "top-end",
+        //             icon: "success",
+        //             title: " update product successfuly ",
+        //             showConfirmButton: false,
+        //             timer: 1500
+        //         });
+        //     }
+        // }
+        // catch (err) {
+        //     // console.log(err)
+        //     Swal.fire({
+        //         position: "top-end",
+        //         icon: "error",
+        //         title: " update product items faile",
+        //         showConfirmButton: false,
+        //         timer: 1500
+        //     });
+        // }
 
     };
     return (

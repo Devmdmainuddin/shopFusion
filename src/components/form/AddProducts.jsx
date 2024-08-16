@@ -22,7 +22,6 @@ const AddProducts = () => {
         const name = user.displayName;
         const email = user.email;
         const userImage = user.photoURL;
-
         const userInfo = { name, email, userImage }
 
 

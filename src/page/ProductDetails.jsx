@@ -17,7 +17,7 @@ import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
 import useAxiosCommon from "../hooks/useAxiosCommon";
 import useWishlist from "../hooks/useWishlist";
-// import useCartItems from "../hooks/useCartItems";
+import useCartItems from "../hooks/useCartItems";
 
 
 const ProductDetails = () => {
@@ -26,19 +26,19 @@ const ProductDetails = () => {
     const [product, loading] = useProduct();
     const [comment, , refetch] = useComment();
     const [commentItem, setCommentItem] = useState([]);
-    //  const [cartItems, , ] = useCartItems()
-    const [, , refash] = useWishlist()
+    const [cartItems, , refash] = useCartItems()
+    // const [, , refash] = useWishlist()
     const axiosCommon = useAxiosCommon();
     const axiosSecure = useAxiosSecure()
     let [Quantity, setQuantity] = useState(1);
     const relative = product.filter(item => item.brand === products.brand)
     const discountp = (parseInt(products.price) * parseInt(products.discount)) / 100
     const discountPrice = parseInt(products.price) - discountp
-    // console.log(commentItem.length);
+
     useEffect(() => {
         const filteritems = comment.filter(p => p.productId === products._id)
         setCommentItem(filteritems)
-      
+
     }, [comment, products,])
 
     const { mutateAsync } = useMutation({
@@ -59,6 +59,22 @@ const ProductDetails = () => {
         }
     })
 
+    const { mutateAsync: submitData } = useMutation({
+        mutationFn: async updateData => {
+            const { data } = await axiosCommon.put(`/cart`, updateData)
+            return data
+        },
+        onSuccess: () => {
+
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your product has been add to cart",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    })
 
     const handelComment = async (e) => {
         e.preventDefault();
@@ -126,33 +142,103 @@ const ProductDetails = () => {
     // }
 
     // add to cart
-    const handlecard = item => {
+    const handlecard = async item => {
 
         const cartItem = {
             produdctId: item._id,
             title: item.title,
             image: item.image,
             price: item.price,
+            discount: item.discount,
             email: user.email,
-            // itemQuantity:Quantity,
+            itemQuantity: Quantity,
         }
-     
-        
- 
-        axiosCommon.post(`/cart`, cartItem)
-        .then(res => {
-            if (res.data?.insertedId) {
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Your items has been add to cart",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                refetch()
-            }
-        })       
+        // .......................................... 
+        try {
+            // console.log(reviewData);
+            await submitData(cartItem)
+            refash()
+           
+        }
+        catch (err) {
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: " product  cart not add  ",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+
+        // axiosCommon.put(`/cart`, cartItem)
+        //     .then(res => {
+        //         if (res.data) {
+        //             Swal.fire({
+        //                 position: "top-end",
+        //                 icon: "success",
+        //                 title: "Your items has been add to cart",
+        //                 showConfirmButton: false,
+        //                 timer: 1500
+        //             });
+        //             refash()
+        //         }
+        //     })
     }
+
+    // const handlecard = async item => {
+
+    //     const cartItem = {
+    //         produdctId: item._id,
+    //         title: item.title,
+    //         image: item.image,
+    //         email: user?.email,
+    //         itemQuantity: Quantity,
+    //         discount: item.discount,
+    //         price: item.price
+    //     }
+
+    //     // console.log(cartItem)
+
+    //     // const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
+    //     // if (existingItemIndex >= 0) {
+
+    //     //     const updatedCart = [...cart];
+    //     //     updatedCart[existingItemIndex].quantity += item.quantity; // or just `+= 1` if adding one
+    //     //     setCart(updatedCart);
+    //     //   } else {
+
+    //     //     setCart([...cart, item]);
+    //     //   }
+    //     try {
+    //         await mutateAsync(cartItem)
+    //         refetch()
+    //     } catch (err) {
+    //         Swal.fire({
+    //             position: "top-end",
+    //             icon: "error",
+    //             title: " product  cart not add  ",
+    //             showConfirmButton: false,
+    //             timer: 1500
+    //         })
+    //     }
+
+
+    //     // axiosCommon.put(`/cart`, cartItem)
+
+    //     //     .then(res => {
+    //     //         if (res.data?.insertedId) {
+
+    //     //             Swal.fire({
+    //     //                 position: "top-end",
+    //     //                 icon: "success",
+    //     //                 title: "Your items has been add to cart",
+    //     //                 showConfirmButton: false,
+    //     //                 timer: 1500
+    //     //             });
+    //     //             refetch()
+    //     //         }
+    //     //     })
+    // }
 
 
 
@@ -240,8 +326,8 @@ const ProductDetails = () => {
                             <div className="divider"></div>
                             <div className="flex gap-5">
 
-                                <button onClick={()=>handlewishlist(products)} className="py-4 px-10 border border-[#262626] text-[#262626] hover:border-[#262626] hover:text-white hover:bg-[#262626] transition-all duration-500 ease-in-out">Add to Wish List</button>
-                                <button onClick={()=>handlecard(products)} className="py-4 px-10 border border-[#262626] bg-[#262626] text-white hover:text-[#262626] hover:border-[#262626] hover:bg-transparent transition-all duration-500 ease-in-out">Add to Cart</button>
+                                <button onClick={() => handlewishlist(products)} className="py-4 px-10 border border-[#262626] text-[#262626] hover:border-[#262626] hover:text-white hover:bg-[#262626] transition-all duration-500 ease-in-out">Add to Wish List</button>
+                                <button onClick={() => handlecard(products)} className="py-4 px-10 border border-[#262626] bg-[#262626] text-white hover:text-[#262626] hover:border-[#262626] hover:bg-transparent transition-all duration-500 ease-in-out">Add to Cart</button>
                             </div>
                             <div tabIndex={0} className="collapse collapse-plus ">
                                 <div className="collapse-title text-[#262626] text-[16px] font-bold">FEATURES  & DETAILS</div>

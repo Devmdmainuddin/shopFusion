@@ -231,6 +231,7 @@ const Searchbar = () => {
                                     <div>
                                         {/* <h2>Black Smart Watch</h2> */}
                                         <h2>{item.title}</h2>
+                                        <p>X * {item.itemQuantity}</p>
                                         <p>${item.price}</p>
                                     </div>
                                     <button onClick={() => handleDelete(item._id)}><IoMdClose /></button>

@@ -15,10 +15,12 @@ import Swal from "sweetalert2";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import { useMutation } from "@tanstack/react-query";
 import useWishlist from "../../hooks/useWishlist";
+import useProducts from "../../hooks/useProducts";
 
 const Searchbar = () => {
     const { user, logOut } = useAuth()
-    const [wishlist] = useWishlist()
+    const [items,handleSearch,handlenext,handlepre,handleReset,handleItemsPerPage]=useProducts()
+    const [wishlist,,refash,wishlistTotal] = useWishlist()
     const [cartItems, , refetch, cartTotal] = useCartItems()
     const [catOpen, setCatOpen] = useState(false)
     const [proOpen, setProOpen] = useState(false);
@@ -28,22 +30,22 @@ const Searchbar = () => {
     const axiosCommon = useAxiosCommon();
 
 
-    //  const { mutateAsync } = useMutation({
-    //     mutationFn: async id => {
-    //         const { data } = await axiosCommon.delete(`/wishlist/${id}`)
-    //         return data
-    //     },
-    //     onSuccess:data => {
-    //         refetch()
-    //         Swal.fire({
-    //             position: "top-end",
-    //             icon: "success",
-    //             title: "wishlist items has been delete",
-    //             showConfirmButton: false,
-    //             timer: 1500
-    //         });
-    //     },
-    // })
+     const { mutateAsync:handelwishlist } = useMutation({
+        mutationFn: async id => {
+            const { data } = await axiosCommon.delete(`/wishlist/${id}`)
+            return data
+        },
+        onSuccess:data => {
+            refetch()
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "wishlist items has been delete",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        },
+    })
 
 
     const { mutateAsync } = useMutation({
@@ -64,7 +66,24 @@ const Searchbar = () => {
     })
 
 
-
+    const handlewishlistDelete = async id => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                // await mutateAsync(id)
+                await handelwishlist(id)
+                refash()
+               
+            }
+        });
+    }
     const handleDelete = async id => {
         Swal.fire({
             title: "Are you sure?",
@@ -165,8 +184,8 @@ const Searchbar = () => {
 
 
                 <div className="relative w-full lg:w-[600px] ml-5 hover:shadow-mainudin">
-                    <label htmlFor="search" className="absolute right-5 top-1/2 -translate-y-1/2"><FaSearch /></label>
-                    <input type="search" name="search" id="search" placeholder="Search Products" className="p-4 px-5 w-full rounded-lg outline-none" />
+                    <label onSubmit={handleSearch} htmlFor="search" className="absolute right-5 top-1/2 -translate-y-1/2"><FaSearch /></label>
+                    <input  type="search" name="search" id="search" placeholder="Search Products" className="py-4  w-full rounded-lg outline-none" />
                 </div>
 
 
@@ -203,14 +222,15 @@ const Searchbar = () => {
                                     <div>
                                         {/* <h2>Black Smart Watch</h2> */}
                                         <h2>{item.title}</h2>
+                                        <p>X * {item.itemQuantity}</p>
                                         <p>${item.price}</p>
                                     </div>
-                                    <button onClick={() => handleDelete(item._id)}><IoMdClose /></button>
+                                    <button onClick={() => handlewishlistDelete(item._id)}><IoMdClose /></button>
                                 </div>)}
 
 
                             <div className="p-5">
-                                <p >Subtotal: <span className="text-[#262626] font-bold">${cartTotal}</span></p>
+                                <p >Subtotal: <span className="text-[#262626] font-bold">${wishlistTotal}</span></p>
                                 <div className="flex  lg:gap-x-5 gap gap-x-1 mt-3">
                                     <Link to='/dashboard/cart' className="w-full block lg:py-4 py-2 lg:px-8 px-3 text-[#262626] border border-[#262626]">View Cart </Link>
                                     <button className="w-full block lg:py-4 py-2 lg:px-10 px-3 bg-[#262626] text-white">Checkout</button>

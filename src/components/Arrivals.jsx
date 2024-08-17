@@ -194,12 +194,12 @@ const Arrivals = () => {
         </div> */}
        
         <Slider {...settings}>
-        {/* {
-          product.map(item => <ProductCard key={item._id} item={item}   ></ProductCard>)
-        } */}
         {
-          product.map(item => <ProductCard01 key={item._id} item={item}   ></ProductCard01>)
+          product.map(item => <ProductCard key={item._id} item={item}   ></ProductCard>)
         }
+        {/* {
+          product.map(item => <ProductCard01 key={item._id} item={item}   ></ProductCard01>)
+        } */}
           {/* {
             product.map(item => {
              

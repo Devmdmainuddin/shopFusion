@@ -140,7 +140,7 @@ const AddProducts = () => {
                         <label htmlFor="discount" className="">
                             <span className=""> product offer</span>
                         </label>
-                        <input type="text" placeholder="type  product offer" name="discount" id="text" className=" py-2 px-4 border-none outline-none rounded-md" required
+                        <input type="number" placeholder="type  product offer" name="discount" id="text" className=" py-2 px-4 border-none outline-none rounded-md" 
                         />
 
                     </div>

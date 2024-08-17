@@ -54,35 +54,47 @@ const ProductCard = ({ item }) => {
             });
         }
     })
+    const { mutateAsync:submitWishlist } = useMutation({
+        mutationFn: async updateData => {
+            const { data } = await axiosCommon.put(`/wishlist`, updateData)
+            return data
+        },
+        onSuccess: () => {
+
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your product has been add to wishlist",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    })
 
 
-
-    const handlewishlist = item => {
+    const handlewishlist =async item => {
 
         const cartItem = {
             produdctId: item._id,
             title: item.title,
             image: item.image,
-            price: item.price,
             email: user?.email,
+            itemQuantity: itemQuantity,
+            discount: item.discount,
+            price: item.price
         }
-        console.log(cartItem)
-
-        axiosCommon.post(`/wishlist`, cartItem)
-
-            .then(res => {
-                if (res.data?.insertedId) {
-
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Your items has been add to wishlist",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    refash()
-                }
+        try {
+            await submitWishlist(cartItem)
+            refash()
+        } catch (err) {
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: " product  cart not add  ",
+                showConfirmButton: false,
+                timer: 1500
             })
+        }
     }
 
     // add to cart
@@ -143,8 +155,9 @@ const ProductCard = ({ item }) => {
         <>
             <div className={`w-full md:w-[370px] group mx-auto`}>
                 <div className="image w-full h-[370px] relative">
-
-                    <button className={`absolute top-5 left-5 bg-primary text-white text-sm py-2 ${discount ? 'px-8' : 'px-0'}`}>{discount}%</button>
+{/* ${discount ? 'px-8' : 'px-0'} */}
+{discount && <button className={`absolute top-5 left-5 bg-primary text-white text-sm py-2 px-8`}> {discount}%</button>} 
+                    
                     <img className='w-full h-full object-cover' src={image} alt='' />
                     <div className="overlay w-full absolute  bottom-0 left-0 opacity-0 py-6 px-7 bg-white group-hover:opacity-100 transition-all duration-300">
                         <ul className='flex gap-3 flex-col'>

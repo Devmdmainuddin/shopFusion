@@ -41,6 +41,7 @@ const ProductDetails = () => {
 
     }, [comment, products,])
 
+    // add comment/reviews
     const { mutateAsync } = useMutation({
         mutationFn: async commentData => {
             const { data } = await axiosSecure.post(`/comment`, commentData)
@@ -58,7 +59,7 @@ const ProductDetails = () => {
             // console.log("data add successfully")
         }
     })
-
+    // add to cart
     const { mutateAsync: submitData } = useMutation({
         mutationFn: async updateData => {
             const { data } = await axiosCommon.put(`/cart`, updateData)
@@ -75,7 +76,26 @@ const ProductDetails = () => {
             });
         }
     })
+    // add to Wishlist
+    const { mutateAsync: submitWishlist } = useMutation({
+        mutationFn: async updateData => {
+            const { data } = await axiosCommon.put(`/wishlist`, updateData)
+            return data
+        },
+        onSuccess: () => {
 
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your product has been add to cart",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    })
+
+
+    // add comment/reviews
     const handelComment = async (e) => {
         e.preventDefault();
         const form = e.target;
@@ -113,33 +133,48 @@ const ProductDetails = () => {
 
 
     // add to whish list
-    // const handlewishlist = item => {
+    const handlewishlist =async item => {
 
-    //     const cartItem = {
-    //         produdctId: item._id,
-    //         title: item.title,
-    //         image: item.image,
-    //         price: item.price,
-    //         email: user.email,
-    //     }
-    //     console.log(cartItem)
+        const cartItem = {
+            produdctId: item._id,
+            title: item.title,
+            image: item.image,
+            price: item.price,
+            discount: item.discount,
+            email: user.email,
+            itemQuantity: Quantity,
+        }
 
-    //     axiosCommon.post(`/wishlist`, cartItem)
+        // .......................................... 
+        try {
+            await submitWishlist(cartItem)
+            refash()
+        }
+        catch (err) {
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: " product  cart not add  ",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+        axiosCommon.post(`/wishlist`, cartItem)
 
-    //         .then(res => {
-    //             if (res.data?.insertedId) {
+            .then(res => {
+                if (res.data?.insertedId) {
 
-    //                 Swal.fire({
-    //                     position: "top-end",
-    //                     icon: "success",
-    //                     title: "Your items has been add to wishlist",
-    //                     showConfirmButton: false,
-    //                     timer: 1500
-    //                 });
-    //                 refash()
-    //             }
-    //         })
-    // }
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Your items has been add to wishlist",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    refash()
+                }
+            })
+    }
 
     // add to cart
     const handlecard = async item => {
@@ -155,10 +190,8 @@ const ProductDetails = () => {
         }
         // .......................................... 
         try {
-            // console.log(reviewData);
             await submitData(cartItem)
             refash()
-           
         }
         catch (err) {
             Swal.fire({
@@ -169,79 +202,7 @@ const ProductDetails = () => {
                 timer: 1500
             });
         }
-
-        // axiosCommon.put(`/cart`, cartItem)
-        //     .then(res => {
-        //         if (res.data) {
-        //             Swal.fire({
-        //                 position: "top-end",
-        //                 icon: "success",
-        //                 title: "Your items has been add to cart",
-        //                 showConfirmButton: false,
-        //                 timer: 1500
-        //             });
-        //             refash()
-        //         }
-        //     })
     }
-
-    // const handlecard = async item => {
-
-    //     const cartItem = {
-    //         produdctId: item._id,
-    //         title: item.title,
-    //         image: item.image,
-    //         email: user?.email,
-    //         itemQuantity: Quantity,
-    //         discount: item.discount,
-    //         price: item.price
-    //     }
-
-    //     // console.log(cartItem)
-
-    //     // const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
-    //     // if (existingItemIndex >= 0) {
-
-    //     //     const updatedCart = [...cart];
-    //     //     updatedCart[existingItemIndex].quantity += item.quantity; // or just `+= 1` if adding one
-    //     //     setCart(updatedCart);
-    //     //   } else {
-
-    //     //     setCart([...cart, item]);
-    //     //   }
-    //     try {
-    //         await mutateAsync(cartItem)
-    //         refetch()
-    //     } catch (err) {
-    //         Swal.fire({
-    //             position: "top-end",
-    //             icon: "error",
-    //             title: " product  cart not add  ",
-    //             showConfirmButton: false,
-    //             timer: 1500
-    //         })
-    //     }
-
-
-    //     // axiosCommon.put(`/cart`, cartItem)
-
-    //     //     .then(res => {
-    //     //         if (res.data?.insertedId) {
-
-    //     //             Swal.fire({
-    //     //                 position: "top-end",
-    //     //                 icon: "success",
-    //     //                 title: "Your items has been add to cart",
-    //     //                 showConfirmButton: false,
-    //     //                 timer: 1500
-    //     //             });
-    //     //             refetch()
-    //     //         }
-    //     //     })
-    // }
-
-
-
     return (
         <div >
             <Container>
@@ -376,6 +337,8 @@ const ProductDetails = () => {
                                 <form onSubmit={handelComment} className='mt-12 max-w-[768px] mx-auto'>
                                     <div className="flex gap-8 ">
                                         <div className="flex-1 items-start">
+                                           <div className="flex gap-4 items-center justify-between">
+                                            <div>
                                             <label className="block mb-2 dark:text-white" htmlFor="comment">your Reviews</label>
                                             <input
                                                 className="w-full p-2 border rounded-md focus:border-teal-500 focus:outline-none"
@@ -383,6 +346,8 @@ const ProductDetails = () => {
                                                 placeholder="type your comment "
                                                 id="title"
                                                 name="comment" />
+                                            </div>
+                                            <div>
                                             <label htmlFor='image' className='block mb-2 text-sm'>
                                                 Select Image:
                                             </label>
@@ -394,6 +359,10 @@ const ProductDetails = () => {
                                                 className="w-full block py-2 px-4   outline-none border rounded-md"
                                                 accept='image/*'
                                             />
+                                            </div>
+                                           
+                                            
+                                           </div>
 
                                             <label className="block mt-4 mb-2 dark:text-white" htmlFor="rating">
                                                 rating this product

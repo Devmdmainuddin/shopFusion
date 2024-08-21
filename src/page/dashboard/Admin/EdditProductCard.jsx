@@ -30,10 +30,7 @@ const EdditProductCard = () => {
 
     const handleEdditProduct = async (e) => {
         e.preventDefault();
-        // console.log('ok')
         const form = e.target;
-        // const image_url = form.image.files[0]
-        // const image = await imageUpload(image_url)
         const title = form.title.value;
         const category = form.category.value;
         const brand = form.brand.value;
@@ -42,11 +39,7 @@ const EdditProductCard = () => {
         const stockStatus = form.stockStatus.value;
         const discount = form.discount.value;
         const update = (new Date()).toDateString();
-        // const name = user.displayName;
-        // const email = user.email;
-        // const userImage = user.photoURL;
-
-        // const userInfo = { name, email, userImage }
+    
 
 
 
@@ -63,30 +56,7 @@ const EdditProductCard = () => {
                             timer: 1500
                         });
             }
-        // try {
-        //     const { data } = await axios.put(`${import.meta.env.VITE_API_URL}/updateproduct/${product._id}`, info)
-           
-        //     if (data?.insertedId) {
-        //         form.reset();
-        //         Swal.fire({
-        //             position: "top-end",
-        //             icon: "success",
-        //             title: " update product successfuly ",
-        //             showConfirmButton: false,
-        //             timer: 1500
-        //         });
-        //     }
-        // }
-        // catch (err) {
-        //     // console.log(err)
-        //     Swal.fire({
-        //         position: "top-end",
-        //         icon: "error",
-        //         title: " update product items faile",
-        //         showConfirmButton: false,
-        //         timer: 1500
-        //     });
-        // }
+       
 
     };
     return (
@@ -101,7 +71,7 @@ const EdditProductCard = () => {
                         <label htmlFor="title" className="">
                             <span className="">product title</span>
                         </label>
-                        <input type="text" placeholder="type product name" defaultValue={product.title} name="title" id="title" className="  py-2 px-4 border-none outline-none rounded-md" required
+                        <input type="text" placeholder="type product name" defaultValue={product.title} name="title" id="title" className="  py-2 px-4 border-none outline-none rounded-md" 
                         />
 
                     </div>
@@ -109,7 +79,7 @@ const EdditProductCard = () => {
                         <label htmlFor="brand" className="">
                             <span className="">brand Name</span>
                         </label>
-                        <input type="text" placeholder="type your University Name"defaultValue={product.brand} name="brand" id="text" className="  py-2 px-4 border-none outline-none rounded-md" required
+                        <input type="text" placeholder="type your University Name"defaultValue={product.brand} name="brand" id="text" className="  py-2 px-4 border-none outline-none rounded-md" 
                         />
 
                     </div>
@@ -131,7 +101,7 @@ const EdditProductCard = () => {
                         <label htmlFor="price" className="">
                             <span className="">product price</span>
                         </label>
-                        <input type="number" placeholder="type product price" defaultValue={product.price} name="price" id="price" className="  py-2 px-4 border-none outline-none rounded-md" required
+                        <input type="number" placeholder="type product price" defaultValue={product.price} name="price" id="price" className="  py-2 px-4 border-none outline-none rounded-md"
                         />
 
                     </div>
@@ -139,7 +109,7 @@ const EdditProductCard = () => {
                         <label htmlFor="descaption" className="">
                             <span className="">product descaption</span>
                         </label>
-                        <input type="text" placeholder="type product descaption" defaultValue={product.descaption} name="descaption" id="text" className="w-full  py-2 px-4 border-none outline-none rounded-md" required
+                        <input type="text" placeholder="type product descaption" defaultValue={product.descaption} name="descaption" id="text" className="w-full  py-2 px-4 border-none outline-none rounded-md"
                         />
 
                     </div>
@@ -147,7 +117,7 @@ const EdditProductCard = () => {
                         <label htmlFor="stockStatus" className="">
                             <span className="">stock Status</span>
                         </label>
-                        <input type="text" defaultValue={product.stockStatus} placeholder="type product stock Status" name="stockStatus" id="rank" className=" inline-block  py-2 px-4 border-none outline-none rounded-md" required
+                        <input type="text" defaultValue={product.stockStatus} placeholder="type product stock Status" name="stockStatus" id="rank" className=" inline-block  py-2 px-4 border-none outline-none rounded-md"
                         />
 
                     </div>
@@ -176,7 +146,7 @@ const EdditProductCard = () => {
                         <label htmlFor="discount" className="">
                             <span className=""> product offer</span>
                         </label>
-                        <input type="text" placeholder="type  product offer" defaultValue={product.discount} name="discount" id="text" className=" py-2 px-4 border-none outline-none rounded-md" required
+                        <input type="text" placeholder="type  product offer" defaultValue={product.discount} name="discount" id="text" className=" py-2 px-4 border-none outline-none rounded-md" 
                         />
 
                     </div>

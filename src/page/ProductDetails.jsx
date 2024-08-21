@@ -16,7 +16,7 @@ import { imageUpload } from "../utils";
 import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
 import useAxiosCommon from "../hooks/useAxiosCommon";
-import useWishlist from "../hooks/useWishlist";
+// import useWishlist from "../hooks/useWishlist";
 import useCartItems from "../hooks/useCartItems";
 
 
@@ -25,7 +25,7 @@ const ProductDetails = () => {
     const products = useLoaderData();
     const [product, loading] = useProduct();
     const [comment, , refetch] = useComment();
-    const [commentItem, setCommentItem] = useState([]);
+    const [commentItem , setCommentItem] = useState([]);
     const [cartItems, , refash] = useCartItems()
     // const [, , refash] = useWishlist()
     const axiosCommon = useAxiosCommon();
@@ -39,10 +39,10 @@ const ProductDetails = () => {
         const filteritems = comment.filter(p => p.productId === products._id)
         setCommentItem(filteritems)
 
-    }, [comment, products,])
+    }, [comment, products])
 
     // add comment/reviews
-    const { mutateAsync } = useMutation({
+    const { mutateAsync:addReviews } = useMutation({
         mutationFn: async commentData => {
             const { data } = await axiosSecure.post(`/comment`, commentData)
             return data
@@ -105,16 +105,15 @@ const ProductDetails = () => {
         const image = await imageUpload(image_url)
         const productId = products._id;
         const productTitle = products.title;
-        const userName = user.displayName;
-        const userEmail = user.email;
-        const userImage = user.photoURL;
+        const userName = user?.displayName;
+        const userEmail = user?.email;
+        const userImage = user?.photoURL;
         const currentTime = (new Date()).toDateString();
 
         const info = { comment, rating, image, productId, productTitle, userName, userEmail, userImage, currentTime };
-        // console.log(info);
+     console.log(info);
         try {
-            // console.log(reviewData);
-            await mutateAsync(info)
+            await addReviews(info)
             refetch()
             form.reset()
         }
@@ -226,7 +225,7 @@ const ProductDetails = () => {
                                     <FaStar />
                                     <ImStarHalf />
                                 </div>
-                                <p className="text-[#767676]"> <span>{commentItem.length}</span> Review</p>
+                                <p className="text-[#767676]"> <span>{commentItem .length}</span> Review</p>
                             </div>
                             <div className="divider"></div>
                             <p className="flex items-center gap-[22px] mt-6"> {products.discount && <span className="text-[#767676] line-through ">${products.price}</span>}<span className="text-xl font-bold text-[#262626]">${products.discount ? discountPrice : products.price}</span></p>
@@ -305,7 +304,7 @@ const ProductDetails = () => {
                                 </div>
                             </div>
                             {
-                                commentItem.slice(0, 2).map(item => <div key={item._id} className="p-4 border">
+                                commentItem.map(item => <div key={item._id} className="p-4 border">
                                     <div className="flex justify-between items-center gap-6">
                                         <Rating
                                             style={{ maxWidth: 120 }}
@@ -386,7 +385,7 @@ const ProductDetails = () => {
                                     <input
                                         className="inline-block w-full rounded bg-teal-500 mt-4 px-4 py-3 text-sm font-medium text-white transition  focus:outline-none focus:ring active:bg-indigo-500"
                                         type="submit"
-                                        value="Add comment"
+                                        value="Add review"
                                     />
 
                                 </form>

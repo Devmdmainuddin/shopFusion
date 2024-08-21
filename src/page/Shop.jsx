@@ -26,6 +26,10 @@ const Shop = () => {
     const [open2, setOpen2] = useState(true);
     const [open3, setOpen3] = useState(true);
     const [open4, setOpen4] = useState(true);
+    // const [filteritem,setfilteritem]= useState(items);
+    // const [books,setbooks]= useState([]);
+    // const [pitem,setPitem]= useState(books);
+
     // useEffect(() => {
     //     function rounded() {
     //         setRound(true)
@@ -50,9 +54,20 @@ const Shop = () => {
         getCount()
     }, [filter, search])
 
-    const handlefilter=(item)=>{
-        setFilter(item)
-    }
+
+    // ..........................
+
+
+
+    // const handlefilter = (item) => {
+    //     const filters = items.filter(items => items.brand === item);
+    //     setFilter(filters)
+    // }
+
+
+
+    // ..........................
+
     const handleItemsPerPage = e => {
         const value = parseInt(e.target.value)
         setitemsperpage(value)
@@ -72,27 +87,47 @@ const Shop = () => {
             setcurrentPage(currentPage - 1)
         }
     }
+
+
     const handlenext = () => {
         if (currentPage < pages.length - 1) {
             setcurrentPage(currentPage + 1)
         }
     }
+
+
     const handleSearch = e => {
         e.preventDefault()
         setSearch(searchText)
     }
+
+    //  const [books,setbooks]= useState([]);
+    //  const [pitem,setPitem]= useState(books);
+    // // const [dataLength,setDataLength]=useState(6);
+
+   
+
+    const handlefilter = filter => {
+        
+        if (filter === 'all') {
+            setitems(items);
+        } else if (filter === 'white') {
+            const filterItem = items.filter(items => items.brand === 'white');
+            setitems(filterItem);
+        } else if (filter === 'jbl') {
+            const filterItem = items.filter(items => items.brand === 'jbl'); 
+            setitems(filterItem);
+        } else if (filter === 'Lenovo') {   
+            const filterItem = items.filter(items => items.brand === 'Lenovo');
+            setitems(filterItem);
+        }
+    }
+
     return (
         <div>
             <Container>
                 <Bredcumb></Bredcumb>
-                {/* <div className='mt-[93px]'>
-                <h2 className='text-[#262626] text-6xl font-bold'>Products</h2>
-                <ul className='flex items-center gap-2 mt-3'>
-                    <li className='text-[12px] font-normal text-[#767676]'><Link>Home</Link></li>
-                    <li><IoIosArrowForward className='text-[12px]' /></li>
-                    <li className='text-[12px] font-normal text-[#767676]'> <Link> Products</Link></li>
-                </ul>
-            </div> */}
+           
                 <div className='sm:flex justify-center md:justify-between mt-[130px] gap-4'>
                     {/* sidebar */}
                     <div className='sidebar sm:w-1/3 lg:w-[370px]   py-16 '>
@@ -105,7 +140,7 @@ const Shop = () => {
                             <div className={` `}>
                                 {/* .......................... */}
 
-                                <div>
+                                {/* <div>
                                     <select
                                         onChange={e => {
                                             setFilter(e.target.value)
@@ -121,25 +156,22 @@ const Shop = () => {
                                         <option value='jbl'>jbl</option>
                                         
                                     </select>
-                                </div>
+                                </div> */}
                                 {/* ............................... */}
-                                {items.map(item=><div key={item._id} onClick={()=>handlefilter(item.brand)}  className='flex justify-start gap-x-[10px] items-center py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
+                                {/* {items.map(item=><div key={item._id} onClick={()=> handlefilter(item.brand) }  className='flex justify-start gap-x-[10px] items-center py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
                                     <p className='text-[16px] font-normal text-[#767676]'>{item.brand}</p>
-                                </div>)}
-                                <div  className='flex justify-start gap-x-[10px] items-center py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
-                                    <p className='text-[16px] font-normal text-[#767676]'>categorey 1</p>
+                                </div>)} */}
+                                <div onClick={() => handlefilter('all')} className='flex justify-start gap-x-[10px] items-center py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
+                                    <p className='text-[16px] font-normal text-[#767676]'>all</p>
                                 </div>
-                                <div className='flex justify-start gap-x-[10px] items-center py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
-                                    <p className='text-[16px] font-normal text-[#767676]'>categorey 2</p>
+                                <div onClick={() => handlefilter('white')} className='flex justify-start gap-x-[10px] items-center py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
+                                    <p className='text-[16px] font-normal text-[#767676]'>white</p>
                                 </div>
-                                <div className='flex justify-start gap-x-[10px] items-center py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
-                                    <p className='text-[16px] font-normal text-[#767676]'>categorey 3</p>
+                                <div onClick={() => handlefilter('jbl')} className='flex justify-start gap-x-[10px] items-center py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
+                                    <p className='text-[16px] font-normal text-[#767676]'>jbl</p>
                                 </div>
-                                <div className='flex justify-start gap-x-[10px] items-center py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
-                                    <p className='text-[16px] font-normal text-[#767676]'>categorey 4</p>
-                                </div>
-                                <div className='flex justify-start gap-x-[10px] items-center py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
-                                    <p className='text-[16px] font-normal text-[#767676]'>categorey 5</p>
+                                <div onClick={() => handlefilter('Lenovo')} className='flex justify-start gap-x-[10px] items-center py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
+                                    <p className='text-[16px] font-normal text-[#767676]'>Lenovo</p>
                                 </div>
                             </div>
                         }
@@ -220,9 +252,9 @@ const Shop = () => {
                             <div className='flex  items-center gap-4'>
                                 <p>Sort by:</p>
                                 <select onChange={e => {
-                            setSort(e.target.value)
-                            setcurrentPage(0)
-                        }}  value={sort} name="sort" id="sort" className='text-[#737373] text-[16px] font-normal border border-[#e8e8e8] py-1 px-5'>
+                                    setSort(e.target.value)
+                                    setcurrentPage(0)
+                                }} value={sort} name="sort" id="sort" className='text-[#737373] text-[16px] font-normal border border-[#e8e8e8] py-1 px-5'>
                                     <option value="featured">featured</option>
                                     <option value="dsc">new</option>
                                     <option value="asc">old</option>
@@ -232,7 +264,7 @@ const Shop = () => {
                             <div className='flex  items-center gap-4'>
                                 <p>Show:</p>
                                 <select value={itemsperpage} onChange={handleItemsPerPage} name="" id="" className='text-[#737373] text-[16px] font-normal border border-[#e8e8e8] py-1 px-5 outline-none'>
-                                <option value="3">3</option>
+                                    <option value="3">3</option>
                                     <option value="6">6</option>
                                     <option value="9">9</option>
                                     <option value="12">12</option>
@@ -243,7 +275,7 @@ const Shop = () => {
                                 </select>
                             </div>
                         </div>
-                        <form onSubmit={handleSearch}>
+                        {/* <form onSubmit={handleSearch}>
                             <div className="flex">
 
                                 <div className="relative ">
@@ -265,17 +297,33 @@ const Shop = () => {
                                 </button>
 
                             </div>
-                        </form>
+                        </form> */}
 
-                        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6  mt-[60px]">
+                        <div className=" grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6  mt-[60px]">
                             {items.map(item => <ProductCard key={item._id} item={item}></ProductCard>)}
                         </div>
                         <div className='mt-[53px]'>
                             <div className='flex justify-center md:justify-between items-center flex-col md:flex-row gap-y-8'>
                                 <ul className='flex items-center gap-4 '>
-                                {
-                                        pages.map(page => <button onClick={() => setcurrentPage(page)} key={page} className={currentPage === page ? "inline-block py-2 px-4 border border-[#F0F0F0] text-[#767676] hover:bg-black hover:text-white" : 'mx-6 p-3 border-2'}>{page}</button>)
+                                <li onClick={handlepre}>
+                                        <span className="p-1 flex rounded transition duration-150 ease-in-out text-base leading-tight font-bold text-gray-500 hover:text-indigo-700 focus:outline-none mr-1 sm:mr-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" />
+                                                <polyline points="15 6 9 12 15 18" />
+                                            </svg>
+                                        </span>
+                                    </li>
+                                    {
+                                        pages.map(page => <button onClick={() => setcurrentPage(page)} key={page} className={`inline-block py-2 px-4 border border-[#F0F0F0] text-[#767676] hover:bg-black hover:text-white transition-all duration-300 ${currentPage === page ? "bg-black text-white" : ''}`}>{page}</button>)
                                     }
+                                    <li onClick={handlenext}>
+                                        <span className="flex rounded transition duration-150 ease-in-out text-base leading-tight font-bold text-gray-500 hover:text-indigo-700 p-1 focus:outline-none ml-1 sm:ml-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" />
+                                                <polyline points="9 6 15 12 9 18" />
+                                            </svg>
+                                        </span>
+                                    </li>
                                     {/* <li className='inline-block py-2 px-4 bg-black text-white'>1</li>
                                     <li className='inline-block py-2 px-4 border border-[#F0F0F0] text-[#767676]'>2</li>
                                     <li className='inline-block py-2 px-4 border border-[#F0F0F0] text-[#767676]'>3</li>
@@ -284,7 +332,7 @@ const Shop = () => {
                                     <li className='inline-block py-2 px-4 border border-[#F0F0F0] text-[#767676]'>10</li> */}
 
                                 </ul>
-                                <p className='text-sm font-normal text-[#767676]'>Products from 1 to 12 of 80</p>
+                                <p className='text-sm font-normal text-[#767676]'>Products from 1 to {items.length} of {counts}</p>
                             </div>
                         </div>
                     </div>

@@ -15,10 +15,10 @@ const Offers = () => {
     const [product, loading] = useProduct()
     return (
         <>
-            <Container>
+            <Container >
                 <Heading className='mt-[128px] mb-12' text='Special Offers'></Heading>
                 {/* <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 mt-3'> */}
-                <div className='flex justify-between md:mt-12 mt-5 flex-wrap gap-y-5'>
+                <div className='flex justify-between md:mt-12 mb-[108px] mt-5 flex-wrap gap-y-5'>
                     {
                         product.map(item => <ProductCard key={item._id} item={item}  ></ProductCard>)
                     }

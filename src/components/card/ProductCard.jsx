@@ -27,7 +27,7 @@ const ProductCard = ({ item }) => {
     // console.log( item);
     // const [detailsModal,setDetailsModal]= useState(false)
 
-    const { image, _id, discount, title, price, brand } = item;
+    const { image, _id, discount, title,category, price, brand } = item;
     const [itemQuantity, setitemQuantity] = useState(1)
     const discountp = (parseInt(price) * parseInt(discount)) / 100
     const discountPrice = parseInt(price) - discountp
@@ -169,7 +169,7 @@ const ProductCard = ({ item }) => {
                 </div>
                 <div className="text pt-6">
                     <Link to={`/product/${_id}`} className="flex justify-between items-baseline mb-3">
-                        <h3 className="text-primary font-bold text-xl">{title}</h3>
+                        <h3 className="text-primary font-bold text-xl">{title} {category}</h3>
                         {discount && <span className="text-base font-DM text-[#ee2121] line-through mr-1"> ${price}</span>}
 
                         <span className="text-base font-DM text-[#767676]">${discount ? discountPrice : price}</span>

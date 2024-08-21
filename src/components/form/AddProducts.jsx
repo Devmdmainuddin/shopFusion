@@ -60,7 +60,7 @@ const AddProducts = () => {
 
 
             <form onSubmit={handleAddProduct} className="w-full md:w-[450px] mx-auto  px-8   border my-6  capitalize">
-                <h1 className="text-3xl font-bold text-center">add scholarship</h1>
+                <h1 className="text-3xl font-bold text-center">add product</h1>
                 <div className="mt-9">
                     <div className="flex flex-col">
                         <label htmlFor="title" className="">

@@ -45,11 +45,11 @@ const Navbar = () => {
         // <div className="nav fixed top-0 left-0 right-0 w-full bg-slate-300 z-50">
         // <header className={`${isActive ? 'bg-white py-4 shadow-md' : 'bg-none py-6'} fixed w-full z-10 transition-all`}>
     //    className="nav fixed top-0 left-0 right-0 w-full bg-slate-300 z-50 "
-       <header className="nav  w-full bg-slate-300 z-50 ">
+       <header className=" nav  w-full bg-slate-300 z-50 ">
             <Container className='h-full '>
                 <div className="cursor"></div>
                 <div className="cursor2"></div>
-                <nav className="  flex justify-end md:justify-center items-center relative md:py-8 py-3 px-3 md:px-0 ">
+                <nav className="flex justify-end md:justify-center items-center relative md:py-8 py-3 px-3 md:px-0 ">
                     <div className="logo">
                         <Image src={logo} alt="logo image" className="absolute left-6 top-1/2 -translate-y-1/2" ></Image>
                         {/* <img src={logo} alt="" className="absolute left-6 top-1/2 -translate-y-1/2" /> */}

@@ -19,9 +19,11 @@ import Login from './page/Login';
 import Registation from './page/Registation';
 import ManageUsers from './page/dashboard/Admin/ManageUsers';
 import AddProducts from './components/form/AddProducts';
-import Cart from './page/dashboard/user/Cart';
+// import Cart from './page/dashboard/user/Cart';
 import EdditProductCard from './page/dashboard/Admin/EdditProductCard';
 import ManageProduct from './page/dashboard/Admin/ManageProduct';
+import SignUp from './page/SignUp';
+import Cart from './page/Cart'
 
 const router = createBrowserRouter([
   {
@@ -56,18 +58,22 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login/>,
       },
-      // {
-      //   path: "/signup",
-      //   element: <SignUp/>,
-      // },
+      {
+        path: "/signup",
+        element: <SignUp/>,
+      },
       {
         path: "/registation",
         element: <Registation/>,
       },
       {
+        path: "/cart",
+        element: <Cart/>,
+      },
+      {
         path: "/product/:id",
         element:<ProductDetails /> ,
-        loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/product/${params.id}`)
+        loader: ({ params }) => fetch(`https://dummyjson.com/products/${params.id}`)
       },
       // {
       //   path: "/chackout/:id",

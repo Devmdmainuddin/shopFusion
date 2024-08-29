@@ -27,10 +27,10 @@ const ProductCard = ({ item }) => {
     // console.log( item);
     // const [detailsModal,setDetailsModal]= useState(false)
 
-    const { image, _id, discount, title,category, price, brand } = item;
-    const [itemQuantity, setitemQuantity] = useState(1)
-    const discountp = (parseInt(price) * parseInt(discount)) / 100
-    const discountPrice = parseInt(price) - discountp
+    const { images, id, discount, title,discountPercentage, category, price, brand } = item;
+    // const [itemQuantity, setitemQuantity] = useState(1)
+    // const discountp = (parseInt(price) * parseInt(discount)) / 100
+    // const discountPrice = parseInt(price) - discountp
 
     const { user } = useAuth() || {}
     const [, , refetch] = useCartItems()
@@ -54,7 +54,7 @@ const ProductCard = ({ item }) => {
             });
         }
     })
-    const { mutateAsync:submitWishlist } = useMutation({
+    const { mutateAsync: submitWishlist } = useMutation({
         mutationFn: async updateData => {
             const { data } = await axiosCommon.put(`/wishlist`, updateData)
             return data
@@ -72,7 +72,7 @@ const ProductCard = ({ item }) => {
     })
 
 
-    const handlewishlist =async item => {
+    const handlewishlist = async item => {
 
         const cartItem = {
             produdctId: item._id,
@@ -153,12 +153,75 @@ const ProductCard = ({ item }) => {
     }
     return (
         <>
-            <div className={`w-full md:w-[370px] group mx-auto`}>
+            {/* md:w-[370px] */}
+            {/* {item.length > 0 ?
+                <>{item.map(item =>
+                    <div key={item.id} className={`w-full md:w-[370px] group mx-auto border`}>
+                        <div className="image w-full h-[370px] relative">
+                           
+                            {discount &&
+                                <button className={`absolute top-5 left-5 bg-primary text-white text-sm py-2 px-8`}> {discount}%</button>}
+
+                            <img className='w-full h-full object-contain' src={item.images} alt='' />
+                            <div className="overlay w-full absolute  bottom-0 left-0 opacity-0 py-6 px-7 bg-white group-hover:opacity-100 transition-all duration-300">
+                                <ul className='flex gap-3 flex-col'>
+                                    <OverlayLi onClick={() => handlewishlist(item)} text='Add to Wish List' icon={<FaHeart />}></OverlayLi>
+                                    <OverlayLi text='Compare' icon={<LuRefreshCcw />}></OverlayLi>
+                                    <OverlayLi onClick={() => handlecard(item)} text=' Add to Cart' icon={<FaShoppingCart />}></OverlayLi>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="text pt-6">
+                            <Link to={`/product/${_id}`} className="flex justify-between items-baseline mb-3">
+                                <h3 className="text-primary font-bold text-xl">{item.title} {item.category}</h3>
+                                {discount && <span className="text-base font-DM text-[#ee2121] line-through mr-1"> ${item.price}</span>}
+
+                                <span className="text-base font-DM text-[#767676]">${discount ? discountPrice : item.price}</span>
+                            </Link>
+                            <p className="brand text-base font-DM text-[#767676]">{brand}</p>
+                        </div>
+
+                    </div>)}</> :
+                <>{products.map(item => <div key={item.id} className={`w-full md:w-[370px] group mx-auto border`}>
+                    <div className="image w-full h-[370px] relative">
+                       
+                        {discount &&
+                            <button className={`absolute top-5 left-5 bg-primary text-white text-sm py-2 px-8`}> {item.discount}%</button>}
+
+                        <img className='w-full h-full object-contain' src={item.images} alt='' />
+                        <div className="overlay w-full absolute  bottom-0 left-0 opacity-0 py-6 px-7 bg-white group-hover:opacity-100 transition-all duration-300">
+                            <ul className='flex gap-3 flex-col'>
+                                <OverlayLi onClick={() => handlewishlist(item)} text='Add to Wish List' icon={<FaHeart />}></OverlayLi>
+                                <OverlayLi text='Compare' icon={<LuRefreshCcw />}></OverlayLi>
+                                <OverlayLi onClick={() => handlecard(item)} text=' Add to Cart' icon={<FaShoppingCart />}></OverlayLi>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="text pt-6">
+                        <Link to={`/product/${_id}`} className="flex justify-between items-baseline mb-3">
+                            <h3 className="text-primary font-bold text-xl">{item.title} {item.category}</h3>
+                            {discount && <span className="text-base font-DM text-[#ee2121] line-through mr-1"> ${item.price}</span>}
+
+                            <span className="text-base font-DM text-[#767676]">${item.discount ? discountPrice : item.price}</span>
+                        </Link>
+                        <p className="brand text-base font-DM text-[#767676]">{brand}</p>
+                    </div>
+
+                </div>)}</>
+            } */}
+
+
+
+
+            <div className={`w-full md:w-[370px] group mx-auto `}>
                 <div className="image w-full h-[370px] relative">
-{/* ${discount ? 'px-8' : 'px-0'} */}
-{discount && <button className={`absolute top-5 left-5 bg-primary text-white text-sm py-2 px-8`}> {discount}%</button>} 
-                    
-                    <img className='w-full h-full object-cover' src={image} alt='' />
+                   
+                {discountPercentage &&
+                 <button className={`absolute top-5 left-5 bg-primary text-white text-sm py-2 px-8`}> {discountPercentage}%</button>
+                 }
+                        
+
+                    <img className='w-full h-full object-contain' src={images} alt='' />
                     <div className="overlay w-full absolute  bottom-0 left-0 opacity-0 py-6 px-7 bg-white group-hover:opacity-100 transition-all duration-300">
                         <ul className='flex gap-3 flex-col'>
                             <OverlayLi onClick={() => handlewishlist(item)} text='Add to Wish List' icon={<FaHeart />}></OverlayLi>
@@ -168,21 +231,24 @@ const ProductCard = ({ item }) => {
                     </div>
                 </div>
                 <div className="text pt-6">
-                    <Link to={`/product/${_id}`} className="flex justify-between items-baseline mb-3">
-                        <h3 className="text-primary font-bold text-xl">{title} {category}</h3>
-                        {discount && <span className="text-base font-DM text-[#ee2121] line-through mr-1"> ${price}</span>}
+                    <Link to={`/product/${id}`} className="flex justify-between items-baseline mb-3">
+                        <h3 className="text-primary font-bold text-xl">{title}</h3>
+                        {/* <span className="text-base font-DM text-[#ee2121] line-through mr-1"> ${price}</span> */}
 
-                        <span className="text-base font-DM text-[#767676]">${discount ? discountPrice : price}</span>
+                        <span className="text-base font-DM text-[#767676]">${price}</span>
                     </Link>
                     <p className="brand text-base font-DM text-[#767676]">{brand}</p>
                 </div>
 
             </div>
+
+
+
             {/* <div className={`w-full md:w-[370px] group mx-auto`}>
                 <div className="image w-full h-[370px] relative">
                   
                     <button className={`absolute top-5 left-5 bg-primary text-white text-sm py-2 ${item.discount? 'px-8' : 'px-0'}`}>{item.discount}</button>
-                    <img className='w-full h-full object-cover' src={item.image} alt={item.title} />
+                    <img className='w-full h-full object-cover' src={images} alt={item.title} />
                     <div className="overlay w-full absolute  bottom-0 left-0 opacity-0 py-6 px-7 bg-white group-hover:opacity-100 transition-all duration-300">
                         <ul className='flex gap-3 flex-col'>
                             <OverlayLi onClick={() => handlewishlist(item)} text='Add to Wish List' icon={<FaHeart />}></OverlayLi>

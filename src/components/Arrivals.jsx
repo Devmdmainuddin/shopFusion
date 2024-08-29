@@ -1,19 +1,13 @@
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-// import Card from "./card/Card";
-import { useEffect, useRef } from "react";
 import ProductCard from "./card/ProductCard";
 import Container from "./layer/Container";
 import Heading from "./layer/Heading";
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import { Navigation } from 'swiper/modules';
-// import { register } from "swiper/element/bundle";
-// register();
-
 import Slider from "react-slick";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
-import useProduct from "../hooks/useProduct";
+// import useProduct from "../hooks/useProduct";
 import LoadingSpinner from "./share/LoadingSpinner";
-import ProductCard01 from "./card/ProductCard01";
+import useProducts from "../hooks/useProducts";
+
 
 function SampleNextArrow(props) {
   const { style, onClick } = props;
@@ -70,59 +64,9 @@ function SamplePrevArrow2(props) {
 }
 
 const Arrivals = () => {
-  // const swiperRef = useRef(null);
-  // useEffect(() => {
-  //   const swiperContainer = swiperRef.current;
-  //   const params = {
-  //     navigation: true,
-  //     loop: true,
-  //     //  slidesPerView: 2,
-  //     breakpoints: {
-  //       640: {
-  //         slidesPerView: 2,
-  //         spaceBetween: 10,
-  //       },
-  //       768: {
-  //         slidesPerView: 3,
-  //         spaceBetween: 20,
-  //       },
-  //       1024: {
-  //         slidesPerView: 4,
-  //         spaceBetween: 20,
-  //       },
+  const [products,loading]=useProducts()
+  // const [product,loading] =useProduct()
 
-  //     },
-  //     // spaceBetween:30,
-  //     // These are new...
-  //     injectStyles: [
-  //       `
-  //           .swiper-button-next,
-  //           .swiper-button-prev {
-  //           width:30px;
-  //           height:30px;
-  //             background-color: #979797;
-  //             padding: 16px 16px;
-  //             border-radius: 100%;
-  //             border:1px solid #979797;
-  //             color: white;
-  //             transition:all 0.4s;
-  //           }
-  //           // .swiper-button-next:hover,
-  //           // .swiper-button-prev:hover{
-  //           // border:1px solid #0156FF;
-  //           // color:#0156FF;
-  //           // background-color: #A2A6B0;
-  //           // }
-
-  //       `,
-  //     ],
-  //   };
-
-  //   Object.assign(swiperContainer, params);
-  //   swiperContainer.initialize();
-  // }, []);
-  const [product, loading] = useProduct()
-  // console.log('arrivals', product);
   var settings = {
     infinite: true,
     slidesToShow: 4,
@@ -176,66 +120,17 @@ const Arrivals = () => {
     <div className="my-36">
       <Container>
         <Heading className='mb-12' text='New Arrivals'></Heading>
-        {/* <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 mt-3'> */}
       </Container>
-      {/* <div className="flex justify-center gap-6 flex-wrap"> */}
+      
       <div className="max-w-[1640px] mx-auto">
-
-        {/* <swiper-container ref={swiperRef} init="false" className='flex flex-wrap py-6'>
-          <swiper-slide> <ProductCard className='w-full' src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard></swiper-slide>
-          <swiper-slide><ProductCard className='w-full' src='/card-2.jpg' offer='10%' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard></swiper-slide>
-          <swiper-slide><ProductCard className='w-full' src='/card-2.jpg' offer='10%' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard></swiper-slide>
-          <swiper-slide><ProductCard className='w-full' src='/card-2.jpg' offer='10%' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard></swiper-slide>
-          <swiper-slide><ProductCard className='w-full' src='/card-2.jpg' offer='10%' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard></swiper-slide>
-
-        </swiper-container> */}
-        {/* <div className='flex justify-between md:mt-12 mt-5 flex-wrap gap-y-5'>
-        
-        </div> */}
-       
         <Slider {...settings}>
         {
-          product.map(item => <ProductCard key={item._id} item={item}   ></ProductCard>)
+          products.map(item => <ProductCard key={item._id} item={item}   ></ProductCard>)
         }
-        {/* {
-          product.map(item => <ProductCard01 key={item._id} item={item}   ></ProductCard01>)
-        } */}
-          {/* {
-            product.map(item => {
-             
-              <ProductCard key={item._id} item={item} src={item.image} offer={item.discount} title={item.title} alt={item.title} price={item.price} brand={item.brand} id={item._id}></ProductCard>
-
-            })
-          } */}
-
-          {/* <div >
-          <ProductCard  src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
-          </div>
-          
-          <div >
-          <ProductCard  src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
-          </div>
-          <div >
-          <ProductCard  src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
-          </div> */}
-
-
-          {/* <ProductCard src='/card-2.jpg' offer='10%' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
-          <ProductCard src='/card-3.jpg' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
-          <ProductCard src='/card-2.jpg' offer='10%' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
-          <ProductCard src='/card-4.jpg' offer='25%' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></ProductCard>
-         */}
-        </Slider>
+     </Slider>
       </div>
 
 
-      {/* <Card src='/card-1.jpg' offer='10%' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></Card>
-      <Card src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></Card>
-      <Card src='/card-1.jpg' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></Card>
-      <Card src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></Card>
-      <Card src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></Card>
-      <Card src='/card-1.jpg' offer='new' title='Basic Crew Neck Tee' alt='product-1 image' price='$60.00' brand='Black'></Card>
-       */}
     </div>
 
 

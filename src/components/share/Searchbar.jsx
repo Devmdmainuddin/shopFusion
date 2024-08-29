@@ -16,11 +16,13 @@ import useAxiosCommon from "../../hooks/useAxiosCommon";
 import { useMutation } from "@tanstack/react-query";
 import useWishlist from "../../hooks/useWishlist";
 import useProducts from "../../hooks/useProducts";
+import { useSelector } from "react-redux";
 
 const Searchbar = () => {
     const { user, logOut } = useAuth()
-    const [items,handleSearch,handlenext,handlepre,handleReset,handleItemsPerPage]=useProducts()
-    const [wishlist,,refash,wishlistTotal] = useWishlist()
+    const carts = useSelector((state) => state.cart.cartItem)
+    const [items, handleSearch, handlenext, handlepre, handleReset, handleItemsPerPage] = useProducts()
+    const [wishlist, , refash, wishlistTotal] = useWishlist()
     const [cartItems, , refetch, cartTotal] = useCartItems()
     const [catOpen, setCatOpen] = useState(false)
     const [proOpen, setProOpen] = useState(false);
@@ -30,12 +32,12 @@ const Searchbar = () => {
     const axiosCommon = useAxiosCommon();
 
 
-     const { mutateAsync:handelwishlist } = useMutation({
+    const { mutateAsync: handelwishlist } = useMutation({
         mutationFn: async id => {
             const { data } = await axiosCommon.delete(`/wishlist/${id}`)
             return data
         },
-        onSuccess:data => {
+        onSuccess: data => {
             refetch()
             Swal.fire({
                 position: "top-end",
@@ -80,7 +82,7 @@ const Searchbar = () => {
                 // await mutateAsync(id)
                 await handelwishlist(id)
                 refash()
-               
+
             }
         });
     }
@@ -182,11 +184,15 @@ const Searchbar = () => {
 
                 </ul>
 
+                <div className='relative w-full lg:w-[600px] ml-5 hover:shadow-mainudin'>
+                    <input type="text" placeholder='Search Products' className='lg:w-[601px] w-full lg:py-4 py-1 px-5 bg-white outline-none' />
+                    <FaSearch className='absolute right-1 lg:right-5 top-1/2 translate-y-[-50%]' />
 
-                <div className="relative w-full lg:w-[600px] ml-5 hover:shadow-mainudin">
+                </div>
+                {/* <div className="relative w-full lg:w-[600px] ml-5 hover:shadow-mainudin">
                     <label onSubmit={handleSearch} htmlFor="search" className="absolute right-5 top-1/2 -translate-y-1/2"><FaSearch /></label>
                     <input  type="search" name="search" id="search" placeholder="Search Products" className="py-4  w-full rounded-lg outline-none" />
-                </div>
+                </div> */}
 
 
                 <div className="md:flex gap-6 relative p-4 hidden ">
@@ -232,7 +238,7 @@ const Searchbar = () => {
                             <div className="p-5">
                                 <p >Subtotal: <span className="text-[#262626] font-bold">${wishlistTotal}</span></p>
                                 <div className="flex  lg:gap-x-5 gap gap-x-1 mt-3">
-                                    <Link to='/dashboard/cart' className="w-full block lg:py-4 py-2 lg:px-8 px-3 text-[#262626] border border-[#262626]">View Cart </Link>
+                                    <Link to='/cart' className="w-full block lg:py-4 py-2 lg:px-8 px-3 text-[#262626] border border-[#262626]">View Cart </Link>
                                     <button className="w-full block lg:py-4 py-2 lg:px-10 px-3 bg-[#262626] text-white">Checkout</button>
                                 </div>
                             </div>
@@ -240,7 +246,7 @@ const Searchbar = () => {
                         </div>
                     )}
                     {/* product mini cart section */}
-                    <button onClick={() => setCartOpen(!cartOpen)} className=""><FaCartShopping className="text-xl hover:text-red-500 transition-all duration-500" /> <span className="text-red-500 bg-white w-9 h-9 border p-2 rounded-full absolute -top-3 ">{cartItems.length}</span></button>
+                    <button onClick={() => setCartOpen(!cartOpen)} className=""><FaCartShopping className="text-xl hover:text-red-500 transition-all duration-500" /> <span className="text-red-500 bg-white w-9 h-9 border p-2 rounded-full absolute -top-3 ">1</span></button>
 
                     {cartOpen && (
                         <div className="w-[360px] absolute z-50 top-full right-3 bg-slate-50 border translate-y-6">
@@ -261,7 +267,7 @@ const Searchbar = () => {
                             <div className="p-5">
                                 <p >Subtotal: <span className="text-[#262626] font-bold">${cartTotal}</span></p>
                                 <div className="flex  lg:gap-x-5 gap gap-x-1 mt-3">
-                                    <Link to='/dashboard/cart' className="w-full block lg:py-4 py-2 lg:px-8 px-3 text-[#262626] border border-[#262626]">View Cart </Link>
+                                    <Link to='/cart' className="w-full block lg:py-4 py-2 lg:px-8 px-3 text-[#262626] border border-[#262626]">View Cart </Link>
                                     <button className="w-full block lg:py-4 py-2 lg:px-10 px-3 bg-[#262626] text-white">Checkout</button>
                                 </div>
                             </div>

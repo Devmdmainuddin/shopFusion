@@ -1,7 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@layer base {
+  tr th {
+    @apply p-8;
+  }
+  tr td {
+    @apply p-8;
+  }
+}
 .cursor{
     position: fixed;
     width: 40px;

@@ -22,7 +22,7 @@ const Footer = () => {
         <footer className="bg-[#F5F5F3] pt-[53px]">
             <Container>
                 <div className=" flex flex-col md:flex-row items-center md:items-start text-center md:text-start md:gap-x-12 lg:gap-x-36 gap-y-8">
-                    <div className=" left  flex  justify-center  md:justify-between lg:gap-x-[140px] gap-x-16">
+                    <div className=" left  flex  justify-center  md:justify-between lg:gap-x-[140px] gap-x-8">
                         <ul >
                             <h4 className='font-DM font-bold text-base text-[#262626] leading-6  md:mb-4 mb-2'>MENU</h4>
 

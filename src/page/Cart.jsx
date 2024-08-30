@@ -1,11 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from '../components/layer/Container';
 import Bredcumb from '../components/layer/Bredcumb';
 import { FaMinus, FaPlus, FaTrashAlt } from 'react-icons/fa';
 import Button01 from '../components/layer/Button01';
+import {useDispatch, useSelector } from "react-redux";
+import { changeQuantity } from '../redux/state/cartSlice';
 
 const Cart = () => {
-    let [Quantity, setQuantity] = useState(1);
+    let [totalPrice, setTotalPrice] = useState(0);
+    const carts = useSelector((state) => state.cart.cartItem)
+    const dispatch = useDispatch();
+
+    const handkeMinusQuantity = (items,quantity) => {
+        dispatch(changeQuantity({...items,qun:quantity -1,}))    
+    }
+    const handkePlusQuantity = (items,quantity) => {
+        dispatch(changeQuantity({...items,qun:quantity +1,}))  
+    }
+
+    useEffect(()=>{
+        const cartTotal = carts.reduce((acc,items)=>  acc + parseInt(items.price* items.qun) ,0)
+
+        setTotalPrice(cartTotal)
+    },[carts])
+ 
     return (
         <div>
             <Container>
@@ -24,51 +42,47 @@ const Cart = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr >
-                                    <th>
-                                        <div className='flex gap-2'>
-                                            <img src="#" alt="cart product img" />
-                                            <h2> Essence Mascara Lash Princess</h2>
-                                        </div>
+                            {carts.map(item=>
+                                <tr key={item.id}>
+                                    
+                                <th>
+                                    <div className='flex gap-2'>
+                                        <img className='w-10 h-10' src={item.images} alt="cart product img" />
+                                        <h2> {item.title}</h2>
+                                    </div>
 
 
-                                    </th>
-                                    <td>
-                                        $44.00
+                                </th>
+                                <td>
+                                ${item.price}
 
-                                    </td>
-                                    <td>
-                                        <div className="w-[139px]   border border-[#F0F0F0] text-[#767676] flex justify-between items-center p-3">
-                                            <span
-                                                className="cursor-pointer inline-block   text-lg font-normal "
-                                                onClick={() =>
-                                                    setQuantity((data) => {
-                                                        if (data >= 2) {
-                                                            return data - 1;
-                                                        } else {
-                                                            return 1;
-                                                        }
-                                                    })
-                                                }
-                                            >
-                                                <FaMinus />
-                                            </span>
-                                            <span className="inline-block px-2 text-lg font-normal">{Quantity}</span>
-                                            <span
-                                                className="cursor-pointer inline-block  text-lg "
-                                                onClick={() => setQuantity(Quantity + 1)}
-                                            >
-                                                <FaPlus />
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td> $44.00</td>
-                                    <th>
-                                        <button
+                                </td>
+                                <td>
+                                    <div className="w-[139px]   border border-[#F0F0F0] text-[#767676] flex justify-between items-center p-3">
+                                        <span
+                                            className="cursor-pointer inline-block   text-lg font-normal "
+                                            onClick={()=>handkeMinusQuantity(item,item.qun)}
+                                        >
+                                            <FaMinus />
+                                        </span>
+                                        <span className="inline-block px-2 text-lg font-normal">{item.qun}</span>
+                                        <span
+                                            className="cursor-pointer inline-block  text-lg "
+                                            onClick={()=>handkePlusQuantity(item,item.qun)}
+                                        >
+                                            <FaPlus />
+                                        </span>
+                                    </div>
+                                </td>
+                                <td>${item.price * item.qun}</td>
+                                <th>
+                                    <button
 
-                                            className="btn btn-ghost btn-xs"><FaTrashAlt className="text-red-600" /></button>
-                                    </th>
-                                </tr>
+                                        className="btn btn-ghost btn-xs"><FaTrashAlt className="text-red-600" /></button>
+                                </th>
+                            </tr>
+                            )}
+                                
                             </tbody>
 
 
@@ -102,10 +116,10 @@ const Cart = () => {
                         <h2 className='text-[#262626] text-xl font-bold'>Cart totals</h2>
                         <div className='w-[644px] mt-6  border border-[#F0F0F0]'>
                             <div className='  flex justify-between border-b border-b-[#F0F0F0] '>
-                                <p className='w-1/2 px-5 py-4 border-r border-r-[#F0F0F0] font-bold'>Subtotal </p> <span className='w-1/2 px-5 py-4'>389.99 $</span>
+                                <p className='w-1/2 px-5 py-4 border-r border-r-[#F0F0F0] font-bold'>Subtotal </p> <span className='w-1/2 px-5 py-4'>{totalPrice} $</span>
                             </div>
                             <div className=' flex justify-between'>
-                                <p className='w-1/2 border-r border-r-[#F0F0F0] py-4 px-5 font-bold'> Total</p> <span className='w-1/2 py-4 px-5'>389.99 $</span>
+                                <p className='w-1/2 border-r border-r-[#F0F0F0] py-4 px-5 font-bold'> Total</p> <span className='w-1/2 py-4 px-5'>{totalPrice} $</span>
                             </div>
 
                         </div>

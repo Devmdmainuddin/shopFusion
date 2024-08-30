@@ -10,6 +10,8 @@ import useWishlist from '../../hooks/useWishlist';
 import useAxiosCommon from '../../hooks/useAxiosCommon';
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
+import { addToCart } from '../../redux/state/cartSlice';
+import { useDispatch } from 'react-redux';
 
 // import { useState } from 'react';
 const OverlayLi = ({ text, icon, onClick }) => {
@@ -26,12 +28,12 @@ const ProductCard = ({ item }) => {
     // {  src, alt,id, offer, title, price, brand }
     // console.log( item);
     // const [detailsModal,setDetailsModal]= useState(false)
-
-    const { images, id, discount, title,discountPercentage, category, price, brand } = item;
+    const dispatch = useDispatch();
+    const { images, id, discount, title, discountPercentage, category, price, brand } = item;
     // const [itemQuantity, setitemQuantity] = useState(1)
     // const discountp = (parseInt(price) * parseInt(discount)) / 100
     // const discountPrice = parseInt(price) - discountp
-
+    let [Quantity, setQuantity] = useState(1);
     const { user } = useAuth() || {}
     const [, , refetch] = useCartItems()
     const [, , refash] = useWishlist()
@@ -100,15 +102,29 @@ const ProductCard = ({ item }) => {
     // add to cart
     const handlecard = async item => {
 
-        const cartItem = {
-            produdctId: item._id,
-            title: item.title,
-            image: item.image,
-            email: user?.email,
-            itemQuantity: itemQuantity,
-            discount: item.discount,
-            price: item.price
+
+        try {
+            dispatch(addToCart({ ...item, qun: Quantity, }))
         }
+        catch (err) {
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: " product  cart not add  ",
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+        // const cartItem = {
+        //     produdctId: item._id,
+        //     title: item.title,
+        //     image: item.image,
+        //     email: user?.email,
+        //     itemQuantity: itemQuantity,
+        //     discount: item.discount,
+        //     price: item.price
+        // }
+
         // console.log(cartItem)
 
         // const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
@@ -121,18 +137,18 @@ const ProductCard = ({ item }) => {
 
         //     setCart([...cart, item]);
         //   }
-        try {
-            await mutateAsync(cartItem)
-            refetch()
-        } catch (err) {
-            Swal.fire({
-                position: "top-end",
-                icon: "error",
-                title: " product  cart not add  ",
-                showConfirmButton: false,
-                timer: 1500
-            })
-        }
+        // try {
+        //     await mutateAsync(cartItem)
+        //     refetch()
+        // } catch (err) {
+        //     Swal.fire({
+        //         position: "top-end",
+        //         icon: "error",
+        //         title: " product  cart not add  ",
+        //         showConfirmButton: false,
+        //         timer: 1500
+        //     })
+        // }
 
 
         // axiosCommon.put(`/cart`, cartItem)
@@ -215,11 +231,11 @@ const ProductCard = ({ item }) => {
 
             <div className={`w-full md:w-[370px] group mx-auto `}>
                 <div className="image w-full h-[370px] relative">
-                   
-                {discountPercentage &&
-                 <button className={`absolute top-5 left-5 bg-primary text-white text-sm py-2 px-8`}> {discountPercentage}%</button>
-                 }
-                        
+
+                    {discountPercentage &&
+                        <button className={`absolute top-5 left-5 bg-primary text-white text-sm py-2 px-8`}> {discountPercentage}%</button>
+                    }
+
 
                     <img className='w-full h-full object-contain' src={images} alt='' />
                     <div className="overlay w-full absolute  bottom-0 left-0 opacity-0 py-6 px-7 bg-white group-hover:opacity-100 transition-all duration-300">

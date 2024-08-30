@@ -47,7 +47,7 @@ const Navbar = () => {
     //    className="nav fixed top-0 left-0 right-0 w-full bg-slate-300 z-50 "
        <header className=" nav  w-full bg-slate-300 z-50 ">
             <Container className='h-full '>
-                <div className="cursor"></div>
+                <div className="cursor fixed w-10 h-10 border border-[##0ae9cf] "></div>
                 <div className="cursor2"></div>
                 <nav className="flex justify-end md:justify-center items-center relative md:py-8 py-3 px-3 md:px-0 ">
                     <div className="logo">

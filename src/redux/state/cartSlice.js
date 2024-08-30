@@ -20,16 +20,27 @@ export const cartslice = createSlice({
             
         },
         changeQuantity(state, action) {
-            let findProduct = state.cartItem.findIndex(item => item.productId === action.payload.id)
-            if (findProduct > 0) {
-                state.cartItem[findProduct].qun += 1;
+            const {  qun } = action.payload;
+            const indexProctId = state.cartItem.findIndex((item) => item.id == action.payload.id)
+            if (qun > 0) {
+                state.cartItem[indexProctId].qun = qun;
             } else {
-                state.cartItem = (state.cartItem).filter(item => item.productId !== action.payload.id);
+                state.cartItem = state.cartItem.filter(item => item.id !== action.payload.id);
                 // delete state.items[indexProctId]
             }
             localStorage.setItem("cart", JSON.stringify(state.cartItem));
-
         }
+
+        // changeQuantity(state, action) {
+        //     let findProduct = state.cartItem.findIndex(item => item.id === action.payload.id)
+        //     if (findProduct > 0) {
+        //         state.cartItem[findProduct].qun += 1;
+        //     } else {
+        //         state.cartItem = (state.cartItem).filter(item => item.id !== action.payload.id);
+        //         // delete state.items[indexProctId]
+        //     }
+        //     localStorage.setItem("cart", JSON.stringify(state.cartItem));
+        // }
     }
 })
 

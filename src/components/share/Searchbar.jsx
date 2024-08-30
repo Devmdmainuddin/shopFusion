@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { FaHeart, FaSearch } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { FaHeart, FaMinus, FaPlus, FaSearch } from "react-icons/fa";
 import { FaCartShopping } from "react-icons/fa6";
 import { HiBars2 } from "react-icons/hi2";
 import { RiContactsFill } from "react-icons/ri";
@@ -16,7 +16,8 @@ import useAxiosCommon from "../../hooks/useAxiosCommon";
 import { useMutation } from "@tanstack/react-query";
 import useWishlist from "../../hooks/useWishlist";
 import useProducts from "../../hooks/useProducts";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { changeQuantity } from "../../redux/state/cartSlice";
 
 const Searchbar = () => {
     const { user, logOut } = useAuth()
@@ -28,7 +29,7 @@ const Searchbar = () => {
     const [proOpen, setProOpen] = useState(false);
     const [wishlistOpen, setWishListOpen] = useState(false);
     const [cartOpen, setCartOpen] = useState(false);
-
+    let [totalPrice, setTotalPrice] = useState(0);
     const axiosCommon = useAxiosCommon();
 
 
@@ -105,13 +106,19 @@ const Searchbar = () => {
         });
     }
 
+    const dispatch = useDispatch();
 
-    // useEffect(()=>{
-    //     const cartTotal = cartItems.reduce((acc,items)=>  acc + parseInt(items.price) ,0)
+    const handkeMinusQuantity = (items, quantity) => {
+        dispatch(changeQuantity({ ...items, qun: quantity - 1, }))
+    }
+    const handkePlusQuantity = (items, quantity) => {
+        dispatch(changeQuantity({ ...items, qun: quantity + 1, }))
+    }
+    useEffect(() => {
+        const cartTotal = carts.reduce((acc, items) => acc + parseInt(items.price * items.qun), 0)
 
-
-    // },[cartItems])
-    // console.log(cartTotal);
+        setTotalPrice(cartTotal)
+    }, [carts])
 
 
     return (
@@ -246,26 +253,40 @@ const Searchbar = () => {
                         </div>
                     )}
                     {/* product mini cart section */}
-                    <button onClick={() => setCartOpen(!cartOpen)} className=""><FaCartShopping className="text-xl hover:text-red-500 transition-all duration-500" /> <span className="text-red-500 bg-white w-9 h-9 border p-2 rounded-full absolute -top-3 ">1</span></button>
+                    <button onClick={() => setCartOpen(!cartOpen)} className=""><FaCartShopping className="text-xl hover:text-red-500 transition-all duration-500" /> <span className="text-red-500 bg-white w-9 h-9 border p-2 rounded-full absolute -top-3 ">{carts.length}</span></button>
 
                     {cartOpen && (
                         <div className="w-[360px] absolute z-50 top-full right-3 bg-slate-50 border translate-y-6">
 
-                            {cartItems.slice(0, 4).map(item =>
+                            {carts.slice(0, 4).map(item =>
                                 <div key={item._id} className="flex justify-between  gap-2 bg-[#F5F5F3] p-5">
-                                    <img src={item.image} alt="" className="bg-[#979797] w-20 h-20" />
+                                    <img src={item.images} alt="" className="bg-[#979797] w-20 h-20" />
                                     <div>
                                         {/* <h2>Black Smart Watch</h2> */}
                                         <h2>{item.title}</h2>
-                                        <p>X * {item.itemQuantity}</p>
-                                        <p>${item.price}</p>
+                                        <div className="w-[100px]   border border-[#F0F0F0] text-[#767676] flex justify-between items-center p-2">
+                                            <span
+                                                className="cursor-pointer inline-block   text-sm font-normal "
+                                                onClick={() => handkeMinusQuantity(item, item.qun)}
+                                            >
+                                                <FaMinus />
+                                            </span>
+                                            <span className="inline-block px-2 text-lg font-normal">{item.qun}</span>
+                                            <span
+                                                className="cursor-pointer inline-block  text-sm "
+                                                onClick={() => handkePlusQuantity(item, item.qun)}
+                                            >
+                                                <FaPlus />
+                                            </span>
+                                        </div>
+                                        <p>${item.price * item.qun}</p>
                                     </div>
                                     <button onClick={() => handleDelete(item._id)}><IoMdClose /></button>
                                 </div>)}
 
 
                             <div className="p-5">
-                                <p >Subtotal: <span className="text-[#262626] font-bold">${cartTotal}</span></p>
+                                <p >Subtotal: <span className="text-[#262626] font-bold">${totalPrice}</span></p>
                                 <div className="flex  lg:gap-x-5 gap gap-x-1 mt-3">
                                     <Link to='/cart' className="w-full block lg:py-4 py-2 lg:px-8 px-3 text-[#262626] border border-[#262626]">View Cart </Link>
                                     <button className="w-full block lg:py-4 py-2 lg:px-10 px-3 bg-[#262626] text-white">Checkout</button>

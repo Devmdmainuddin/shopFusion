@@ -8,9 +8,15 @@ import { Pagination } from 'swiper/modules';
 import PaginatedItems from '../components/PaginatedItems';
 import ProductFilter from '../components/layer/ProductFilter';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPosts } from '../redux/posts/postsSlice';
 
 
 const Shop = () => {
+    const dispatch = useDispatch();
+    const { posts, isLoading, isError, error } = useSelector((state) => state.posts)
+    console.log(posts);
+
     const [products, loading, refetch] = useProducts()
     // const [items, setitems] = useState([])
     const [item, setitem] = useState(products)
@@ -62,7 +68,26 @@ const handelActive = ()=>{
 }
 
     // if (loading ) return <p>loadding.................</p>
+    useEffect(() => {
+        dispatch(fetchPosts())
+    }, [dispatch])
 
+    let content;
+    if (isLoading) {
+        content = <h1>loading............</h1>
+    }
+    if (!isLoading && isError) {
+        content = <h1> {error}</h1>
+    }
+    if (!isLoading && !isError && posts.length === 0) {
+        content = <h1>NO POSTS FOUND</h1>
+    }
+    if (!isLoading && !isError && posts.length > 0) {
+        content = 
+          <PaginatedItems item={posts} itemsPerPage={number}></PaginatedItems>
+          
+
+    }
 
     return (
         <div>
@@ -231,7 +256,7 @@ const handelActive = ()=>{
                         {/* <div className=" grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6  mt-[60px]"> */}
                         <div className={`${activeMulti == "active"? '': 'flex flex-wrap justify-between gap-16'} mt-[60px]`}>
                             {/* <Pagination itemsPerPage={3}/> */}
-                            <PaginatedItems item={item} itemsPerPage={number}></PaginatedItems>
+                            {content}
                         </div>
 
 

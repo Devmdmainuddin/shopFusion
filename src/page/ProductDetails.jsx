@@ -20,7 +20,7 @@ import useAxiosCommon from "../hooks/useAxiosCommon";
 import useCartItems from "../hooks/useCartItems";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Bredcumb from "../components/layer/Bredcumb";
-import { useDispatch, useSelector, } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, } from '../redux/state/cartSlice';
 
 
@@ -29,10 +29,9 @@ const ProductDetails = () => {
     const products = useLoaderData();
     const [product, loading] = useProduct();
     const dispatch = useDispatch();
-    // const carts = useSelector((state) => state.cart.cartItem)
     const carts = useSelector((state) => state.cart.cartItem)
+ 
     console.log(carts);
-    
     // const [comment, , refetch] = useComment();
     // const [commentItem, setCommentItem] = useState([]);
     // const [cartItems, , refash] = useCartItems()
@@ -42,7 +41,7 @@ const ProductDetails = () => {
     // const [, , refash] = useWishlist()
     // const axiosCommon = useAxiosCommon();
     // const axiosSecure = useAxiosSecure()
-    let [Quantity, setQuantity] = useState(1);
+    let [quantity, setQuantity] = useState(1);
     const relative = product.filter(item => item.brand === products.brand)
     const discountp = (parseInt(products.price) * parseInt(products.discount)) / 100
     const discountPrice = parseInt(products.price) - discountp
@@ -189,8 +188,27 @@ const ProductDetails = () => {
 
     // add to cart
     const handlecard = (item) => {
-
-        dispatch(addToCart({...item,qun:Quantity,}))
+        try {
+            dispatch(addToCart({...item,qun:parseInt(quantity)}))
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your items has been add to cart",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+        catch (err) {
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: " product  cart not add  ",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+       
+        
         // const cartItem = {
         //     produdctId: item._id,
         //     title: item.title,
@@ -289,10 +307,10 @@ const ProductDetails = () => {
                                         >
                                             <FaMinus />
                                         </span>
-                                        <span className="inline-block px-2 text-lg font-normal">{Quantity}</span>
+                                        <span className="inline-block px-2 text-lg font-normal">{quantity}</span>
                                         <span
                                             className="cursor-pointer inline-block  text-lg "
-                                            onClick={() => setQuantity(Quantity + 1)}
+                                            onClick={() => setQuantity(quantity + 1)}
                                         >
                                             <FaPlus />
                                         </span>
@@ -471,7 +489,7 @@ const ProductDetails = () => {
 
                                         </div>
                                         <input
-                                            className="inline-block w-full rounded bg-teal-500 mt-4 px-4 py-3 text-sm font-medium text-white transition  focus:outline-none focus:ring active:bg-indigo-500"
+                                            className="inline-block mt-6 py-4 px-10 border border-[#262626] bg-[#262626] text-white hover:text-[#262626] hover:border-[#262626] hover:bg-transparent transition-all duration-500 ease-in-out"
                                             type="submit"
                                             value="Add review"
                                         />

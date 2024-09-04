@@ -8,10 +8,11 @@ import useAuth from '../../hooks/useAuth';
 import useCartItems from '../../hooks/useCartItems';
 import useWishlist from '../../hooks/useWishlist';
 import useAxiosCommon from '../../hooks/useAxiosCommon';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { addToCart } from '../../redux/state/cartSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPosts } from '../../redux/posts/postsSlice';
 
 // import { useState } from 'react';
 const OverlayLi = ({ text, icon, onClick }) => {
@@ -29,6 +30,9 @@ const ProductCard = ({ item }) => {
     // console.log( item);
     // const [detailsModal,setDetailsModal]= useState(false)
     const dispatch = useDispatch();
+    const { posts, isLoading, isError, error } = useSelector((state) => state.posts)
+    console.log(posts);
+
     const { images, id, discount, title, discountPercentage, category, price, brand } = item;
     // const [itemQuantity, setitemQuantity] = useState(1)
     // const discountp = (parseInt(price) * parseInt(discount)) / 100
@@ -39,6 +43,55 @@ const ProductCard = ({ item }) => {
     const [, , refash] = useWishlist()
     const axiosCommon = useAxiosCommon();
 
+    // useEffect(() => {
+    //     dispatch(fetchPosts())
+    // }, [dispatch])
+
+    // let content;
+    // if (isLoading) {
+    //     content = <h1>loading............</h1>
+    // }
+    // if (!isLoading && isError) {
+    //     content = <h1> {error}</h1>
+    // }
+    // if (!isLoading && !isError && posts.length === 0) {
+    //     content = <h1>NO POSTS FOUND</h1>
+    // }
+    // if (!isLoading && !isError && posts.length > 0) {
+    //     content = <div>
+         
+    //         {/* <li key={post.id}>{post.title}</li> */}
+    //         {posts.map(post => <div key={post.id} className={`w-full md:w-[370px] group mx-auto `}>
+    //             <div className="image w-full h-[370px] relative">
+
+    //                 {post.discountPercentage &&
+    //                     <button className={`absolute top-5 left-5 bg-primary text-white text-sm py-2 px-8`}> {post.discountPercentage}%</button>
+    //                 }
+
+
+    //                 <img className='w-full h-full object-contain' src={post.images} alt='' />
+    //                 <div className="overlay w-full absolute  bottom-0 left-0 opacity-0 py-6 px-7 bg-white group-hover:opacity-100 transition-all duration-300">
+    //                     <ul className='flex gap-3 flex-col'>
+    //                         <OverlayLi onClick={() => handlewishlist(item)} text='Add to Wish List' icon={<FaHeart />}></OverlayLi>
+    //                         <OverlayLi text='Compare' icon={<LuRefreshCcw />}></OverlayLi>
+    //                         <OverlayLi onClick={() => handlecard(item)} text=' Add to Cart' icon={<FaShoppingCart />}></OverlayLi>
+    //                     </ul>
+    //                 </div>
+    //             </div>
+    //             <div className="text pt-6">
+    //                 <Link to={`/product/${post.id}`} className="flex justify-between items-baseline mb-3">
+    //                     <h3 className="text-primary font-bold text-xl">{post.title}</h3>
+
+    //                     <span className="text-base font-DM text-[#767676]">${post.price}</span>
+    //                 </Link>
+    //                 <p className="brand text-base font-DM text-[#767676]">{post.brand}</p>
+    //             </div>
+
+    //         </div>)}
+    //     </div>
+
+
+    // }
 
     const { mutateAsync } = useMutation({
         mutationFn: async updateData => {
@@ -105,6 +158,13 @@ const ProductCard = ({ item }) => {
 
         try {
             dispatch(addToCart({ ...item, qun: Quantity, }))
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your items has been add to cart",
+                showConfirmButton: false,
+                timer: 1500
+            });
         }
         catch (err) {
             Swal.fire({
@@ -144,7 +204,7 @@ const ProductCard = ({ item }) => {
         //     Swal.fire({
         //         position: "top-end",
         //         icon: "error",
-        //         title: " product  cart not add  ",
+        //         title: " product  cart not add ",
         //         showConfirmButton: false,
         //         timer: 1500
         //     })
@@ -169,6 +229,7 @@ const ProductCard = ({ item }) => {
     }
     return (
         <>
+           
             {/* md:w-[370px] */}
             {/* {item.length > 0 ?
                 <>{item.map(item =>
@@ -249,8 +310,7 @@ const ProductCard = ({ item }) => {
                 <div className="text pt-6">
                     <Link to={`/product/${id}`} className="flex justify-between items-baseline mb-3">
                         <h3 className="text-primary font-bold text-xl">{title}</h3>
-                        {/* <span className="text-base font-DM text-[#ee2121] line-through mr-1"> ${price}</span> */}
-
+                        
                         <span className="text-base font-DM text-[#767676]">${price}</span>
                     </Link>
                     <p className="brand text-base font-DM text-[#767676]">{brand}</p>

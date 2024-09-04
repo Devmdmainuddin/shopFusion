@@ -17,7 +17,7 @@ import { useMutation } from "@tanstack/react-query";
 import useWishlist from "../../hooks/useWishlist";
 import useProducts from "../../hooks/useProducts";
 import { useDispatch, useSelector } from "react-redux";
-import { changeQuantity } from "../../redux/state/cartSlice";
+import { changeQuantity, deleteItem } from "../../redux/state/cartSlice";
 
 const Searchbar = () => {
     const { user, logOut } = useAuth()
@@ -32,7 +32,7 @@ const Searchbar = () => {
     let [totalPrice, setTotalPrice] = useState(0);
     const axiosCommon = useAxiosCommon();
 
-
+    const dispatch = useDispatch();
     const { mutateAsync: handelwishlist } = useMutation({
         mutationFn: async id => {
             const { data } = await axiosCommon.delete(`/wishlist/${id}`)
@@ -87,26 +87,28 @@ const Searchbar = () => {
             }
         });
     }
-    const handleDelete = async id => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then(async (result) => {
-            if (result.isConfirmed) {
+    const handleDelete = id => {
+        dispatch(deleteItem(id));
+        // Swal.fire({
+        //     title: "Are you sure?",
+        //     text: "You won't be able to revert this!",
+        //     icon: "warning",
+        //     showCancelButton: true,
+        //     confirmButtonColor: "#3085d6",
+        //     cancelButtonColor: "#d33",
+        //     confirmButtonText: "Yes, delete it!"
+        // }).then(async (result) => {
+        //     if (result.isConfirmed) {
                 // await mutateAsync(id)
-                await mutateAsync(id)
+                // await mutateAsync(id)
                 // refash()
-                refetch()
-            }
-        });
+                // refetch()
+               
+        //     }
+        // });
     }
 
-    const dispatch = useDispatch();
+  
 
     const handkeMinusQuantity = (items, quantity) => {
         dispatch(changeQuantity({ ...items, qun: quantity - 1, }))
@@ -253,7 +255,7 @@ const Searchbar = () => {
                         </div>
                     )}
                     {/* product mini cart section */}
-                    <button onClick={() => setCartOpen(!cartOpen)} className=""><FaCartShopping className="text-xl hover:text-red-500 transition-all duration-500" /> <span className="text-red-500 bg-white w-9 h-9 border p-2 rounded-full absolute -top-3 ">{carts.length}</span></button>
+                    <button onClick={() => setCartOpen(!cartOpen)} className=""><FaCartShopping className="text-xl hover:text-red-500 transition-all duration-500 " /> {carts.length >0?<span className="text-red-500 bg-white w-9 h-9 border p-2 rounded-full text-center absolute -top-3 ">{carts.length}</span>:''}</button>
 
                     {cartOpen && (
                         <div className="w-[360px] absolute z-50 top-full right-3 bg-slate-50 border translate-y-6">
@@ -261,34 +263,39 @@ const Searchbar = () => {
                             {carts.slice(0, 4).map(item =>
                                 <div key={item._id} className="flex justify-between  gap-2 bg-[#F5F5F3] p-5">
                                     <img src={item.images} alt="" className="bg-[#979797] w-20 h-20" />
-                                    <div>
+
+                                    <div className="my-2">
                                         {/* <h2>Black Smart Watch</h2> */}
                                         <h2>{item.title}</h2>
-                                        <div className="w-[100px]   border border-[#F0F0F0] text-[#767676] flex justify-between items-center p-2">
-                                            <span
-                                                className="cursor-pointer inline-block   text-sm font-normal "
-                                                onClick={() => handkeMinusQuantity(item, item.qun)}
-                                            >
-                                                <FaMinus />
-                                            </span>
-                                            <span className="inline-block px-2 text-lg font-normal">{item.qun}</span>
-                                            <span
-                                                className="cursor-pointer inline-block  text-sm "
-                                                onClick={() => handkePlusQuantity(item, item.qun)}
-                                            >
-                                                <FaPlus />
-                                            </span>
+                                        <div className="flex justify-between items-center">
+                                            <div className="w-[100px]   border border-[#353535] text-[#767676] flex justify-between items-center p-1">
+                                                <span
+                                                    className="cursor-pointer inline-block   text-sm font-normal "
+                                                    onClick={() => handkeMinusQuantity(item, item.qun)}
+                                                >
+                                                    <FaMinus />
+                                                </span>
+                                                <span className="inline-block px-2 text-sm font-normal">{item.qun}</span>
+                                                <span
+                                                    className="cursor-pointer inline-block  text-sm "
+                                                    onClick={() => handkePlusQuantity(item, item.qun)}
+                                                >
+                                                    <FaPlus />
+                                                </span>
+                                            </div>
+                                            <button onClick={() => handleDelete(item.id)}><IoMdClose /></button>
                                         </div>
+
                                         <p>${item.price * item.qun}</p>
                                     </div>
-                                    <button onClick={() => handleDelete(item._id)}><IoMdClose /></button>
+                                    
                                 </div>)}
 
 
                             <div className="p-5">
                                 <p >Subtotal: <span className="text-[#262626] font-bold">${totalPrice}</span></p>
                                 <div className="flex  lg:gap-x-5 gap gap-x-1 mt-3">
-                                    <Link to='/cart' className="w-full block lg:py-4 py-2 lg:px-8 px-3 text-[#262626] border border-[#262626]">View Cart </Link>
+                                    <Link onClick={() => setCartOpen(!cartOpen)} to='/cart' className="w-full block lg:py-4 py-2 lg:px-8 px-3 text-[#262626] border border-[#262626]">View Cart </Link>
                                     <button className="w-full block lg:py-4 py-2 lg:px-10 px-3 bg-[#262626] text-white">Checkout</button>
                                 </div>
                             </div>

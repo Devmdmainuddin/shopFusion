@@ -5,6 +5,7 @@ import { FaMinus, FaPlus, FaTrashAlt } from 'react-icons/fa';
 import Button01 from '../components/layer/Button01';
 import { useDispatch, useSelector } from "react-redux";
 import { changeQuantity, deleteItem, removeProduct } from '../redux/state/cartSlice';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
     // let [totalPrice, setTotalPrice] = useState(0);
@@ -25,11 +26,11 @@ const Cart = () => {
     //     const cartTotal = carts.reduce((acc, items) => acc + parseInt(items.price * items.qun), 0)
     //     setTotalPrice(cartTotal)
     // }, [carts])
-    let {totalprice,totalQuntity}= carts.reduce((acc,item)=>{
+    let { totalprice, totalQuntity } = carts.reduce((acc, item) => {
         acc.totalprice += item.price * item.qun
         acc.totalQuntity += item.qun
         return acc
-    },{totalprice:0,totalQuntity:0})
+    }, { totalprice: 0, totalQuntity: 0 })
 
     return (
         <div>
@@ -37,67 +38,67 @@ const Cart = () => {
                 <Bredcumb></Bredcumb>
                 <div className='my-[136px]'>
                     <div className="overflow-x-auto border border-[#F0F0F0]">
-                        {carts.length ? 
-                         <table className="   w-full ">
-                         {/* head */}
-                         <thead className='bg-[#F5F5F3] '>
-                             <tr className=''>
-                                 <th className='text-start'>Product</th>
-                                 <th className='text-start'>Price</th>
-                                 <th className='text-start'>Quantity</th>
-                                 <th className='text-start'>Total</th>
-                                 <th className='text-start'>Action</th>
-                             </tr>
-                         </thead>
-                         <tbody>
-                             {carts.map((item ,i)=>
-                                 <tr key={item.id}>
+                        {carts.length ?
+                            <table className="   w-full ">
+                                {/* head */}
+                                <thead className='bg-[#F5F5F3] '>
+                                    <tr className=''>
+                                        <th className='text-start'>Product</th>
+                                        <th className='text-start'>Price</th>
+                                        <th className='text-start'>Quantity</th>
+                                        <th className='text-start'>Total</th>
+                                        <th className='text-start'>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {carts.map((item, i) =>
+                                        <tr key={item.id}>
 
-                                     <th>
-                                         <div className='flex gap-2'>
-                                             <img className='w-10 h-10' src={item.images} alt="cart product img" />
-                                             <h2> {item.title}</h2>
-                                         </div>
-
-
-                                     </th>
-                                     <td>
-                                      ${item.price.toFixed(2)}
-
-                                     </td>
-                                     <td>
-                                         <div className="w-[139px]   border border-[#F0F0F0] text-[#767676] flex justify-between items-center p-3">
-                                             <span
-                                                 className="cursor-pointer inline-block   text-lg font-normal "
-                                                 onClick={() => handkeMinusQuantity(item, item.qun)}
-                                             >
-                                                 <FaMinus />
-                                             </span>
-                                             <span className="inline-block px-2 text-lg font-normal">{item.qun}</span>
-                                             <span
-                                                 className="cursor-pointer inline-block  text-lg "
-                                                 onClick={() => handkePlusQuantity(item, item.qun)}
-                                             >
-                                                 <FaPlus />
-                                             </span>
-                                         </div>
-                                     </td>
-                                     <td>${(item.price * item.qun).toFixed(2)}</td>
-                                     <th>
-                                         <button
-                                          onClick={() => dispatch(removeProduct(i))}
-                                             // onClick={() => handleDelete(item.id)}
-                                             className="btn btn-ghost btn-xs"><FaTrashAlt className="text-red-600" /></button>
-                                     </th>
-                                 </tr>
-                             )}
-
-                         </tbody>
+                                            <th>
+                                                <div className='flex gap-2'>
+                                                    <img className='w-10 h-10' src={item.images} alt="cart product img" />
+                                                    <h2> {item.title}</h2>
+                                                </div>
 
 
-                     </table>: <h2 className='my-6 text-center'>no product available</h2>
+                                            </th>
+                                            <td>
+                                                ${item.price.toFixed(2)}
+
+                                            </td>
+                                            <td>
+                                                <div className="w-[139px]   border border-[#F0F0F0] text-[#767676] flex justify-between items-center p-3">
+                                                    <span
+                                                        className="cursor-pointer inline-block   text-lg font-normal "
+                                                        onClick={() => handkeMinusQuantity(item, item.qun)}
+                                                    >
+                                                        <FaMinus />
+                                                    </span>
+                                                    <span className="inline-block px-2 text-lg font-normal">{item.qun}</span>
+                                                    <span
+                                                        className="cursor-pointer inline-block  text-lg "
+                                                        onClick={() => handkePlusQuantity(item, item.qun)}
+                                                    >
+                                                        <FaPlus />
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td>${(item.price * item.qun).toFixed(2)}</td>
+                                            <th>
+                                                <button
+                                                    onClick={() => dispatch(removeProduct(i))}
+                                                    // onClick={() => handleDelete(item.id)}
+                                                    className="btn btn-ghost btn-xs"><FaTrashAlt className="text-red-600" /></button>
+                                            </th>
+                                        </tr>
+                                    )}
+
+                                </tbody>
+
+
+                            </table> : <h2 className='my-6 text-center'>Cart is Empty</h2>
                         }
-                       
+
                     </div>
                     <div className='mt-2 p-5 flex items-center gap-6 border border-[#F0F0F0]'>
                         <div className=''>
@@ -134,8 +135,10 @@ const Cart = () => {
                             </div>
 
                         </div>
+                        <Link to='/checkout'>
+                            <Button01 className='mt-[30px]' text='Proceed to Checkout'></Button01>
+                        </Link>
 
-                        <Button01 className='mt-[30px]' text='Proceed to Checkout'></Button01>
 
 
 

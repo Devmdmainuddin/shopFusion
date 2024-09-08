@@ -3,10 +3,9 @@ import ProductCard from "./card/ProductCard";
 import Container from "./layer/Container";
 import Heading from "./layer/Heading";
 import Slider from "react-slick";
-import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
-// import useProduct from "../hooks/useProduct";
 import LoadingSpinner from "./share/LoadingSpinner";
 import useProducts from "../hooks/useProducts";
+
 
 
 function SampleNextArrow(props) {
@@ -21,21 +20,6 @@ function SampleNextArrow(props) {
     </div>
   );
 }
-
-function SampleNextArrow2(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className='lg:w-16 lg:h-16 w-10 h-10 absolute lg:right-5 right-1 top-1/2 translate-y-[-100%] rounded-full bg-[#c3c3c2] !flex justify-center items-center'
-      style={{ ...style, display: "block", }}
-      onClick={onClick}
-    >
-      <FaArrowRightLong />
-
-    </div>
-  );
-}
-
 function SamplePrevArrow(props) {
   const { style, onClick } = props;
   return (
@@ -49,22 +33,10 @@ function SamplePrevArrow(props) {
   );
 }
 
-function SamplePrevArrow2(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className='lg:w-16 lg:h-16 w-10 h-10 absolute lg:left-5 left-1 top-1/2 translate-y-[-100%] rounded-full bg-[#c3c3c2] !flex justify-center items-center z-50'
-      style={{ ...style, display: "block", }}
-      onClick={onClick}
-    >
-      <FaArrowLeftLong />
-
-    </div>
-  );
-}
-
 const Arrivals = () => {
+
   const [products,loading]=useProducts()
+
   // const [product,loading] =useProduct()
 
   var settings = {
@@ -100,17 +72,7 @@ const Arrivals = () => {
           slidesToScroll: 1,
         }
       },
-      // {
-      //   breakpoint: 480,
-      //   settings: {
-      //     slidesToShow: 1,
-      //     slidesToScroll: 1,
-
-      //     nextArrow: <SampleNextArrow2 />,
-      //     prevArrow: <SamplePrevArrow2 />,
-
-      //   }
-      // }
+  
     ]
 
 
@@ -125,7 +87,7 @@ const Arrivals = () => {
       <div className="max-w-[1640px] mx-auto">
         <Slider {...settings}>
         {
-          products.map(item => <ProductCard key={item._id} item={item}   ></ProductCard>)
+          products.map((item,key) => <ProductCard key={key} item={item}   ></ProductCard>)
         }
      </Slider>
       </div>

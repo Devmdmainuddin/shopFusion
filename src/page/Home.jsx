@@ -22,6 +22,7 @@ import { useState } from "react";
 import Banner02 from "../components/banner/Banner02";
 import Banner03 from "../components/banner/Banner03";
 import ProductCard01 from "../components/card/ProductCard01";
+import NewProduct from "../components/NewProduct";
 // import ProductCard02 from "../components/card/ProductCard02";
 // import Heading01 from "../components/layer/Heading01";
 
@@ -36,12 +37,6 @@ const Home = () => {
         <div>
             <Slider01></Slider01>
             <Intro></Intro>
-            {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-               {
-                product.slice(0,datalength).map(item=> <ProductCard01 key={item._id} item={item}   ></ProductCard01>)
-               }
-            </div>
-       */}
             <Banner></Banner>
             <Arrivals></Arrivals>
             {/* <Banner02></Banner02>
@@ -49,7 +44,7 @@ const Home = () => {
             <Bestsellers></Bestsellers>
             <Ads></Ads>
             <Offers></Offers>
-            {/* <Company></Company> */}
+         
             
            
             

@@ -3,10 +3,7 @@ import { useEffect, useState } from 'react';
 import { FaMinus, FaPlus, FaThList } from 'react-icons/fa';
 import Bredcumb from '../components/layer/Bredcumb';
 import { IoGrid } from 'react-icons/io5';
-import useProducts from '../hooks/useProducts';
-import { Pagination } from 'swiper/modules';
 import PaginatedItems from '../components/PaginatedItems';
-import ProductFilter from '../components/layer/ProductFilter';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts } from '../redux/posts/postsSlice';
@@ -15,13 +12,9 @@ import { fetchPosts } from '../redux/posts/postsSlice';
 const Shop = () => {
     const dispatch = useDispatch();
     const { posts, isLoading, isError, error } = useSelector((state) => state.posts)
-    console.log(posts);
-
-    const [products, loading, refetch] = useProducts()
-    // const [items, setitems] = useState([])
-    const [item, setitem] = useState(products)
+    const [item, setitem] = useState(posts)
     const [cetegorey, setCategorey] = useState([])
-    const [activeMulti,setActiveMulti]= useState('')
+    const [activeMulti, setActiveMulti] = useState('')
     const [brand, setBrand] = useState([])
     const [number, setNumber] = useState(12)
     const [open1, setOpen1] = useState(true)
@@ -29,43 +22,31 @@ const Shop = () => {
     const [open3, setOpen3] = useState(true)
     const [open4, setOpen4] = useState(true);
 
-    // useEffect(() => {
-    //     fetch('FakeData.js')
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //             setProducts(data)
-
-    //         })
-    // }, [])
 
     useEffect(() => {
-        setCategorey([... new Set(products.map(item => item.category))])
-
-    }, [products])
-    useEffect(() => {
-        setBrand([... new Set(products.map(item => item.brand))])
-
-    }, [products])
+        setCategorey([... new Set(posts.map(item => item.category))])
+        setBrand([... new Set(posts.map(item => item.brand))])
+    }, [posts])
 
     const handlefilter = filter => {
-        const filterItem = products.filter(items => items.category === filter);
+        const filterItem = posts.filter(items => items.category === filter);
         setitem(filterItem);
     }
     const handlebrandfilter = filter => {
-        const filterItem = products.filter(items => items.brand === filter);
+        const filterItem = posts.filter(items => items.brand === filter);
         setitem(filterItem);
     }
     const handleAllProduct = () => {
-        setitem(products)
+        setitem(posts)
     }
     const selectNumber = (element) => {
         let numberConverter = Number(element.target.value)
         setNumber(numberConverter)
 
     }
-const handelActive = ()=>{
-    setActiveMulti("active")
-}
+    const handelActive = () => {
+        setActiveMulti("active")
+    }
 
     // if (loading ) return <p>loadding.................</p>
     useEffect(() => {
@@ -83,9 +64,9 @@ const handelActive = ()=>{
         content = <h1>NO POSTS FOUND</h1>
     }
     if (!isLoading && !isError && posts.length > 0) {
-        content = 
-          <PaginatedItems item={posts} itemsPerPage={number}></PaginatedItems>
-          
+        content =
+            <PaginatedItems item={item} itemsPerPage={number}></PaginatedItems>
+
 
     }
 
@@ -97,8 +78,6 @@ const handelActive = ()=>{
                 <div className='sm:flex justify-center md:justify-between mt-[130px] gap-10'>
                     {/* sidebar */}
                     <div className='sidebar sm:w-1/3 lg:w-[370px]'>
-                        {/* <ProductFilter cetegorey={cetegorey} text='shop by categorey'></ProductFilter> */}
-                        {/* <ProductFilter cetegorey={brand} text='Shop by Brand'></ProductFilter> */}
 
                         {/* cetegory item  */}
                         <div>
@@ -208,13 +187,11 @@ const handelActive = ()=>{
                     <div className='main w-full sm:w-2/3 lg:w-10/12 mb-[207px] '>
                         <div className='flex justify-between items-center'>
                             <div className="icon flex lg:gap-x-5 gap-x-2">
-
-                                <div onClick={()=>setActiveMulti('')} className={`${activeMulti == "active"?"":"bg-[#262626] text-[#fff] "} text-[#737373] border-[#F0F0F0] lg:w-9 w-7  lg:h-9 h-7 border  flex justify-center items-center  hover:bg-[#262626] hover:text-[#fff] cursor-pointer transition-all duration-300`}>
-                                <IoGrid /> 
+                                <div onClick={() => setActiveMulti('')} className={`${activeMulti == "active" ? "" : "bg-[#262626] text-[#fff] "} text-[#737373] border-[#F0F0F0] lg:w-9 w-7  lg:h-9 h-7 border  flex justify-center items-center  hover:bg-[#262626] hover:text-[#fff] cursor-pointer transition-all duration-300`}>
+                                    <IoGrid />
                                 </div>
-
-                                <div onClick={handelActive} className={`${activeMulti == "active" ?"bg-[#262626] text-[#fff]":""} lg:w-9 w-7  lg:h-9 h-7 border border-[#F0F0F0] flex justify-center items-center text-[#737373] hover:bg-[#262626] hover:text-[#fff] cursor-pointer transition-all duration-300`}>
-                                <FaThList /> 
+                                <div onClick={handelActive} className={`${activeMulti == "active" ? "bg-[#262626] text-[#fff]" : ""} lg:w-9 w-7  lg:h-9 h-7 border border-[#F0F0F0] flex justify-center items-center text-[#737373] hover:bg-[#262626] hover:text-[#fff] cursor-pointer transition-all duration-300`}>
+                                    <FaThList />
                                 </div>
 
                             </div>
@@ -238,7 +215,6 @@ const handelActive = ()=>{
                                     <p>Show:</p>
                                     <select
                                         onChange={selectNumber}
-
                                         name="" id="" className='text-[#737373] text-[16px] font-normal border border-[#e8e8e8] py-1 px-5 outline-none'>
                                         <option value="3">3</option>
                                         <option value="6">6</option>
@@ -252,10 +228,7 @@ const handelActive = ()=>{
                                 </div>
                             </div>
                         </div>
-
-                        {/* <div className=" grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6  mt-[60px]"> */}
-                        <div className={`${activeMulti == "active"? '': 'flex flex-wrap justify-between gap-16'} mt-[60px]`}>
-                            {/* <Pagination itemsPerPage={3}/> */}
+                        <div className={`${activeMulti == "active" ? '' : 'flex flex-wrap justify-between gap-16'} mt-[60px]`}>
                             {content}
                         </div>
 

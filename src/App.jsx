@@ -24,6 +24,7 @@ import EdditProductCard from './page/dashboard/Admin/EdditProductCard';
 import ManageProduct from './page/dashboard/Admin/ManageProduct';
 import SignUp from './page/SignUp';
 import Cart from './page/Cart'
+import Checkout from './page/Checkout';
 
 const router = createBrowserRouter([
   {
@@ -70,6 +71,11 @@ const router = createBrowserRouter([
         path: "/cart",
         element: <Cart/>,
       },
+      {
+        path: "/checkout",
+        element: <Checkout/>,
+      },
+
       {
         path: "/product/:id",
         element:<ProductDetails /> ,

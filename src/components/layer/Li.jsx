@@ -19,7 +19,7 @@ Li.propTypes = {
     className: PropTypes.string,
     to: PropTypes.string,
     content: PropTypes.string,
-    children: PropTypes.object,
+    children: PropTypes.node, // updated to node
     megaMenu: PropTypes.string,
 }
 export default Li;

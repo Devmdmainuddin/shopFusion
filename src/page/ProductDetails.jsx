@@ -1,51 +1,52 @@
-import { IoIosArrowForward } from "react-icons/io";
+// import { IoIosArrowForward } from "react-icons/io";
 import Container from "../components/layer/Container";
 import { Link, useLoaderData } from "react-router-dom";
 import { FaMinus, FaPlus, FaStar } from "react-icons/fa";
-import { ImStarHalf } from "react-icons/im";
-import { useEffect, useState } from "react";
+// import { ImStarHalf } from "react-icons/im";
+// import { useEffect, useState } from "react";
 import Heading from "../components/layer/Heading";
 import useProduct from "../hooks/useProduct";
 import ProductCard from "../components/card/ProductCard";
-import useComment from "../hooks/useComment";
+// import useComment from "../hooks/useComment";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../hooks/useAxiosSecure";
-import { useMutation } from "@tanstack/react-query";
-import { imageUpload } from "../utils";
+// import useAxiosSecure from "../hooks/useAxiosSecure";
+// import { useMutation } from "@tanstack/react-query";
+// import { imageUpload } from "../utils";
 import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
-import useAxiosCommon from "../hooks/useAxiosCommon";
+// import useAxiosCommon from "../hooks/useAxiosCommon";
 // import useWishlist from "../hooks/useWishlist";
-import useCartItems from "../hooks/useCartItems";
+// import useCartItems from "../hooks/useCartItems";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Bredcumb from "../components/layer/Bredcumb";
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, } from '../redux/state/cartSlice';
+import { useEffect, useState } from "react";
+import { fetchPosts } from "../redux/posts/postsSlice";
 
 
 const ProductDetails = () => {
     const { user } = useAuth() || {}
     const products = useLoaderData();
-    const [product, loading] = useProduct();
+    // const [product, loading] = useProduct();
     const dispatch = useDispatch();
-    const carts = useSelector((state) => state.cart.cartItem)
+    // const carts = useSelector((state) => state.cart.cartItem)
+    const { posts, isLoading, isError, error } = useSelector((state) => state.posts)
  
-    console.log(carts);
-    // const [comment, , refetch] = useComment();
-    // const [commentItem, setCommentItem] = useState([]);
-    // const [cartItems, , refash] = useCartItems()
+    console.log(posts);
+
     const [open, setOpen] = useState(false)
     const [open1, setOpen1] = useState(false)
-    const [open3, setOpen3] = useState(false)
-    // const [, , refash] = useWishlist()
-    // const axiosCommon = useAxiosCommon();
-    // const axiosSecure = useAxiosSecure()
-    let [quantity, setQuantity] = useState(1);
-    const relative = product.filter(item => item.brand === products.brand)
-    const discountp = (parseInt(products.price) * parseInt(products.discount)) / 100
-    const discountPrice = parseInt(products.price) - discountp
+    // const [open3, setOpen3] = useState(false)
 
+    let [quantity, setQuantity] = useState(1);
+    const relative = posts.filter(item => item.category === products.category)
+    const discountp = (parseInt(posts.price) * parseInt(posts.discount)) / 100
+    const discountPrice = parseInt(posts.price) - discountp
+    useEffect(() => {
+        dispatch(fetchPosts())
+    }, [dispatch])
     // useEffect(() => {
     //     const filteritems = comment.filter(p => p.productId === products._id)
     //     setCommentItem(filteritems)
@@ -326,7 +327,7 @@ const ProductDetails = () => {
                                 <div className="divider"></div>
                                 <div className="flex gap-5">
 
-                                    <button onClick={() => handlewishlist(products)} className="py-4 px-10 border border-[#262626] text-[#262626] hover:border-[#262626] hover:text-white hover:bg-[#262626] transition-all duration-500 ease-in-out">Add to Wish List</button>
+                                    <button  className="py-4 px-10 border border-[#262626] text-[#262626] hover:border-[#262626] hover:text-white hover:bg-[#262626] transition-all duration-500 ease-in-out">Add to Wish List</button>
                                     <button onClick={() => handlecard(products)} className="py-4 px-10 border border-[#262626] bg-[#262626] text-white hover:text-[#262626] hover:border-[#262626] hover:bg-transparent transition-all duration-500 ease-in-out">Add to Cart</button>
                                 </div>
                                 <div className="divider"></div>
@@ -338,7 +339,8 @@ const ProductDetails = () => {
                                     </div>
                                     {open &&
                                         <div className="collapse-content text-[#767676]">
-                                            {products.descaption} {/* <p>tabindex={0} attribute is necessary to make the div focusable</p> */}
+                                            <h2>descaption</h2>
+                                            {products?.descaption} {/* <p>tabindex={0} attribute is necessary to make the div focusable</p> */}
                                         </div>
                                     }
                                 </div>
@@ -398,15 +400,15 @@ const ProductDetails = () => {
                                             </div>
                                             <div className="  border-t border-b my-10" >
                                                 <div className="flex justify-between py-6">
-                                                    <h2>{products.reviews[1].reviewerName}</h2>
+                                                    <h2>{products?.reviews[1].reviewerName}</h2>
                                                     <span><Rating
                                                         style={{ maxWidth: 120 }}
-                                                        value={products.reviews[1].rating}
+                                                        value={products?.reviews[1].rating}
                                                         readOnly
                                                     />
                                                     </span>
                                                 </div>
-                                                <p> {products.reviews[1].comment}</p>
+                                                <p> {products?.reviews[1].comment}</p>
 
 
                                             </div>
@@ -439,7 +441,7 @@ const ProductDetails = () => {
 
                         <div className="main ">
                             <div className="image w-full md:w-[370px]">
-                                <img src={products.images} alt="" />
+                                <img src={products?.images} alt="" />
                             </div>
                             <div className="review">
                                 <div className="py-8 px-4">
@@ -504,10 +506,10 @@ const ProductDetails = () => {
                 </div>
 
                 <div className="">
-                    <Heading text='relative product'></Heading>
+                    <Heading className='capitalize' text='relative product'></Heading>
                     <div className='flex justify-between md:my-12 my-5 flex-wrap gap-y-5'>
                         {
-                            relative.map(item => <ProductCard key={item._id} item={item}   ></ProductCard>)
+                            relative.slice(0,4).map((item,key) => <ProductCard key={key} item={item}   ></ProductCard>)
                         }
                     </div>
                 </div>

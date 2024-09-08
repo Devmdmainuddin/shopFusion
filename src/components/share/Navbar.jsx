@@ -57,7 +57,7 @@ const Navbar = () => {
                     {/*  ${show ? "opacity-100 visible z-50" : " opacity-0 invisible"}`} */}
 
                     <ul className={`flex flex-col md:flex-row md:justify-center md:items-center md:gap-x-10 md:bg-transparent bg-[#D8D8D8]  transition-all duration-300  md:static p-4 md:p-0  absolute top-full left-0 w-full z-50 ${show ? "translate-x-0" : " -translate-x-full "} `}>
-                        <Li to='/' className={({ Active }) => (Active ? 'active' : 'default')} content='Home'></Li>
+                        <Li to='/' className='' content='Home'></Li>
                         <Li to='shops' className='' content='Shop'></Li>
                         <Li to='aboutUs' className='' content='About'></Li>
                         <Li to='contact' className='' content='Contacts'></Li>

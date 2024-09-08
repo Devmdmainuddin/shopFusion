@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
 import toast from 'react-hot-toast';
 import useAxiosCommon from '../hooks/useAxiosCommon';
@@ -28,6 +28,7 @@ const Registation = () => {
     const axiosCommon = useAxiosCommon()
     const navigate = useNavigate()
     const { createUser, signInWithGoogle, updateUserProfile, loading, setLoading } = useAuth()
+   
     const handleSubmit = async e => {
         e.preventDefault()
 

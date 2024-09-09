@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { getPosts } from "./postsAPI";
+import axios from "axios";
 
 
 //  checkout info save
@@ -17,10 +18,17 @@ const initialState = {
 
 // 
 export const checkout = createAsyncThunk('posts/checkout',
-    async () => {
-        const posts = await getPosts();
-        return posts
-    }
+    async (formData) => {
+        const response = await axios.post(
+          "http://localhost:5000/checkout",
+          formData,
+          {
+            withCredentials: true,
+          }
+        );
+    
+        return response.data;
+      }
 )
 
 

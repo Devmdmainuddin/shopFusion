@@ -4,11 +4,21 @@ import Container from "../components/layer/Container";
 import Heading from "../components/layer/Heading";
 // import Button02 from "../components/layer/Button02";
 import Button01 from "../components/layer/Button01";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { checkout } from "../redux/posts/postsSlice";
+import useUser from "../hooks/useUser";
+import useAuth from "../hooks/useAuth";
 
 
 const Checkout = () => {
+    const [users] = useUser()
+    const { user } = useAuth()
+    // console.log(user.length);
+    const mainuser = users?.find(u => u.email === user?.email);
+    // console.log(mainuser?.email);
+    // console.log(mainuser?.address02);
     const carts = useSelector((state) => state.cart.cartItem)
+    const dispatch = useDispatch();
     let { totalprice, totalQuntity } = carts.reduce((acc, item) => {
         acc.totalprice += item.price * item.qun
         acc.totalQuntity += item.qun
@@ -27,18 +37,24 @@ const Checkout = () => {
         const postnumber = form.postnumber.value
         const number = form.number.value
         const email = form.email.value
-        const info={
-            fname:fname,
-            lname:lname,
-            companyName:companyName,
-            streetName:streetName,
-            city:city,
-            county:county,
-            postnumber:postnumber,
-            number:number,
-            email:email,
-            }
-            console.log(info);
+        const info = {
+            fname: fname,
+            lname: lname,
+            companyName: companyName,
+            streetName: streetName,
+            city: city,
+            county: county,
+            postnumber: postnumber,
+            number: number,
+            email: email,
+        }
+        console.log(info);
+        try {
+            dispatch(checkout(info))
+            alert('checkout successfully')
+        } catch (err) {
+            console.log(err.message);
+        }
 
 
     }
@@ -87,7 +103,7 @@ const Checkout = () => {
                                 type='text'
                                 name='companyName'
                                 id='companyName'
-                                required
+                               
                                 placeholder='Company Name'
                                 className='w-full py-2 border-b  outline-0'
 
@@ -102,6 +118,7 @@ const Checkout = () => {
                                 name='streetName'
                                 id='streetName'
                                 required
+                                defaultValue={mainuser?.address01}
                                 placeholder='House number and street name'
                                 className='w-full py-2 border-b  outline-0'
 
@@ -111,6 +128,7 @@ const Checkout = () => {
                                 name='apartment'
                                 id='apartment'
                                 required
+                                defaultValue={mainuser?.address02}
                                 placeholder='Apartment, suite, unit etc. (optional)'
                                 className='w-full py-2 border-b  outline-0 mt-4'
 
@@ -126,6 +144,7 @@ const Checkout = () => {
                                 name='city'
                                 id='city'
                                 required
+                                defaultValue={mainuser?.city}
                                 placeholder='Town/City'
                                 className='w-full py-2 border-b  outline-0'
 
@@ -139,7 +158,8 @@ const Checkout = () => {
                                 type='text'
                                 name='county'
                                 id='county'
-                                required
+                                
+                                defaultValue={mainuser?.county}
                                 placeholder='County'
                                 className='w-full py-2 border-b  outline-0'
 
@@ -154,6 +174,7 @@ const Checkout = () => {
                                 name='postnumber'
                                 id='postnumber'
                                 required
+                                defaultValue={mainuser?.postCode}
                                 placeholder='Post Code'
                                 className='w-full py-2 border-b  outline-0'
 
@@ -168,6 +189,7 @@ const Checkout = () => {
                                 name='number'
                                 id='number'
                                 required
+                                defaultValue={mainuser?.telephone}
                                 placeholder='Phone'
                                 className='w-full py-2 border-b  outline-0'
 
@@ -182,18 +204,19 @@ const Checkout = () => {
                                 name='email'
                                 id='email'
                                 required
+                                defaultValue={mainuser?.email}
                                 placeholder='Email'
                                 className='w-full py-2 border-b  outline-0'
 
                             />
                         </div>
                         <button
-                               
-                                type='submit'
-                                className=' bg-[#95f0bc] capitalize w-full rounded-md py-3 '
-                            >
-                                save info
-                            </button>
+
+                            type='submit'
+                            className=' bg-[#95f0bc] capitalize w-full rounded-md py-3 '
+                        >
+                            save info
+                        </button>
                     </form>
                     <Heading text='Additional Information'></Heading>
                     <div className="border-b pb-[87px]">
@@ -223,7 +246,7 @@ const Checkout = () => {
                             </div>
                             <div className=' flex justify-between '>
                                 <p className='w-1/2 border-r border-r-[#F0F0F0] py-4 px-5 font-bold'> total</p>
-                                <span className='w-1/2 py-4 px-5'>{parseInt(totalprice.toFixed(2))+100  }  $</span>
+                                <span className='w-1/2 py-4 px-5'>{parseInt(totalprice.toFixed(2)) + 100}  $</span>
                             </div>
 
                         </div>

@@ -5,6 +5,9 @@ import useAxiosCommon from '../hooks/useAxiosCommon';
 import Container from '../components/layer/Container';
 import Bredcumb from '../components/layer/Bredcumb';
 import Button01 from '../components/layer/Button01';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../redux/auth/authSlice';
+import Swal from 'sweetalert2';
 // import Input from '../components/layer/Input';
 // import { imageUpload } from '../utils/index';
 // import Swal from 'sweetalert2';
@@ -23,12 +26,10 @@ import Button01 from '../components/layer/Button01';
 
 
 const Registation = () => {
-    const { user } = useAuth()
-    // const [showpassword, setshowpassword] = useState(null)
-    const axiosCommon = useAxiosCommon()
+    const dispatch = useDispatch();
     const navigate = useNavigate()
-    const { createUser, signInWithGoogle, updateUserProfile, loading, setLoading } = useAuth()
-   
+    const { createUser,setLoading } = useAuth()
+
     const handleSubmit = async e => {
         e.preventDefault()
 
@@ -39,9 +40,6 @@ const Registation = () => {
         const email = form.email.value
         const telephone = form.telephone.value
         const password = form.password.value
-        // const repeatPassword = form.repeatPassword.value
-        // const image = form.image.files[0]
-        // const image_url = await imageUpload(image)
         const address01 = form.address01.value
         const address02 = form.address02.value
         const city = form.city.value
@@ -52,7 +50,6 @@ const Registation = () => {
         const userinfo = {
             name: name,
             email: email,
-            // image: image_url,
             telephone: telephone,
             address01: address01,
             address02: address02,
@@ -63,116 +60,31 @@ const Registation = () => {
             role: 'user',
             status: 'verified',
         }
-        console.log(userinfo);
-        // if (password.length < 6) {
-        //     Swal.fire({
-        //         position: "top-end",
-        //         icon: "error",
-        //         title: "password must have a  6 letter",
-        //         showConfirmButton: false,
-        //         timer: 1500
-        //     });
-        //     //toast.error('error.message')
-        //     return
-        // }
-        // if (password !== repeatPassword) {
-        //     Swal.fire({
-        //         position: "top-end",
-        //         icon: "error",
-        //         title: "password don't metch",
-        //         showConfirmButton: false,
-        //         timer: 1500
-        //     });
-        //     //toast.error('password must have a capital letter')
-        //     return
-        // }
-
-
-        // if (/[A-Z]/.test(password)) {
-        //     Swal.fire({
-        //         position: "top-end",
-        //         icon: "error",
-        //         title: "password don't have a capital letter",
-        //         showConfirmButton: false,
-        //         timer: 1500
-        //     });
-        //     //toast.error("password must have a  uppercase  letter")
-        //     return
-        // }
-
-        // if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-        //     Swal.fire({
-        //         position: "top-end",
-        //         icon: "error",
-        //         title: "password don't have a special character",
-        //         showConfirmButton: false,
-        //         timer: 1500
-        //     });
-        //     //toast.error('password must have a capital letter')
-        //     return
-        // }
-
-
         try {
             setLoading(true)
-
-            // const image_url = await imageUpload(image)
             const result = await createUser(email, password)
-
-            // await updateUserProfile(name, image_url)
-            // const userinfo = {
-            //     name:user? user?.displayName:name,
-            //     email:user? user?.email:email,
-            //     image:user? user?.photoURL : image_url,
-            //     role: 'user',
-            //     status: 'verified',
-            // }
-            axiosCommon.put(`/user`, userinfo)
-                .then(res => {
-                    toast.success('signup Successful')
-                })
+            dispatch(registerUser(userinfo))
+            toast.success('signup Successful')
             navigate('/')
 
         }
         catch (err) {
-            console.log(err);
             setLoading(false)
             toast.error(err.message)
         }
 
 
 
+
+       
+
+
+
+
     }
-    // const handleGoogleSignIn = async () => {
-
-    //     try {
-    //         setLoading(true)
-    //         await signInWithGoogle()
-
-    //         //  user info save in database
-    //         const userinfo = {
-    //             name: user?.displayName,
-    //             email: user?.email,
-    //             image: user?.photoURL,
-    //             role: 'user',
-    //             status: 'verified',
-    //         }
-    //         axiosCommon.put(`/user`, userinfo)
-    //             .then(res => {
-    //                 toast.success('signup Successful')
-    //             })
-
-    //         navigate('/')
-    //         toast.success('signup Successful')
-    //     }
-    //     catch (err) {
-    //         setLoading(false)
-    //         toast.error(err.message)
-    //     }
-    // }
 
 
-    // ......................
+
 
     let Division = ["Barishal", "Chattogram", "Dhaka", "Khulna", "Rajshahi", "Rangpur", "Mymensingh", "Sylhet"]
 
@@ -295,12 +207,6 @@ const Registation = () => {
                                         placeholder='Your phone number' />
                                 </div>
 
-
-                                {/* <Input name='firstName' LabelText='First Name' placeholder='First Name' type='text' id='FirstName' className=' w-full md:w-[508px]' />
-                                <Input name='lastName' LabelText='Last Name' placeholder='Last Name' type='text' id='LastName' className='w-full md:w-[508px]' />
-                                <Input name='email' LabelText='Email address' placeholder='company@domain.com' type='Email' id='Emailaddress' className='w-full md:w-[508px]' />
-                                <Input name='telephone' LabelText='Telephone' placeholder='Your phone number' type='number' id='Telephone' className='w-full md:w-[508px]' />
-                             */}
                             </div>
 
                         </div>
@@ -419,7 +325,7 @@ const Registation = () => {
                 </div>
             </Container>
         </div>
-        
+
     );
 };
 

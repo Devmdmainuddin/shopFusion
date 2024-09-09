@@ -47,6 +47,8 @@ const Checkout = () => {
             postnumber: postnumber,
             number: number,
             email: email,
+            productQuntity: totalQuntity,
+            productPrice: totalprice + 100,
         }
         console.log(info);
         try {
@@ -64,7 +66,7 @@ const Checkout = () => {
                 <Bredcumb></Bredcumb>
                 <div className="w-[1057px]">
                     <Heading text='Billing Details'></Heading>
-                    <form onSubmit={handleSubmit} action="" className=" py-6">
+                    <form onSubmit={handleSubmit} action="" className=" py-[140px]">
                         <div className="  flex justify-between gap-10">
                             <div className="w-full flex flex-col ">
                                 <label htmlFor='fname' className='block mb-2 font-bold text-primary'>
@@ -103,7 +105,7 @@ const Checkout = () => {
                                 type='text'
                                 name='companyName'
                                 id='companyName'
-                               
+
                                 placeholder='Company Name'
                                 className='w-full py-2 border-b  outline-0'
 
@@ -158,7 +160,7 @@ const Checkout = () => {
                                 type='text'
                                 name='county'
                                 id='county'
-                                
+
                                 defaultValue={mainuser?.county}
                                 placeholder='County'
                                 className='w-full py-2 border-b  outline-0'
@@ -210,53 +212,57 @@ const Checkout = () => {
 
                             />
                         </div>
+
+                        <div>
+                            <Heading text='Additional Information'></Heading>
+                            <div className="border-b pb-[87px]">
+                                <h2 className='block  font-bold text-primary'>Other Notes (optional)</h2>
+                                <p className="text-sm font-normal text-[#767676] mt-2.5">Notes about your order, e.g. special notes for delivery.</p>
+                            </div>
+                            <Heading text='Your Order'></Heading>
+                            <div className='flex  flex-col my-[54px]'>
+
+                                <div className='w-[644px] mt-6  border border-[#F0F0F0]'>
+                                    <div className='  flex justify-between border-b border-b-[#F0F0F0] '>
+                                        <p className='w-1/2 px-5 py-4 border-r border-r-[#F0F0F0] font-bold'>Product</p>
+                                        <span className='w-1/2 px-5 py-4'> Total</span>
+                                    </div>
+                                    {/* {totalprice.toFixed(2)}  {totalQuntity} */}
+                                    <div className=' flex justify-between border-b border-b-[#F0F0F0] '>
+                                        <p className='w-1/2 border-r border-r-[#F0F0F0] py-4 px-5 font-bold'> Product Quantity</p>
+                                        <span className='w-1/2 py-4 px-5'>{totalQuntity}</span>
+                                    </div>
+                                    <div className='  flex justify-between border-b border-b-[#F0F0F0] '>
+                                        <p className='w-1/2 px-5 py-4 border-r border-r-[#F0F0F0] font-bold'>Subtotal</p>
+                                        <span className='w-1/2 px-5 py-4'> {totalprice.toFixed(2)} $</span>
+                                    </div>
+                                    <div className='  flex justify-between border-b border-b-[#F0F0F0] '>
+                                        <p className='w-1/2 px-5 py-4 border-r border-r-[#F0F0F0] font-bold'>Delivary cost</p>
+                                        <span className='w-1/2 px-5 py-4'> 100 $</span>
+                                    </div>
+                                    <div className=' flex justify-between '>
+                                        <p className='w-1/2 border-r border-r-[#F0F0F0] py-4 px-5 font-bold'> total</p>
+                                        <span className='w-1/2 py-4 px-5'>{parseInt(totalprice.toFixed(2)) + 100}  $</span>
+                                    </div>
+
+                                </div>
+
+
+
+
+
+                            </div>
+                        </div>
                         <button
 
                             type='submit'
-                            className=' bg-[#95f0bc] capitalize w-full rounded-md py-3 '
+                            className=' mt-7 py-4 px-10 border border-[#262626] bg-[#262626] text-white hover:text-[#262626] hover:border-[#262626] hover:bg-transparent transition-all duration-500 ease-in-out '
                         >
-                            save info
+                            Proceed to payment
                         </button>
                     </form>
-                    <Heading text='Additional Information'></Heading>
-                    <div className="border-b pb-[87px]">
-                        <h2 className='block  font-bold text-primary'>Other Notes (optional)</h2>
-                        <p className="text-sm font-normal text-[#767676] mt-2.5">Notes about your order, e.g. special notes for delivery.</p>
-                    </div>
-                    <Heading text='Your Order'></Heading>
-                    <div className='flex  flex-col my-[54px]'>
 
-                        <div className='w-[644px] mt-6  border border-[#F0F0F0]'>
-                            <div className='  flex justify-between border-b border-b-[#F0F0F0] '>
-                                <p className='w-1/2 px-5 py-4 border-r border-r-[#F0F0F0] font-bold'>Product</p>
-                                <span className='w-1/2 px-5 py-4'> Total</span>
-                            </div>
-                            {/* {totalprice.toFixed(2)}  {totalQuntity} */}
-                            <div className=' flex justify-between border-b border-b-[#F0F0F0] '>
-                                <p className='w-1/2 border-r border-r-[#F0F0F0] py-4 px-5 font-bold'> Product Quantity</p>
-                                <span className='w-1/2 py-4 px-5'>{totalQuntity}</span>
-                            </div>
-                            <div className='  flex justify-between border-b border-b-[#F0F0F0] '>
-                                <p className='w-1/2 px-5 py-4 border-r border-r-[#F0F0F0] font-bold'>Subtotal</p>
-                                <span className='w-1/2 px-5 py-4'> {totalprice.toFixed(2)} $</span>
-                            </div>
-                            <div className='  flex justify-between border-b border-b-[#F0F0F0] '>
-                                <p className='w-1/2 px-5 py-4 border-r border-r-[#F0F0F0] font-bold'>Delivary cost</p>
-                                <span className='w-1/2 px-5 py-4'> 100 $</span>
-                            </div>
-                            <div className=' flex justify-between '>
-                                <p className='w-1/2 border-r border-r-[#F0F0F0] py-4 px-5 font-bold'> total</p>
-                                <span className='w-1/2 py-4 px-5'>{parseInt(totalprice.toFixed(2)) + 100}  $</span>
-                            </div>
-
-                        </div>
-
-
-
-
-
-                    </div>
-                    <Button01 className='my-[30px]' text='Proceed to payment'></Button01>
+                   
 
                 </div>
             </Container>

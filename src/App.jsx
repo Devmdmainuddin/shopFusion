@@ -25,11 +25,13 @@ import ManageProduct from './page/dashboard/Admin/ManageProduct';
 import SignUp from './page/SignUp';
 import Cart from './page/Cart'
 import Checkout from './page/Checkout';
+import ErrorPage from './page/ErrorPage';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout/>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",

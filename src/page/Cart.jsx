@@ -6,6 +6,7 @@ import Button01 from '../components/layer/Button01';
 import { useDispatch, useSelector } from "react-redux";
 import { changeQuantity, deleteItem, removeProduct } from '../redux/state/cartSlice';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Cart = () => {
     // let [totalPrice, setTotalPrice] = useState(0);
@@ -13,7 +14,26 @@ const Cart = () => {
     const dispatch = useDispatch();
 
     const handleDelete = id => {
-        dispatch(deleteItem(id));
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                dispatch(deleteItem(id));
+        // await mutateAsync(id)
+        // await mutateAsync(id)
+        // refash()
+        // refetch()
+
+            }
+        });
+
+       
     }
     const handkeMinusQuantity = (items, quantity) => {
         dispatch(changeQuantity({ ...items, qun: quantity - 1, }))
@@ -86,7 +106,7 @@ const Cart = () => {
                                             <td>${(item.price * item.qun).toFixed(2)}</td>
                                             <th>
                                                 <button
-                                                    onClick={() => dispatch(removeProduct(i))}
+                                                    onClick={() => handleDelete(item.id)}
                                                     // onClick={() => handleDelete(item.id)}
                                                     className="btn btn-ghost btn-xs"><FaTrashAlt className="text-red-600" /></button>
                                             </th>

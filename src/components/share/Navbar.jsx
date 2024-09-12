@@ -8,14 +8,36 @@ import { useEffect, useState } from "react";
 import Image from "../layer/Image";
 import { IoMdClose } from "react-icons/io";
 import Searchbar from './Searchbar'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const Navbar = () => {
     const [proOpen, setProOpen] = useState(false);
     const [cartOpen, setCartOpen] = useState(false);
     const [show, setShow] = useState(false)
+    let [searchInput, setSearchInput] = useState("");
+    let [searchFilter, setSearchFilter] = useState([]);
     const [isActive, setIsActive] = useState(false)
+const navigate= useNavigate()
 
+    const dispatch = useDispatch();
+    const { posts, isLoading, isError, error } = useSelector((state) => state.posts)
+    console.log(posts);
+
+    const handleInput = (e) => {
+        setSearchInput(e.target.value)
+        if (e.target.value === "") {
+            setSearchFilter([])
+        } else {
+            const searchOne = posts.filter(item => item.title.toLowerCase().includes(e.target.value.toLowerCase()))
+            setSearchFilter(searchOne)
+        }
+    }
+    const handleLink=(id)=>{
+        navigate(`/product/${id}`)
+        setSearchFilter([])
+        setSearchInput("")
+    }
     useEffect(() => {
         window.addEventListener('scroll', () => {
             window.scrollY > 160 ? setIsActive(true) : setIsActive(false);
@@ -31,7 +53,7 @@ const Navbar = () => {
             }
         }
         resize()
-        
+
         window.addEventListener("resize", resize)
         var cursor = document.querySelector(".cursor");
         var cursor2 = document.querySelector(".cursor2");
@@ -41,11 +63,30 @@ const Navbar = () => {
 
 
     }, [])
+
+    // let handleInput = (e) => {
+    //     setSearchInput(e.target.value);
+    //     if (e.target.value === "") {
+    //         setSearchFilter([]);
+    //     } else {
+    //         let searchone = info.filter((item) =>
+    //             item.title.toLowerCase().includes(e.target.value)
+    //         );
+    //         setSearchFilter(searchone);
+    //     }
+    // };
+
+    // let handleSingleSearch = (id) => {
+    //     navigate(`/product/${id}`);
+    //     setSearchFilter([]);
+    //     setSearchInput("");
+    // };
     return (
         // <div className="nav fixed top-0 left-0 right-0 w-full bg-slate-300 z-50">
         // <header className={`${isActive ? 'bg-white py-4 shadow-md' : 'bg-none py-6'} fixed w-full z-10 transition-all`}>
-    //    className="nav fixed top-0 left-0 right-0 w-full bg-slate-300 z-50 "
-       <header className=" nav  w-full bg-slate-300 z-50 ">
+        //    className="nav fixed top-0 left-0 right-0 w-full bg-slate-300 z-50 "
+        <header className=" nav  w-full bg-slate-300 z-50 ">
+
             <Container className='h-full '>
                 <div className="cursor fixed w-10 h-10 border border-[##0ae9cf] "></div>
                 <div className="cursor2"></div>
@@ -104,7 +145,7 @@ const Navbar = () => {
                 {/* ${show ?"opacity-100 visible z-50":"opacity-0 hidden"} */}
 
             </Container>
-            <Searchbar></Searchbar>
+            <Searchbar searchInput={searchInput} searchFilter={searchFilter} handleLink={handleLink} handleInput={handleInput}></Searchbar>
         </header>
     );
 };

@@ -1,16 +1,13 @@
 import { useState } from 'react';
 import ProductCard from './card/ProductCard'
 import ReactPaginate from 'react-paginate';
-
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import useProducts from '../hooks/useProducts';
-
+import PropTypes from 'prop-types';
 
 
 
 function Items({ currentItems }) {
-    
+
 
     return (
         <>
@@ -24,26 +21,12 @@ function Items({ currentItems }) {
     );
 }
 
-function PaginatedItems({ itemsPerPage ,item}) {
-    const [products, loading, refetch] = useProducts()
-    // const { data: products = [], isPending: loading, refetch } = useQuery({
-    //     queryKey: ['products'],
-    //     queryFn: async () => {
-    //         const { data } = await axios.get(`https://dummyjson.com/products`)
-    //         return data.products
-    //     },
-    // })
-// if(item.length < 0){
-//     const items = products
-//     return items
-// }else{
-//     const items = item; 
-// }
-const items = item.length? item:products; 
+function PaginatedItems({ itemsPerPage, item }) {
+    const [products] = useProducts()
+
+    const items = item.length ? item : products;
 
     const [itemOffset, setItemOffset] = useState(0);
-
-
     const endOffset = itemOffset + itemsPerPage;
     console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     const currentItems = items.slice(itemOffset, endOffset);
@@ -87,5 +70,11 @@ const items = item.length? item:products;
             </div>
         </>
     );
+}
+PaginatedItems.propTypes = {
+    itemsPerPage: PropTypes.number,
+    item: PropTypes.array,
+
+
 }
 export default PaginatedItems

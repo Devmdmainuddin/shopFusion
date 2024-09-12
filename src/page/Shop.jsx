@@ -36,6 +36,15 @@ const Shop = () => {
         const filterItem = posts.filter(items => items.brand === filter);
         setitem(filterItem);
     }
+    const handlePricefilter = value => {
+        const filterItem = posts.filter(items => items.price > value.low && items.price < value.high);
+    //    if(filterItem.length >0){
+        setitem(filterItem);
+    //    }else{
+    //     setitem("")
+    //    }
+        
+    }
     const handleAllProduct = () => {
         setitem(posts)
     }
@@ -64,8 +73,9 @@ const Shop = () => {
         content = <h1>NO POSTS FOUND</h1>
     }
     if (!isLoading && !isError && posts.length > 0) {
-        content =
-            <PaginatedItems item={item} itemsPerPage={number}></PaginatedItems>
+
+        content =<PaginatedItems item={item} itemsPerPage={number}></PaginatedItems>
+        
 
 
     }
@@ -159,19 +169,19 @@ const Shop = () => {
                             </div>
                             {open4 &&
                                 <div className={` `}>
-                                    <div className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
+                                    <div onClick={()=>handlePricefilter({low:0,high:9.99})} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
                                         <p>$0.00 - $9.99</p>
                                     </div>
-                                    <div className='flex justify-between py-4 border-b border-b-[#F0F0F0] px-4 leading-relaxed text-[13px] font-normal'>
+                                    <div onClick={()=>handlePricefilter({low:10.00,high:19.99})} className='flex justify-between py-4 border-b border-b-[#F0F0F0] px-4 leading-relaxed text-[13px] font-normal'>
                                         <p>$10.00 - $19.99</p>
                                     </div>
-                                    <div className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
+                                    <div onClick={()=>handlePricefilter({low:20.00,high:29.99})} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
                                         <p>$20.00 - $29.99</p>
                                     </div>
-                                    <div className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
+                                    <div onClick={()=>handlePricefilter({low:30.00,high:39.99})} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
                                         <p>$30.00 - $39.99</p>
                                     </div>
-                                    <div className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
+                                    <div onClick={()=>handlePricefilter({low:40.00,high:69.99})} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
                                         <p>$40.00 - $69.99</p>
                                     </div>
 
@@ -228,8 +238,9 @@ const Shop = () => {
                                 </div>
                             </div>
                         </div>
+                        
                         <div className={`${activeMulti == "active" ? '' : 'flex flex-wrap justify-between gap-16'} mt-[60px]`}>
-                            {content}
+                          {content}
                         </div>
 
 

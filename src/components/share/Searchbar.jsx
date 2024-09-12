@@ -19,12 +19,10 @@ import useProducts from "../../hooks/useProducts";
 import { useDispatch, useSelector } from "react-redux";
 import { changeQuantity, deleteItem } from "../../redux/state/cartSlice";
 
-const Searchbar = () => {
+const Searchbar = ({ searchFilter, handleInput, searchInput, handleLink }) => {
     const { user, logOut } = useAuth()
     const carts = useSelector((state) => state.cart.cartItem)
-    const [items, handleSearch, handlenext, handlepre, handleReset, handleItemsPerPage] = useProducts()
     const [wishlist, , refash, wishlistTotal] = useWishlist()
-    const [cartItems, , refetch, cartTotal] = useCartItems()
     const [catOpen, setCatOpen] = useState(false)
     const [proOpen, setProOpen] = useState(false);
     const [wishlistOpen, setWishListOpen] = useState(false);
@@ -51,22 +49,22 @@ const Searchbar = () => {
     })
 
 
-    const { mutateAsync } = useMutation({
-        mutationFn: async id => {
-            const { data } = await axiosCommon.delete(`/cart/${id}`)
-            return data
-        },
-        onSuccess: data => {
-            refetch()
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "cart items has been delete",
-                showConfirmButton: false,
-                timer: 1500
-            });
-        },
-    })
+    // const { mutateAsync } = useMutation({
+    //     mutationFn: async id => {
+    //         const { data } = await axiosCommon.delete(`/cart/${id}`)
+    //         return data
+    //     },
+    //     onSuccess: data => {
+    //         refetch()
+    //         Swal.fire({
+    //             position: "top-end",
+    //             icon: "success",
+    //             title: "cart items has been delete",
+    //             showConfirmButton: false,
+    //             timer: 1500
+    //         });
+    //     },
+    // })
 
 
     const handlewishlistDelete = async id => {
@@ -88,24 +86,22 @@ const Searchbar = () => {
         });
     }
     const handleDelete = id => {
-        dispatch(deleteItem(id));
-        // Swal.fire({
-        //     title: "Are you sure?",
-        //     text: "You won't be able to revert this!",
-        //     icon: "warning",
-        //     showCancelButton: true,
-        //     confirmButtonColor: "#3085d6",
-        //     cancelButtonColor: "#d33",
-        //     confirmButtonText: "Yes, delete it!"
-        // }).then(async (result) => {
-        //     if (result.isConfirmed) {
-        // await mutateAsync(id)
-        // await mutateAsync(id)
-        // refash()
-        // refetch()
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                dispatch(deleteItem(id));
+                // await mutateAsync(id)
 
-        //     }
-        // });
+
+            }
+        });
     }
 
 
@@ -126,6 +122,8 @@ const Searchbar = () => {
     return (
 
         <div className=" lg:py-6 py-2   bg-[#F5F5F3]  w-full">
+
+            <Link to='/cart' className="z-50 fixed top-1/2 -translate-y-1/2 right-10"><FaCartShopping className="text-5xl text-green-300 hover:text-red-500 transition-all duration-500 " /> {carts.length > 0 ? <span className="text-red-500 text-sm bg-white p-2 border  rounded-full text-center absolute -top-1/2  ">{carts.length}</span> : ''}</Link>
             <Container className={`flex flex-row px-6 justify-between items-center  relative`}>
                 <div onClick={() => setCatOpen(!catOpen)} className="left flex items-center gap-2  text-sm font-DM  ">
                     <HiBars2 />
@@ -194,8 +192,23 @@ const Searchbar = () => {
                 </ul>
 
                 <div className='relative w-full lg:w-[600px] ml-5 hover:shadow-mainudin'>
-                    <input type="text" placeholder='Search Products' className='lg:w-[601px] w-full lg:py-4 py-1 px-5 bg-white outline-none' />
+                    <input type="text" value={searchInput} onChange={handleInput} placeholder='Search Products' className='lg:w-[601px] w-full lg:py-4 py-1 px-5 bg-white outline-none' />
                     <FaSearch className='absolute right-1 lg:right-5 top-1/2 translate-y-[-50%]' />
+                    {searchFilter.length>0 && 
+                     <div className='absolute w-full max-h-[350px] top-full z-50  overflow-y-scroll' >
+                     {searchFilter.map((item, key) =>
+                         <div onClick={() => handleLink(item.id)} key={key} className="  flex justify-between  gap-2 bg-[#F5F5F3] p-5">
+                             <img src={item.images} alt="" className="bg-[#979797] w-20 h-20" />
+                             <div><h2>{item.title}</h2>
+                             </div>
+
+
+                         </div>
+                     )}
+                 </div>}
+                   
+
+
 
                 </div>
                 {/* <div className="relative w-full lg:w-[600px] ml-5 hover:shadow-mainudin">
@@ -290,7 +303,7 @@ const Searchbar = () => {
                                         </div>
 
                                     </div>)}
-                                    </> :
+                            </> :
                                 <h2 className='my-6 text-center'>Cart is Empty</h2>}
 
 
@@ -298,8 +311,8 @@ const Searchbar = () => {
                             <div className="p-5">
                                 <p >Subtotal: <span className="text-[#262626] font-bold">${totalPrice}</span></p>
                                 <div className="flex  lg:gap-x-5 gap gap-x-1 mt-3">
-                                    <Link to='/cart' onClick={() => setCartOpen(!cartOpen)}  className="w-full block lg:py-4 py-2 lg:px-8 px-3 text-[#262626] border border-[#262626]">View Cart </Link>
-                                    <Link to='/checkout' onClick={() => setCartOpen(!cartOpen)}  className="w-full block lg:py-4 py-2 lg:px-10 px-3 bg-[#262626] text-white">Checkout</Link>
+                                    <Link to='/cart' onClick={() => setCartOpen(!cartOpen)} className="w-full block lg:py-4 py-2 lg:px-8 px-3 text-[#262626] border border-[#262626]">View Cart </Link>
+                                    <Link to='/checkout' onClick={() => setCartOpen(!cartOpen)} className="w-full block lg:py-4 py-2 lg:px-10 px-3 bg-[#262626] text-white">Checkout</Link>
                                 </div>
                             </div>
 

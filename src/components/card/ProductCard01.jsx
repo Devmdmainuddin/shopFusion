@@ -44,7 +44,7 @@ const handlewishlist = item => {
         price: item.price,
         email: user?.email,
     }
-    console.log(cartItem)
+   
 
     axiosCommon.post(`/wishlist`, cartItem)
   
@@ -73,7 +73,7 @@ const handlewishlist = item => {
                 price: item.price,
                 email: user?.email,
             }
-            console.log(cartItem)
+           
     
             axiosCommon.post(`/cart`, cartItem)
           

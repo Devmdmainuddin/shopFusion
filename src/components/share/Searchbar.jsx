@@ -18,6 +18,8 @@ import useWishlist from "../../hooks/useWishlist";
 import useProducts from "../../hooks/useProducts";
 import { useDispatch, useSelector } from "react-redux";
 import { changeQuantity, deleteItem } from "../../redux/state/cartSlice";
+import PropTypes from 'prop-types';
+
 
 const Searchbar = ({ searchFilter, handleInput, searchInput, handleLink }) => {
     const { user, logOut } = useAuth()
@@ -334,5 +336,11 @@ const Searchbar = ({ searchFilter, handleInput, searchInput, handleLink }) => {
         </div>
     );
 };
-
+Searchbar.propTypes = {
+    searchFilter: PropTypes.array,
+    handleInput: PropTypes.func,
+    handleLink: PropTypes.func,
+    searchInput: PropTypes.string, // updated to node
+    
+}
 export default Searchbar;

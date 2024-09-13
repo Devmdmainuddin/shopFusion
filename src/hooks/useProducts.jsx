@@ -7,6 +7,7 @@ const useProducts = () => {
     queryKey: ['products'],
     queryFn: async () => {
       // const { data } = await axios.get(`FakeData.js`)
+      // console.log(data);
       // return data
       const { data } = await axios.get(`https://dummyjson.com/products`)
       return data.products

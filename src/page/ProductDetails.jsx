@@ -29,16 +29,13 @@ import { fetchPosts } from "../redux/posts/postsSlice";
 const ProductDetails = () => {
     const { user } = useAuth() || {}
     const products = useLoaderData();
-    // const [product, loading] = useProduct();
+  
     const dispatch = useDispatch();
     // const carts = useSelector((state) => state.cart.cartItem)
-    const { posts, isLoading, isError, error } = useSelector((state) => state.posts)
- 
-    console.log(posts);
+    const { posts } = useSelector((state) => state.posts)
 
     const [open, setOpen] = useState(false)
     const [open1, setOpen1] = useState(false)
-    // const [open3, setOpen3] = useState(false)
 
     let [quantity, setQuantity] = useState(1);
     const relative = posts.filter(item => item.category === products.category)

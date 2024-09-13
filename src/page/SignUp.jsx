@@ -31,7 +31,7 @@ const SignUp = () => {
             role: 'user',
             status: 'verified',
         }
-        console.log(userinfo);
+   
         // if (password.length < 6) {
         //     Swal.fire({
         //         position: "top-end",
@@ -90,7 +90,7 @@ const SignUp = () => {
 
         }
         catch (err) {
-            console.log(err);
+          
             setLoading(false)
 
         }

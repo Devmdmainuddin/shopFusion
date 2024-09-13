@@ -8,7 +8,7 @@ import { Navigation, Autoplay } from 'swiper/modules';
 
 const HeroBanner = () => {
 
-    console.log('banner', banner)
+
     return (
         <>
             <Swiper

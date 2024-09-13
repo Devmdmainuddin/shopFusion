@@ -10,31 +10,11 @@
   }
 }
 .cursor{
-    position: fixed;
-    width: 40px;
-    height: 40px;
-    border: 1px solid #0ae9cf;
-    border-radius: 50%;
-    left: 0;
-    top: 0;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    transition: .1s;
-    z-index: 100;
+    pointer-events: none; 
   }
   
   .cursor2{
-    position: fixed;
-    width: 8px;
-    height: 8px;
-    background-color: #0ae9cf;
-    border-radius: 50%;
-    left: 0;
-    top: 0;
     pointer-events: none;
-    transform: translate(-50%, -50%);
-    transition: .2s;
-    z-index: 100;
   }
   
   .content:hover ~ .cursor{

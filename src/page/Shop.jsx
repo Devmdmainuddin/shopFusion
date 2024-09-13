@@ -27,6 +27,15 @@ const Shop = () => {
         setCategorey([... new Set(posts.map(item => item.category))])
         setBrand([... new Set(posts.map(item => item.brand))])
     }, [posts])
+    const handleByNew = () => {
+        const sortedByNew = [...posts]?.sort((a, b) => new Date(b.meta.createdAt) - new Date(a.meta.createdAt));
+        setitem(sortedByNew);
+    };
+
+    const handleByOld = () => {
+        const sortedByOld = [...posts]?.sort((a, b) => new Date(a.meta.createdAt) - new Date(b.meta.createdAt));
+        setitem(sortedByOld);
+    };
 
     const handlefilter = filter => {
         const filterItem = posts.filter(items => items.category === filter);
@@ -38,13 +47,15 @@ const Shop = () => {
     }
     const handlePricefilter = value => {
         const filterItem = posts.filter(items => items.price > value.low && items.price < value.high);
-    //    if(filterItem.length >0){
-        setitem(filterItem);
-    //    }else{
-    //     setitem("")
-    //    }
-        
+        if (filterItem.length > 0) {
+            setitem(filterItem);
+        } else {
+            setitem("")
+        }
+
     }
+
+
     const handleAllProduct = () => {
         setitem(posts)
     }
@@ -74,8 +85,8 @@ const Shop = () => {
     }
     if (!isLoading && !isError && posts.length > 0) {
 
-        content =<PaginatedItems item={item} itemsPerPage={number}></PaginatedItems>
-        
+
+        content = <PaginatedItems item={item} itemsPerPage={number}></PaginatedItems>
 
 
     }
@@ -169,19 +180,19 @@ const Shop = () => {
                             </div>
                             {open4 &&
                                 <div className={` `}>
-                                    <div onClick={()=>handlePricefilter({low:0,high:9.99})} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
+                                    <div onClick={() => handlePricefilter({ low: 0, high: 9.99 })} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
                                         <p>$0.00 - $9.99</p>
                                     </div>
-                                    <div onClick={()=>handlePricefilter({low:10.00,high:19.99})} className='flex justify-between py-4 border-b border-b-[#F0F0F0] px-4 leading-relaxed text-[13px] font-normal'>
+                                    <div onClick={() => handlePricefilter({ low: 10.00, high: 19.99 })} className='flex justify-between py-4 border-b border-b-[#F0F0F0] px-4 leading-relaxed text-[13px] font-normal'>
                                         <p>$10.00 - $19.99</p>
                                     </div>
-                                    <div onClick={()=>handlePricefilter({low:20.00,high:29.99})} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
+                                    <div onClick={() => handlePricefilter({ low: 20.00, high: 29.99 })} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
                                         <p>$20.00 - $29.99</p>
                                     </div>
-                                    <div onClick={()=>handlePricefilter({low:30.00,high:39.99})} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
+                                    <div onClick={() => handlePricefilter({ low: 30.00, high: 39.99 })} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
                                         <p>$30.00 - $39.99</p>
                                     </div>
-                                    <div onClick={()=>handlePricefilter({low:40.00,high:69.99})} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
+                                    <div onClick={() => handlePricefilter({ low: 40.00, high: 69.99 })} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
                                         <p>$40.00 - $69.99</p>
                                     </div>
 
@@ -209,15 +220,17 @@ const Shop = () => {
                                 <div className='flex  items-center gap-4'>
                                     <p>Sort by:</p>
                                     <select
-                                        // onChange={e => {
-                                        //     setSort(e.target.value)
-                                        //     setcurrentPage(0)
-                                        // }}
-                                        //  value={sort} 
+                                        onChange={(e) => {
+                                            if (e.target.value === "new") {
+                                                handleByNew();
+                                            } else if (e.target.value === "old") {
+                                                handleByOld();
+                                            }
+                                        }}
                                         name="sort" id="sort" className='text-[#737373] text-[16px] font-normal border border-[#e8e8e8] py-1 px-5'>
 
-                                        <option value="dsc">new</option>
-                                        <option value="asc">old</option>
+                                        <option value="new">new</option>
+                                        <option value="old">old</option>
 
                                     </select>
                                 </div>
@@ -238,9 +251,9 @@ const Shop = () => {
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div className={`${activeMulti == "active" ? '' : 'flex flex-wrap justify-between gap-16'} mt-[60px]`}>
-                          {content}
+                            {item ? content : <p>no product</p>}
                         </div>
 
 

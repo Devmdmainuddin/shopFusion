@@ -50,12 +50,12 @@ const Checkout = () => {
             productQuntity: totalQuntity,
             productPrice: totalprice + 100,
         }
-        console.log(info);
+       
         try {
             dispatch(checkout(info))
             alert('checkout successfully')
         } catch (err) {
-            console.log(err.message);
+          
         }
 
 

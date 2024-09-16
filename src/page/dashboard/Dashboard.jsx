@@ -3,6 +3,7 @@ import { CiMenuFries } from "react-icons/ci";
 import { IoMdSettings } from "react-icons/io";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { Link, Outlet } from "react-router-dom";
+
 // import Sidebar from "./Sidebar";
 
 
@@ -88,17 +89,18 @@ const Dashboard = () => {
 
 
 
-            <main className={`main   md:max-w-[calc(100%-256px)] z-40   ${show ? 'ml-12' : 'ml-64'}  bg-gray-200 min-h-screen transition-all  duration-500 z-30`}>
+            <main className={`main    z-40   ${show ? 'ml-12 md:max-w-full]' : 'ml-64 md:max-w-[calc(100%-256px)]'}  bg-gray-200 min-h-screen transition-all  duration-500 z-30`}>
                 <div className="py-2  text-gray-600 bg-gray-100   hover:text-gray-700 flex items-center  shadow-black/5 sticky top-0 left-0 z-30">
                     <button onClick={() => setShow(!show)} type="button" className="text-lg text-gray-600 sidebar-toggle">
                         <CiMenuFries />
                     </button>
+              
                     <ul className="flex items-center text-lg ml-4">
                         <li className="mr-2">
-                            <a href="#" className="text-gray-400 hover:text-gray-600 font-medium">Dashboard</a>
+                            <a href="#" className="text-gray-400 hover:text-gray-600 font-medium">{window.location.pathname.split("/")[1]}</a>
                         </li>
                         <li className="text-gray-600 mr-2 font-medium">/</li>
-                        <li className="text-gray-600 mr-2 font-medium">Analytics</li>
+                        <li className="text-gray-600 mr-2 font-medium">{window.location.pathname.split("/")[2]}</li>
                     </ul>
 
                 </div>

@@ -26,6 +26,7 @@ import SignUp from './page/SignUp';
 import Cart from './page/Cart'
 import Checkout from './page/Checkout';
 import ErrorPage from './page/ErrorPage';
+import PrivateRoute from './routes/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -75,7 +76,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/checkout",
-        element: <Checkout/>,
+        element: <PrivateRoute> <Checkout/></PrivateRoute>
       },
 
       {

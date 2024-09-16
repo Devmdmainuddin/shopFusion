@@ -33,22 +33,22 @@ const Searchbar = ({ searchFilter, handleInput, searchInput, handleLink }) => {
     const axiosCommon = useAxiosCommon();
 
     const dispatch = useDispatch();
-    const { mutateAsync: handelwishlist } = useMutation({
-        mutationFn: async id => {
-            const { data } = await axiosCommon.delete(`/wishlist/${id}`)
-            return data
-        },
-        onSuccess: data => {
-            refetch()
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "wishlist items has been delete",
-                showConfirmButton: false,
-                timer: 1500
-            });
-        },
-    })
+    // const { mutateAsync: handelwishlist } = useMutation({
+    //     mutationFn: async id => {
+    //         const { data } = await axiosCommon.delete(`/wishlist/${id}`)
+    //         return data
+    //     },
+    //     onSuccess: data => {
+    //         refetch()
+    //         Swal.fire({
+    //             position: "top-end",
+    //             icon: "success",
+    //             title: "wishlist items has been delete",
+    //             showConfirmButton: false,
+    //             timer: 1500
+    //         });
+    //     },
+    // })
 
 
     // const { mutateAsync } = useMutation({
@@ -69,24 +69,24 @@ const Searchbar = ({ searchFilter, handleInput, searchInput, handleLink }) => {
     // })
 
 
-    const handlewishlistDelete = async id => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then(async (result) => {
-            if (result.isConfirmed) {
-                // await mutateAsync(id)
-                await handelwishlist(id)
-                refash()
+    // const handlewishlistDelete = async id => {
+    //     Swal.fire({
+    //         title: "Are you sure?",
+    //         text: "You won't be able to revert this!",
+    //         icon: "warning",
+    //         showCancelButton: true,
+    //         confirmButtonColor: "#3085d6",
+    //         cancelButtonColor: "#d33",
+    //         confirmButtonText: "Yes, delete it!"
+    //     }).then(async (result) => {
+    //         if (result.isConfirmed) {
+    //             // await mutateAsync(id)
+    //             await handelwishlist(id)
+    //             refash()
 
-            }
-        });
-    }
+    //         }
+    //     });
+    // }
     const handleDelete = id => {
         Swal.fire({
             title: "Are you sure?",
@@ -276,7 +276,7 @@ const Searchbar = ({ searchFilter, handleInput, searchInput, handleLink }) => {
                         <div className="w-[360px] absolute z-50 top-full right-3 bg-slate-50 border translate-y-6">
                             {carts.length ? <>
                                 {carts.slice(0, 4).map(item =>
-                                    <div key={item._id} className="flex justify-between  gap-2 bg-[#F5F5F3] p-5">
+                                    <div key={item._id} className="flex   gap-2 bg-[#F5F5F3] p-5">
                                         <img src={item.images} alt="" className="bg-[#979797] w-20 h-20" />
 
                                         <div className="my-2">

@@ -2,6 +2,7 @@ import { BiDetail } from "react-icons/bi";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 
 const ManageProductRow = ({item,handleDelete}) => {
@@ -11,7 +12,7 @@ const ManageProductRow = ({item,handleDelete}) => {
                 <p className='text-gray-900 whitespace-no-wrap'>{item.title}</p>
             </td>
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-             <img src={item.image} alt="" className="w-16 h-16" />   
+             <img src={item?.image} alt="" className="w-16 h-16" />   
             </td>
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
                 <p className='text-gray-900 whitespace-no-wrap'>{item.category}</p>
@@ -23,7 +24,7 @@ const ManageProductRow = ({item,handleDelete}) => {
                 <p className='text-gray-900 whitespace-no-wrap'>{item.discount}%</p>
             </td>
             <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-                <p className='text-gray-900 whitespace-no-wrap'>{item.userInfo.name}</p>
+                <p className='text-gray-900 whitespace-no-wrap'>{item?.userInfo?.name}</p>
             </td>
 
 
@@ -44,5 +45,8 @@ const ManageProductRow = ({item,handleDelete}) => {
         </tr>
     );
 };
-
+ManageProductRow.propTypes = {
+    item: PropTypes.object,
+    handleDelete: PropTypes.func,
+}
 export default ManageProductRow;

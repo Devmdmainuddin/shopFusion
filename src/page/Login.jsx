@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Container from "../components/layer/Container";
 import Bredcumb from "../components/layer/Bredcumb";
 import Button02 from "../components/layer/Button02";
@@ -10,6 +10,8 @@ import Swal from "sweetalert2";
 const Login = () => {
     const { signIn, setLoading } = useAuth()
     const navigate = useNavigate()
+    const location = useLocation()
+    const from = location?.state || '/'
     const handleSubmit = async e => {
         e.preventDefault()
         const form = e.target
@@ -19,7 +21,7 @@ const Login = () => {
         try {
             const result = await signIn(email, password)
             // dispatch(loginUser(formData))
-            navigate('/')
+            navigate(from)
             Swal.fire({
                 position: "top-end",
                 icon: "success",

@@ -20,7 +20,7 @@ const initialState = {
 export const checkout = createAsyncThunk('posts/checkout',
     async (formData) => {
         const response = await axios.post(
-          "http://localhost:5000/checkout",
+          "shop-fusion-server-one.vercel.app/checkout",
           formData,
           {
             withCredentials: true,

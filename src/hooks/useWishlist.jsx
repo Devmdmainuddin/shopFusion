@@ -12,10 +12,10 @@ const useWishlist = () => {
         },
       })
    
-      const wishlistTotal = wishlist.reduce((acc,items)=> acc + parseInt(items.price),0)
+      // const wishlistTotal = wishlist.reduce((acc,items)=> acc + parseInt(items.price),0)
       // console.log(wishlistTotal);
    
-      return [wishlist,loading,refash,wishlistTotal]
+      return [wishlist,loading,refash]
 
     // ..............................
 };

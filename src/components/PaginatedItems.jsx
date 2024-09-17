@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import ProductCard from './card/ProductCard'
 import ReactPaginate from 'react-paginate';
-import useProducts from '../hooks/useProducts';
 import PropTypes from 'prop-types';
 import { useGetproductsQuery } from '../services/productApi';
 
@@ -23,7 +22,7 @@ function Items({ currentItems }) {
 }
 
 function PaginatedItems({ itemsPerPage, item }) {
-    // const [products] = useProducts()
+ 
     const { data } = useGetproductsQuery()
     const items = item? item : data;
 
@@ -36,9 +35,6 @@ function PaginatedItems({ itemsPerPage, item }) {
 
     const handlePageClick = (event) => {
         const newOffset = (event.selected * itemsPerPage) % items.length;
-        // console.log(
-        //     `User requested page number ${event.selected}, which is offset ${newOffset}`
-        // );
         setItemOffset(newOffset);
     };
 

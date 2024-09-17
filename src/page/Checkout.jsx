@@ -55,7 +55,7 @@ const Checkout = () => {
             dispatch(checkout(info))
             alert('checkout successfully')
         } catch (err) {
-          
+          console.log(err);
         }
 
 

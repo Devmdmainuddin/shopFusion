@@ -5,16 +5,11 @@ import Bredcumb from '../components/layer/Bredcumb';
 import { IoGrid } from 'react-icons/io5';
 import PaginatedItems from '../components/PaginatedItems';
 import { Link } from 'react-router-dom';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { fetchPosts } from '../redux/posts/postsSlice';
 import { useGetproductsQuery } from '../services/productApi';
 
 
 const Shop = () => {
-    // const dispatch = useDispatch();
     const { data, error, isLoading, } = useGetproductsQuery()
-    // const [item, setitem] = useState(data)
-    // const { posts, isLoading, isError, error } = useSelector((state) => state.posts)
     const [item, setitem] = useState(data)
     const [cetegorey, setCategorey] = useState([])
     const [activeMulti, setActiveMulti] = useState('')
@@ -80,16 +75,6 @@ const Shop = () => {
     if (isLoading) {
         content = <h1>loading............</h1>
     }
-    // if (!isLoading) {
-    //     content = <h1> {error}</h1>
-    // }
-    // if (!isLoading && data?.length === 0) {
-    //     content = <h1>NO POSTS FOUND</h1>
-    // }
-    // if (!isLoading && data?.length > 0) {
-    //     content = <PaginatedItems item={item} itemsPerPage={number}></PaginatedItems>
-    // }
-
     if (!isLoading && error) {
         content = <h1> {error}</h1>
     }

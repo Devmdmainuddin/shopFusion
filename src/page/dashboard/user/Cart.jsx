@@ -1,9 +1,4 @@
 import { FaTrashAlt } from "react-icons/fa";
-// import useCart from "../../hook/useCart";
-// import Swal from "sweetalert2";
-// import useAxiosCommon from "../../hook/useAxiosCommon";
-// import useAxiosPublic from "../../hook/useAxiosPublic";
-import { Link } from "react-router-dom";
 import useCartItems from "../../../hooks/useCartItems";
 import Swal from "sweetalert2";
 import useAxiosCommon from "../../../hooks/useAxiosCommon";

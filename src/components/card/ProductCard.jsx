@@ -22,7 +22,6 @@ const OverlayLi = ({ text, icon, onClick }) => {
 const ProductCard = ({ item }) => {
     const dispatch = useDispatch();
     const { image, _id, title, discount, price, brand } = item;
-    
     const discountp = (parseFloat(price) * parseFloat(discount)) / 100;
     const discountPrice = parseFloat(price) - discountp;
     let [Quantity, setQuantity] = useState(1);

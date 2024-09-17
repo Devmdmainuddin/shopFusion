@@ -8,14 +8,10 @@ import { IoMdClose } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Container from "../layer/Container";
 import MegaMenuLi from "../layer/MegaMenuLi";
-// import Login from "../../page/Login";
 import useAuth from "../../hooks/useAuth";
-import useCartItems from "../../hooks/useCartItems";
 import Swal from "sweetalert2";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
-import { useMutation } from "@tanstack/react-query";
 import useWishlist from "../../hooks/useWishlist";
-import useProducts from "../../hooks/useProducts";
 import { useDispatch, useSelector } from "react-redux";
 import { changeQuantity, deleteItem } from "../../redux/state/cartSlice";
 import PropTypes from 'prop-types';
@@ -30,7 +26,6 @@ const Searchbar = ({ searchFilter, handleInput, searchInput, handleLink }) => {
     const [wishlistOpen, setWishListOpen] = useState(false);
     const [cartOpen, setCartOpen] = useState(false);
     let [totalPrice, setTotalPrice] = useState(0);
-    const axiosCommon = useAxiosCommon();
 
     const dispatch = useDispatch();
     // const { mutateAsync: handelwishlist } = useMutation({

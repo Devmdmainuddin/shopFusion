@@ -58,7 +58,7 @@ const EdditProductCard = () => {
 
         try {
             await updateProduct({id:product?._id, updateProduct:info})
-            console.log(productid,info);
+            
             Swal.fire({
                 position: "top-end",
                 icon: "success",

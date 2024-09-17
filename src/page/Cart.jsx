@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react';
+
 import Container from '../components/layer/Container';
 import Bredcumb from '../components/layer/Bredcumb';
 import { FaMinus, FaPlus, FaTrashAlt } from 'react-icons/fa';
 import Button01 from '../components/layer/Button01';
 import { useDispatch, useSelector } from "react-redux";
-import { changeQuantity, deleteItem, removeProduct } from '../redux/state/cartSlice';
+import { changeQuantity, deleteItem,  } from '../redux/state/cartSlice';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const Cart = () => {
-    // let [totalPrice, setTotalPrice] = useState(0);
+
     const carts = useSelector((state) => state.cart.cartItem)
     const dispatch = useDispatch();
-
     const handleDelete = id => {
         Swal.fire({
             title: "Are you sure?",
@@ -25,11 +24,6 @@ const Cart = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 dispatch(deleteItem(id));
-        // await mutateAsync(id)
-        // await mutateAsync(id)
-        // refash()
-        // refetch()
-
             }
         });
 

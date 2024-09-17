@@ -1,16 +1,11 @@
 import { Helmet } from 'react-helmet-async'
  import useAxiosSecure from '../../../hooks/useAxiosSecure'
-// import useAuth from '../../../hooks/useAuth'
-// import UserDataRow from '../../../components/Dashboard/Rows/UserDataRow'
-// import LoadingSpinner from '../../../components/Shared/LoadingSpinner'
 import {  useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import UserDataRow from '../../../components/row/UserDataRow'
-// import { useQuery } from '@tanstack/react-query'
-// import useAuth from '../../../hooks/useAuth'
+
 
 const ManageUsers = () => {
-//   const { loading } = useAuth()
   const [filter, setFilter] = useState('')
   const [sort, setSort] = useState('')
 

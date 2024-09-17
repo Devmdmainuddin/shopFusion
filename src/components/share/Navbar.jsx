@@ -23,7 +23,6 @@ const Navbar = () => {
 
     const dispatch = useDispatch();
     const { data, error, isLoading, } = useGetproductsQuery()
-    // const { posts } = useSelector((state) => state.posts)
     const handleInput = (e) => {
         setSearchInput(e.target.value)
         if (e.target.value === "") {
@@ -60,8 +59,6 @@ const Navbar = () => {
         document.addEventListener("mousemove", function (e) {
             cursor.style.cssText = cursor2.style.cssText = "left: " + e.clientX + "px; top: " + e.clientY + "px;";
         });
-
-
     }, [])
 
     return (

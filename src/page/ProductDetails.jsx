@@ -1,41 +1,28 @@
-// import { IoIosArrowForward } from "react-icons/io";
+
 import Container from "../components/layer/Container";
-import { Link, useLoaderData } from "react-router-dom";
-import { FaMinus, FaPlus, FaStar } from "react-icons/fa";
-// import { ImStarHalf } from "react-icons/im";
-// import { useEffect, useState } from "react";
+import {  useLoaderData } from "react-router-dom";
+import { FaMinus, FaPlus, } from "react-icons/fa";
 import Heading from "../components/layer/Heading";
-import useProduct from "../hooks/useProduct";
 import ProductCard from "../components/card/ProductCard";
-// import useComment from "../hooks/useComment";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
-// import useAxiosSecure from "../hooks/useAxiosSecure";
-// import { useMutation } from "@tanstack/react-query";
-// import { imageUpload } from "../utils";
 import { Rating } from '@smastrom/react-rating'
 import '@smastrom/react-rating/style.css'
-// import useAxiosCommon from "../hooks/useAxiosCommon";
-// import useWishlist from "../hooks/useWishlist";
-// import useCartItems from "../hooks/useCartItems";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Bredcumb from "../components/layer/Bredcumb";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { addToCart, } from '../redux/state/cartSlice';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAddReviewMutation} from "../services/reviewApi";
 import { useGetproductsQuery } from "../services/productApi";
-import LoadingSpinner from "../components/share/LoadingSpinner";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../hooks/useAxiosCommon";
-// import { useGetproductsQuery } from "../services/productApi";
 
 
 const ProductDetails = () => {
     const { user } = useAuth() || {}
     const [addReviews] = useAddReviewMutation()
     const { data } = useGetproductsQuery()
-    // const { data: review } = useGetReviewsQuery()
     const dispatch = useDispatch();
     const products = useLoaderData();
     const axiosCommon = useAxiosCommon()
@@ -47,7 +34,7 @@ const ProductDetails = () => {
     const discountp = (parseInt(products?.price) * parseInt(products?.discount)) / 100
     const discountPrice = parseInt(products?.price) - discountp
 
-    const { data: reviewProducts = [], isPending: loading, refetch } = useQuery({
+    const { data: reviewProducts = [], refetch } = useQuery({
         queryKey: ['review'],
         queryFn: async () => {
             const { data } = await axiosCommon.get(`/reviews/${products._id}`)
@@ -129,9 +116,7 @@ const ProductDetails = () => {
         const userEmail = user?.email;
         const userImage = user?.photoURL;
         const currentTime = (new Date()).toDateString();
-
         const info = { name, email, review, rating, productId, productTitle, userName, userEmail, userImage, currentTime };
-        console.log(info);
         try {
             await addReviews(info)
             Swal.fire({
@@ -178,29 +163,6 @@ const ProductDetails = () => {
         }
 
 
-        // const cartItem = {
-        //     produdctId: item._id,
-        //     title: item.title,
-        //     image: item.image,
-        //     price: item.price,
-        //     discount: item.discount,
-        //     email: user.email,
-        //     itemQuantity: Quantity,
-        // }
-
-        // try {
-        //     await submitData(cartItem)
-        //     refash()
-        // }
-        // catch (err) {
-        //     Swal.fire({
-        //         position: "top-end",
-        //         icon: "error",
-        //         title: " product  cart not add  ",
-        //         showConfirmButton: false,
-        //         timer: 1500
-        //     });
-        // }
     }
     return (
         <div >

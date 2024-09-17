@@ -4,8 +4,7 @@ import Container from "./layer/Container";
 import Heading from "./layer/Heading";
 import Slider from "react-slick";
 import LoadingSpinner from "./share/LoadingSpinner";
-import useProducts from "../hooks/useProducts";
-import { useDeleteProductMutation, useGetproductsQuery } from "../services/productApi";
+import {  useGetproductsQuery } from "../services/productApi";
 
 
 

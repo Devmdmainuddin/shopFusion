@@ -196,19 +196,19 @@ const Searchbar = ({ searchFilter, handleInput, searchInput, handleLink }) => {
                 <div className='relative w-full lg:w-[600px] ml-5 hover:shadow-mainudin'>
                     <input type="text" value={searchInput} onChange={handleInput} placeholder='Search Products' className='lg:w-[601px] w-full lg:py-4 py-1 px-5 bg-white outline-none' />
                     <FaSearch className='absolute right-1 lg:right-5 top-1/2 translate-y-[-50%]' />
-                    {searchFilter.length>0 && 
-                     <div className='absolute w-full max-h-[350px] top-full z-50  overflow-y-scroll' >
-                     {searchFilter.map((item, key) =>
-                         <div onClick={() => handleLink(item.id)} key={key} className="  flex justify-between  gap-2 bg-[#F5F5F3] p-5">
-                             <img src={item.images} alt="" className="bg-[#979797] w-20 h-20" />
-                             <div><h2>{item.title}</h2>
-                             </div>
+                    {searchFilter.length > 0 &&
+                        <div className='absolute w-full max-h-[350px] top-full z-50  overflow-y-scroll' >
+                            {searchFilter.map((item, key) =>
+                                <div onClick={() => handleLink(item.id)} key={key} className="  flex justify-between  gap-2 bg-[#F5F5F3] p-5">
+                                    <img src={item.images} alt="" className="bg-[#979797] w-20 h-20" />
+                                    <div><h2>{item.title}</h2>
+                                    </div>
 
 
-                         </div>
-                     )}
-                 </div>}
-                   
+                                </div>
+                            )}
+                        </div>}
+
 
 
 
@@ -273,40 +273,43 @@ const Searchbar = ({ searchFilter, handleInput, searchInput, handleLink }) => {
                     <button onClick={() => setCartOpen(!cartOpen)} className=""><FaCartShopping className="text-xl hover:text-red-500 transition-all duration-500 " /> {carts.length > 0 ? <span className="text-red-500 bg-white w-9 h-9 border p-2 rounded-full text-center absolute -top-3 ">{carts.length}</span> : ''}</button>
 
                     {cartOpen && (
-                        <div className="w-[360px] absolute z-50 top-full right-3 bg-slate-50 border translate-y-6">
-                            {carts.length ? <>
-                                {carts.slice(0, 4).map(item =>
-                                    <div key={item._id} className="flex   gap-2 bg-[#F5F5F3] p-5">
-                                        <img src={item.images} alt="" className="bg-[#979797] w-20 h-20" />
+                        <div className="block w-[360px]  absolute z-50 top-full right-3 bg-slate-50 border translate-y-6">
+                            <div className="w-full h-[320px] overflow-y-scroll">
+                                {carts.length ? <>
+                                    {carts.slice(0, 4).map(item =>
+                                        <div key={item._id} className="flex   gap-2 bg-[#F5F5F3] py-2 px-5">
+                                            <img src={item.image} alt="" className="bg-[#979797] w-20 h-20" />
 
-                                        <div className="my-2">
-                                            {/* <h2>Black Smart Watch</h2> */}
-                                            <h2>{item.title}</h2>
-                                            <div className="flex justify-between items-center">
-                                                <div className="w-[100px]   border border-[#353535] text-[#767676] flex justify-between items-center p-1">
-                                                    <span
-                                                        className="cursor-pointer inline-block   text-sm font-normal "
-                                                        onClick={() => handkeMinusQuantity(item, item.qun)}
-                                                    >
-                                                        <FaMinus />
-                                                    </span>
-                                                    <span className="inline-block px-2 text-sm font-normal">{item.qun}</span>
-                                                    <span
-                                                        className="cursor-pointer inline-block  text-sm "
-                                                        onClick={() => handkePlusQuantity(item, item.qun)}
-                                                    >
-                                                        <FaPlus />
-                                                    </span>
+                                            <div className="my-2">
+                                                {/* <h2>Black Smart Watch</h2> */}
+                                                <h2>{item.title}</h2>
+                                                <div className="flex justify-between items-center">
+                                                    <div className="w-[100px]   border border-[#353535] text-[#767676] flex justify-between items-center p-1">
+                                                        <span
+                                                            className="cursor-pointer inline-block   text-sm font-normal "
+                                                            onClick={() => handkeMinusQuantity(item, item.qun)}
+                                                        >
+                                                            <FaMinus />
+                                                        </span>
+                                                        <span className="inline-block px-2 text-sm font-normal">{item.qun}</span>
+                                                        <span
+                                                            className="cursor-pointer inline-block  text-sm "
+                                                            onClick={() => handkePlusQuantity(item, item.qun)}
+                                                        >
+                                                            <FaPlus />
+                                                        </span>
+                                                    </div>
+                                                    <button onClick={() => handleDelete(item._id)}><IoMdClose /></button>
                                                 </div>
-                                                <button onClick={() => handleDelete(item.id)}><IoMdClose /></button>
+
+                                                <p>${item.price * item.qun}</p>
                                             </div>
 
-                                            <p>${item.price * item.qun}</p>
-                                        </div>
+                                        </div>)}
+                                </> :
+                                    <h2 className='my-6 text-center'>Cart is Empty</h2>}
+                            </div>
 
-                                    </div>)}
-                            </> :
-                                <h2 className='my-6 text-center'>Cart is Empty</h2>}
 
 
 
@@ -341,6 +344,6 @@ Searchbar.propTypes = {
     handleInput: PropTypes.func,
     handleLink: PropTypes.func,
     searchInput: PropTypes.string, // updated to node
-    
+
 }
 export default Searchbar;

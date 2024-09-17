@@ -1,53 +1,52 @@
 
 import { createSlice } from "@reduxjs/toolkit";
-import useAxiosCommon from "../../hooks/useAxiosCommon";
-import Swal from "sweetalert2";
+
+
+
 
 export const cartslice = createSlice({
-   
-   
-  
 
     name: "cart",
     initialState: {
         cartItem: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [],
+
     },
     reducers: {
-        addToCart(state,action) {
+        addToCart(state, action) {
 
-            let findProduct = state.cartItem.findIndex((item) => item.id == action.payload.id)
-            if(findProduct !== -1){
-            state.cartItem[findProduct].qun += action.payload.qun?action.payload.qun:1;
-            localStorage.setItem("cart", JSON.stringify(state.cartItem));
-            }else {
-            state.cartItem=[...state.cartItem, action.payload]
-            localStorage.setItem("cart", JSON.stringify(state.cartItem));
+            let findProduct = state.cartItem.findIndex((item) => item._id == action.payload._id)
+            if (findProduct !== -1) {
+                state.cartItem[findProduct].qun += action.payload.qun ? action.payload.qun : 1;
+                localStorage.setItem("cart", JSON.stringify(state.cartItem));
+            } else {
+                state.cartItem = [...state.cartItem, action.payload]
+                localStorage.setItem("cart", JSON.stringify(state.cartItem));
 
             }
-            
+
         },
         deleteItem: (state, action) => {
-            state.cartItem = state.cartItem.filter(item => item.id !== action.payload);
+            state.cartItem = state.cartItem.filter(item => item._id !== action.payload);
             localStorage.setItem("cart", JSON.stringify(state.cartItem));
-          },
-          removeProduct:(state,action)=>{
-            state.cartItem.splice(action.payload,1)
+        },
+        removeProduct: (state, action) => {
+            state.cartItem.splice(action.payload, 1)
             localStorage.setItem("cart", JSON.stringify(state.cartItem));
-          },
+        },
         changeQuantity(state, action) {
-            const {  qun } = action.payload;
-            const indexProctId = state.cartItem.findIndex((item) => item.id == action.payload.id)
+            const { qun } = action.payload;
+            const indexProctId = state.cartItem.findIndex((item) => item._id == action.payload._id)
             if (qun > 0) {
                 state.cartItem[indexProctId].qun = qun;
             } else {
-                state.cartItem = state.cartItem.filter(item => item.id !== action.payload.id);
+                state.cartItem = state.cartItem.filter(item => item._id !== action.payload._id);
                 // delete state.items[indexProctId]
             }
             localStorage.setItem("cart", JSON.stringify(state.cartItem));
         },
         // produceDecement:(state,action)=>{
         //     if(state.cartItem[action.payload].qun>1)
-            
+
         // }
 
 
@@ -64,5 +63,5 @@ export const cartslice = createSlice({
     }
 })
 
-export const { addToCart,deleteItem ,removeProduct, changeQuantity } = cartslice.actions
+export const { addToCart, deleteItem, removeProduct, changeQuantity } = cartslice.actions
 export default cartslice.reducer;

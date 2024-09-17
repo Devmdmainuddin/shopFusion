@@ -82,7 +82,7 @@ const router = createBrowserRouter([
       {
         path: "/product/:id",
         element:<ProductDetails /> ,
-        loader: ({ params }) => fetch(`https://dummyjson.com/products/${params.id}`)
+        loader: ({ params }) => fetch(`https://shop-fusion-server-one.vercel.app/product/${params.id}`)
       },
       // {
       //   path: "/chackout/:id",

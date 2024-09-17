@@ -4,11 +4,6 @@ import axios from "axios";
 
 
 //  checkout info save
-
-
-
-
-
 const initialState = {
     posts: [],
     isLoading: false,

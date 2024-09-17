@@ -10,6 +10,7 @@ import { IoMdClose } from "react-icons/io";
 import Searchbar from './Searchbar'
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useGetproductsQuery } from "../../services/productApi";
 
 const Navbar = () => {
     const [proOpen, setProOpen] = useState(false);
@@ -21,13 +22,14 @@ const Navbar = () => {
     const navigate = useNavigate()
 
     const dispatch = useDispatch();
-    const { posts } = useSelector((state) => state.posts)
+    const { data, error, isLoading, } = useGetproductsQuery()
+    // const { posts } = useSelector((state) => state.posts)
     const handleInput = (e) => {
         setSearchInput(e.target.value)
         if (e.target.value === "") {
             setSearchFilter([])
         } else {
-            const searchOne = posts.filter(item => item.title.toLowerCase().includes(e.target.value.toLowerCase()))
+            const searchOne = data?.filter(item => item.title.toLowerCase().includes(e.target.value.toLowerCase()))
             setSearchFilter(searchOne)
         }
     }

@@ -36,15 +36,12 @@ function SamplePrevArrow(props) {
 
 const Arrivals = () => {
 
-  const [products, loading] = useProducts()
   const { data, error, isLoading, } = useGetproductsQuery()
-  const [deleteProduct] = useDeleteProductMutation()
-  const handleDelete=async(id)=>{
-   await deleteProduct(id)
-
-  }
-  // const [product,loading] =useProduct()
-
+  // const [deleteProduct] = useDeleteProductMutation()
+  // const handleDelete=async(id)=>{
+  //  await deleteProduct(id)
+  // }
+ 
   var settings = {
     infinite: true,
     slidesToShow: 4,
@@ -83,8 +80,8 @@ const Arrivals = () => {
 
 
   };
-  
-  if (loading) return <LoadingSpinner />
+
+
   return (
     <div className="my-36">
       <Container>
@@ -93,25 +90,12 @@ const Arrivals = () => {
 
       <div className="max-w-[1640px] mx-auto">
         <Slider {...settings}>
-          {
-            products.map((item, key) => <ProductCard key={key} item={item}   ></ProductCard>)
-          }
+          {isLoading && <LoadingSpinner />}
+          {error && <p>error:{error.message}</p>}
+          {!isLoading && !error && data && data.length > 0 && (
+            data.map((item, key) => <ProductCard key={key} item={item}   ></ProductCard>)
+          )}
         </Slider>
-        {/* server data show */}
-        {isLoading && <LoadingSpinner />}
-        {error && <p>error:{error.message}</p>}
-        {!isLoading && !error && data && data.length > 0 && (
-          <section>
-            {data.map((item, key) => <article key={key}>
-              <h2 >{item.title} </h2>
-              {/* <span>{item.id}</span> */}
-              <button onClick={()=>handleDelete(item._id)}>delete</button>
-            </article>)}
-          </section>
-
-        )}
-
-
       </div>
 
 

@@ -11,6 +11,7 @@ const useProducts = () => {
       // return data
       const { data } = await axios.get(`https://dummyjson.com/products`)
       return data.products
+      
     },
   })
 

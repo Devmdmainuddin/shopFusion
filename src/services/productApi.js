@@ -5,6 +5,7 @@ export const productApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: `${import.meta.env.VITE_API_URL}` }),
     tagTypes: ['product'],
     endpoints: (builder) => ({
+        // get product
         getproducts: builder.query({
             query: () => `/products`,
             providesTags: (result) =>
@@ -15,6 +16,7 @@ export const productApi = createApi({
                       ]
                     : [{ type: 'product', id: 'LIST' }],
         }),
+        // delete product
         deleteProduct: builder.mutation({
             query: (id) => ({
                 url: `/product/${id}`,
@@ -25,6 +27,7 @@ export const productApi = createApi({
                 { type: 'product', id: 'LIST' }, 
             ],
         }),
+        // add product
         addProduct: builder.mutation({
             query: (body) => ({
                 url: `/product/`,
@@ -33,6 +36,7 @@ export const productApi = createApi({
             }),
             invalidatesTags:  [{ type: 'product', id: 'LIST' },] 
         }),
+        // update product
         updateProduct: builder.mutation({
             query: ({id,updateProduct}) => ({
                 url: `/updateproducts/${id}`,
@@ -41,7 +45,7 @@ export const productApi = createApi({
             }),
             invalidatesTags: (result, error, id) => [
                 { type: 'product', id },
-                { type: 'product', id: 'LIST' }, 
+                { type: 'product', id: 'LIST' },  
             ], 
         }),
 

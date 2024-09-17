@@ -32,7 +32,7 @@ const ManageProductRow = ({item,handleDelete}) => {
                 
                 {/* Update User Modal */}
                 {/* <UpdateUserModal isOpen={isOpen} setIsOpen={setIsOpen} modalHandler={modalHandler} user={user}></UpdateUserModal> */}
-                <Link to={`/product/${item._id}`} className='cursor-pointer inline-block px-3 py-1 bg-green-200  rounded-full font-semibold text-red-900 leading-tight'>
+                <Link to={`/product/${item?._id}`} className='cursor-pointer inline-block px-3 py-1 bg-green-200  rounded-full font-semibold text-red-900 leading-tight'>
                 <BiDetail />
                 </Link>
                 <Link to={`/dashboard/edditProduct/${item._id} `} className='cursor-pointer inline-block px-3 py-1 bg-green-300   rounded-full font-semibold text-red-900 leading-tight'>

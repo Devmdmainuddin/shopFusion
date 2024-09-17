@@ -5,14 +5,17 @@ import Bredcumb from '../components/layer/Bredcumb';
 import { IoGrid } from 'react-icons/io5';
 import PaginatedItems from '../components/PaginatedItems';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts } from '../redux/posts/postsSlice';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { fetchPosts } from '../redux/posts/postsSlice';
+import { useGetproductsQuery } from '../services/productApi';
 
 
 const Shop = () => {
-    const dispatch = useDispatch();
-    const { posts, isLoading, isError, error } = useSelector((state) => state.posts)
-    const [item, setitem] = useState(posts)
+    // const dispatch = useDispatch();
+    const { data, error, isLoading, } = useGetproductsQuery()
+    // const [item, setitem] = useState(data)
+    // const { posts, isLoading, isError, error } = useSelector((state) => state.posts)
+    const [item, setitem] = useState(data)
     const [cetegorey, setCategorey] = useState([])
     const [activeMulti, setActiveMulti] = useState('')
     const [brand, setBrand] = useState([])
@@ -24,29 +27,29 @@ const Shop = () => {
 
 
     useEffect(() => {
-        setCategorey([... new Set(posts.map(item => item.category))])
-        setBrand([... new Set(posts.map(item => item.brand))])
-    }, [posts])
+        setCategorey([... new Set(data?.map(item => item.category))])
+        setBrand([... new Set(data?.map(item => item.brand))])
+    }, [data])
     const handleByNew = () => {
-        const sortedByNew = [...posts]?.sort((a, b) => new Date(b.meta.createdAt) - new Date(a.meta.createdAt));
+        const sortedByNew = [...data]?.sort((a, b) => new Date(b.meta.createdAt) - new Date(a.meta.createdAt));
         setitem(sortedByNew);
     };
 
     const handleByOld = () => {
-        const sortedByOld = [...posts]?.sort((a, b) => new Date(a.meta.createdAt) - new Date(b.meta.createdAt));
+        const sortedByOld = [...data]?.sort((a, b) => new Date(a.meta.createdAt) - new Date(b.meta.createdAt));
         setitem(sortedByOld);
     };
 
     const handlefilter = filter => {
-        const filterItem = posts.filter(items => items.category === filter);
+        const filterItem = data?.filter(items => items.category === filter);
         setitem(filterItem);
     }
     const handlebrandfilter = filter => {
-        const filterItem = posts.filter(items => items.brand === filter);
+        const filterItem = data?.filter(items => items.brand === filter);
         setitem(filterItem);
     }
     const handlePricefilter = value => {
-        const filterItem = posts.filter(items => items.price > value.low && items.price < value.high);
+        const filterItem = data?.filter(items => items.price > value.low && items.price < value.high);
         if (filterItem.length > 0) {
             setitem(filterItem);
         } else {
@@ -57,7 +60,7 @@ const Shop = () => {
 
 
     const handleAllProduct = () => {
-        setitem(posts)
+        setitem(data)
     }
     const selectNumber = (element) => {
         let numberConverter = Number(element.target.value)
@@ -69,26 +72,32 @@ const Shop = () => {
     }
 
     // if (loading ) return <p>loadding.................</p>
-    useEffect(() => {
-        dispatch(fetchPosts())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(fetchPosts())
+    // }, [dispatch])
 
     let content;
     if (isLoading) {
         content = <h1>loading............</h1>
     }
-    if (!isLoading && isError) {
+    // if (!isLoading) {
+    //     content = <h1> {error}</h1>
+    // }
+    // if (!isLoading && data?.length === 0) {
+    //     content = <h1>NO POSTS FOUND</h1>
+    // }
+    // if (!isLoading && data?.length > 0) {
+    //     content = <PaginatedItems item={item} itemsPerPage={number}></PaginatedItems>
+    // }
+
+    if (!isLoading && error) {
         content = <h1> {error}</h1>
     }
-    if (!isLoading && !isError && posts.length === 0) {
+    if (!isLoading && !error && data.length === 0) {
         content = <h1>NO POSTS FOUND</h1>
     }
-    if (!isLoading && !isError && posts.length > 0) {
-
-
+    if (!isLoading && !error && data.length > 0) {
         content = <PaginatedItems item={item} itemsPerPage={number}></PaginatedItems>
-
-
     }
 
     return (
@@ -253,7 +262,7 @@ const Shop = () => {
                         </div>
 
                         <div className={`${activeMulti == "active" ? '' : 'flex flex-wrap justify-between gap-16'} mt-[60px]`}>
-                            {item ? content : <p>no product</p>}
+                            {data ? content : <p>no product</p>}
                         </div>
 
 

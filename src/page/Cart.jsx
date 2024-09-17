@@ -103,7 +103,8 @@ const Cart = () => {
                                                     </span>
                                                 </div>
                                             </td>
-                                            <td>${(item.price * item.qun).toFixed(2)}</td>
+                                            {/* .toFixed(2) */}
+                                            <td>${((item.price).toFixed(2) * item.qun)}</td>
                                             <th>
                                                 <button
                                                     onClick={() => handleDelete(item.id)}

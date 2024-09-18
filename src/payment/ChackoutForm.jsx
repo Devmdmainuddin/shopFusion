@@ -6,9 +6,11 @@ import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { deleteCheckout } from "../redux/posts/postsSlice";
 import { clearCart } from "../redux/state/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 const ChackoutForm = ({total,id}) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const [error, setError] = useState()
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState('');
@@ -95,6 +97,7 @@ const ChackoutForm = ({total,id}) => {
         if (res.data?.result?.insertedId) {
           dispatch(deleteCheckout(id));
           dispatch(clearCart());
+          navigate(`/`)
           Swal.fire({
             position: "top-end",
             icon: "success",

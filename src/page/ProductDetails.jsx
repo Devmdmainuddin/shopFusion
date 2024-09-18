@@ -17,6 +17,7 @@ import { useAddReviewMutation} from "../services/reviewApi";
 import { useGetproductsQuery } from "../services/productApi";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../hooks/useAxiosCommon";
+import userimg from '/use.png'
 
 
 const ProductDetails = () => {
@@ -301,7 +302,7 @@ const ProductDetails = () => {
 
                                                 <div className="  border-t  my-10" >
                                                     <div className="flex justify-between py-6">
-                                                        <div className="flex gap-2 items-center"><img src={items.userImage} alt="" className="w-12 h-12 rounded-full " /> <h2>{items.userName}</h2></div>
+                                                        <div className="flex gap-2 items-center"><img src={items.userImage?items.userImage:userimg} alt="" className="w-12 h-12 rounded-full " /> <h2>{items.userName}</h2></div>
                                                        
                                                         <span><Rating
                                                             style={{ maxWidth: 120 }}

@@ -1,18 +1,18 @@
-// import { Input } from "postcss";
+
 import Bredcumb from "../components/layer/Bredcumb";
 import Container from "../components/layer/Container";
 import Heading from "../components/layer/Heading";
-// import Button02 from "../components/layer/Button02";
-import Button01 from "../components/layer/Button01";
 import { useDispatch, useSelector } from "react-redux";
 import { checkout } from "../redux/posts/postsSlice";
 import useUser from "../hooks/useUser";
 import useAuth from "../hooks/useAuth";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Checkout = () => {
     const [users] = useUser()
     const { user } = useAuth()
+    const navigate = useNavigate()
     // console.log(user.length);
     const mainuser = users?.find(u => u.email === user?.email);
     // console.log(mainuser?.email);
@@ -50,12 +50,16 @@ const Checkout = () => {
             productQuntity: totalQuntity,
             productPrice: totalprice + 100,
         }
-       
+
         try {
             dispatch(checkout(info))
-            alert('checkout successfully')
+                .unwrap()
+                .then((res) => console.log("Checkout success:", res))
+                .catch((err) => console.log("Checkout failed:", err));
+                navigate(`/payment`)
+
         } catch (err) {
-          console.log(err);
+            console.log(err);
         }
 
 
@@ -253,16 +257,19 @@ const Checkout = () => {
 
                             </div>
                         </div>
-                        <button
+                      
+                            <button
+                              
+                                type='submit'
+                                className=' mt-7 py-4 px-10 border border-[#262626] bg-[#262626] text-white hover:text-[#262626] hover:border-[#262626] hover:bg-transparent transition-all duration-500 ease-in-out '
+                            >
+                                Proceed to payment
+                            </button>
+                        
 
-                            type='submit'
-                            className=' mt-7 py-4 px-10 border border-[#262626] bg-[#262626] text-white hover:text-[#262626] hover:border-[#262626] hover:bg-transparent transition-all duration-500 ease-in-out '
-                        >
-                            Proceed to payment
-                        </button>
                     </form>
 
-                   
+
 
                 </div>
             </Container>

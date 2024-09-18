@@ -44,6 +44,12 @@ export const cartslice = createSlice({
             }
             localStorage.setItem("cart", JSON.stringify(state.cartItem));
         },
+        // Clear all items in the cart
+        clearCart(state) {
+            state.cartItem = [];
+            localStorage.setItem("cart", JSON.stringify(state.cartItem));
+        }
+
         // produceDecement:(state,action)=>{
         //     if(state.cartItem[action.payload].qun>1)
 
@@ -63,5 +69,5 @@ export const cartslice = createSlice({
     }
 })
 
-export const { addToCart, deleteItem, removeProduct, changeQuantity } = cartslice.actions
+export const { addToCart, deleteItem, removeProduct, changeQuantity,clearCart  } = cartslice.actions
 export default cartslice.reducer;

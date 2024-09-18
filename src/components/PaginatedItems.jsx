@@ -12,8 +12,8 @@ function Items({ currentItems }) {
     return (
         <>
             {currentItems &&
-                currentItems.map((item) => (
-                    <div key={item.id}>
+                currentItems.map((item,key) => (
+                    <div key={key}>
                         <ProductCard item={item}></ProductCard>
                     </div>
                 ))}

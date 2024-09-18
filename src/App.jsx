@@ -27,6 +27,8 @@ import Cart from './page/Cart'
 import Checkout from './page/Checkout';
 import ErrorPage from './page/ErrorPage';
 import PrivateRoute from './routes/PrivateRoute';
+import Payment from './payment/Payment';
+import AdminHome from './page/dashboard/Admin/AdminHome';
 
 const router = createBrowserRouter([
   {
@@ -78,6 +80,11 @@ const router = createBrowserRouter([
         path: "/checkout",
         element: <PrivateRoute> <Checkout/></PrivateRoute>
       },
+      {
+        path: "/payment",
+        element: <PrivateRoute> <Payment/></PrivateRoute>
+      },
+
 
       {
         path: "/product/:id",
@@ -96,6 +103,10 @@ const router = createBrowserRouter([
     // element: <DashboardLayout></DashboardLayout>,
     element: <Dashboard/>,
     children:[
+      {
+        path: "/dashboard/",
+        element: <AdminHome/>,
+      },
       {
         path: "/dashboard/addProduct",
         element: <AddProducts/>,

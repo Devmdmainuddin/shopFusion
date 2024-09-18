@@ -194,8 +194,8 @@ const Searchbar = ({ searchFilter, handleInput, searchInput, handleLink }) => {
                     {searchFilter.length > 0 &&
                         <div className='absolute w-full max-h-[350px] top-full z-50  overflow-y-scroll' >
                             {searchFilter.map((item, key) =>
-                                <div onClick={() => handleLink(item.id)} key={key} className="  flex justify-between  gap-2 bg-[#F5F5F3] p-5">
-                                    <img src={item.images} alt="" className="bg-[#979797] w-20 h-20" />
+                                <div onClick={() => handleLink(item._id)} key={key} className=" cursor-pointer flex justify-between  gap-2 bg-[#F5F5F3] p-5">
+                                    <img src={item.image} alt="" className="bg-[#979797] w-20 h-20" />
                                     <div><h2>{item.title}</h2>
                                     </div>
 

@@ -26,8 +26,12 @@ const Dashboard = () => {
 
             <div className={`sidebar-menu overflow-hidden fixed left-0 top-0  ${show ? 'w-12' : 'w-64'} h-full text-gray-600 bg-gray-100  z-50 transition-all duration-500 `}>
                 <Link to={'/'} className="flex items-center py-2 px-6 border-b ">
-                    <img src="#" alt="" className=" rounded object-cover" />
-                    <span className="text-lg font-bold  ml-3">Logo</span>
+                <div className="logo">
+                        {/* <Image src='../../../public/logo.png' alt="logo image" className="absolute left-6 top-1/2 -translate-y-1/2" ></Image> */}
+                        <img src='/logo.png' alt="" className="w-[18px] h-[18px] rounded object-cover"  />
+                    </div>
+                    {/* <img src="#" alt="" className=" rounded object-cover" /> */}
+                    {/* <span className="text-lg font-bold  ml-3">Logo</span> */}
                 </Link>
 
                 <ul className="mt-4">

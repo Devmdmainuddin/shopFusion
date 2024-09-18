@@ -8,17 +8,21 @@ const initialState = {
 };
 export const registerUser = createAsyncThunk(
     "user",
-
-    async (formData) => {
-        const response = await axios.put(
-            "shop-fusion-server-one.vercel.app/user",
-            formData,
-            {
-                withCredentials: true,
-            }
-        );
-
-        return response.data;
+    async (formData, { rejectWithValue }) => {
+        try {
+            const response = await axios.put(
+                "https://shop-fusion-server-one.vercel.app/user", 
+                formData,
+                {
+                    withCredentials: true,
+                }
+            );
+            return response.data;
+        } catch (error) {
+            // Log the error to see what's happening
+            console.error("Error during registration:", error);
+            return rejectWithValue(error.response.data);
+        }
     }
 );
 export const loginUser = createAsyncThunk(

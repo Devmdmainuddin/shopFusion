@@ -50,8 +50,7 @@ export const getCheckout = createAsyncThunk(
       }
     }
   );
-//   <a href="https://ibb.co.com/VHBY9Nx"><img src="https://i.ibb.co.com/B4s23PG/19-23fa6f2c-04d4-4c97-a102-80171c95556c-grande-1-1.jpg" alt="19-23fa6f2c-04d4-4c97-a102-80171c95556c-grande-1-1" border="0"></a>
-// delete checkout
+
 export const deleteCheckout = createAsyncThunk(
     'posts/deleteCheckout',
     async (_, { rejectWithValue }) => {

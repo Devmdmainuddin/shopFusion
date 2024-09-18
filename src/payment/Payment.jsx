@@ -10,10 +10,7 @@ const Payment = () => {
     const { user } = useAuth()
     const dispatch = useDispatch();
     const { selectedCheckout, isLoading, error } = useSelector((state) => state.posts);
-    // console.log(selectedCheckout);
-    // useEffect(() => {
-    //     dispatch(getCheckout(user?.email));
-    // }, [dispatch,user?.email]);
+
     useEffect(() => {
         if (user && user.email) {
             dispatch(getCheckout(user.email));

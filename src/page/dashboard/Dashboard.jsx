@@ -28,7 +28,7 @@ const Dashboard = () => {
                 <Link to={'/'} className="flex items-center py-2 px-6 border-b ">
                 <div className="logo">
                         {/* <Image src='../../../public/logo.png' alt="logo image" className="absolute left-6 top-1/2 -translate-y-1/2" ></Image> */}
-                        <img src='/logo.png' alt="" className="w-[18px] h-[18px] rounded object-cover"  />
+                        <img src='/logo.png' alt="" className="w-[40px] h-[40px] rounded object-contain"  />
                     </div>
                     {/* <img src="#" alt="" className=" rounded object-cover" /> */}
                     {/* <span className="text-lg font-bold  ml-3">Logo</span> */}

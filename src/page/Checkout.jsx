@@ -7,17 +7,26 @@ import { checkout } from "../redux/posts/postsSlice";
 import useUser from "../hooks/useUser";
 import useAuth from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 
 const Checkout = () => {
     const [users] = useUser()
     const { user } = useAuth()
     const navigate = useNavigate()
-    // console.log(user.length);
+    const [cartIds,setCartIds]=useState([])
+
     const mainuser = users?.find(u => u.email === user?.email);
-    // console.log(mainuser?.email);
-    // console.log(mainuser?.address02);
+
     const carts = useSelector((state) => state.cart.cartItem)
+    useEffect(() => {
+        if (carts && carts.length > 0) {
+          const extractedCartIds = carts.map(cart => cart.id || cart._id);  
+          setCartIds(extractedCartIds);  
+        }
+      }, [carts]);
+      console.log(cartIds);
+
     const dispatch = useDispatch();
     let { totalprice, totalQuntity } = carts.reduce((acc, item) => {
         acc.totalprice += item.price * item.qun
@@ -47,6 +56,7 @@ const Checkout = () => {
             postnumber: postnumber,
             number: number,
             email: user?.email,
+            productsIds:cartIds,
             productQuntity: totalQuntity,
             productPrice: totalprice + 100,
         }

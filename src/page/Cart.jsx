@@ -65,8 +65,8 @@ const Cart = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {carts.map((item, i) =>
-                                        <tr key={item.id}>
+                                    {carts.map((item, key) =>
+                                        <tr key={key}>
 
                                             <th>
                                                 <div className='flex gap-2'>
@@ -77,7 +77,7 @@ const Cart = () => {
 
                                             </th>
                                             <td>
-                                                ${item?.price?.toFixed(2)}
+                                                ${parseFloat(item?.price).toFixed(2)}
 
                                             </td>
                                             <td>
@@ -98,7 +98,7 @@ const Cart = () => {
                                                 </div>
                                             </td>
                                             {/* .toFixed(2) */}
-                                            <td>${((item.price)?.toFixed(2) * item.qun)}</td>
+                                            <td>${(parseFloat(item.price)?.toFixed(2) * item.qun)}</td>
                                             <th>
                                                 <button
                                                     onClick={() => handleDelete(item.id)}
@@ -146,7 +146,7 @@ const Cart = () => {
                                 <p className='w-1/2 px-5 py-4 border-r border-r-[#F0F0F0] font-bold'>Product quantity </p> <span className='w-1/2 px-5 py-4'>{totalQuntity} </span>
                             </div>
                             <div className=' flex justify-between'>
-                                <p className='w-1/2 border-r border-r-[#F0F0F0] py-4 px-5 font-bold'> Total</p> <span className='w-1/2 py-4 px-5'>{totalprice?.toFixed(2)} $</span>
+                                <p className='w-1/2 border-r border-r-[#F0F0F0] py-4 px-5 font-bold'> Total</p> <span className='w-1/2 py-4 px-5'>{parseFloat(totalprice?.toFixed(2))} $</span>
                             </div>
 
                         </div>

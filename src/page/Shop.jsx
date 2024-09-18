@@ -19,21 +19,35 @@ const Shop = () => {
     const [open2, setOpen2] = useState(true)
     const [open3, setOpen3] = useState(true)
     const [open4, setOpen4] = useState(true);
-
-
     useEffect(() => {
         setCategorey([... new Set(data?.map(item => item.category))])
         setBrand([... new Set(data?.map(item => item.brand))])
+        if (data) {
+            setitem(data); 
+          }
     }, [data])
-    const handleByNew = () => {
-        const sortedByNew = [...data]?.sort((a, b) => new Date(b.meta.createdAt) - new Date(a.meta.createdAt));
-        setitem(sortedByNew);
-    };
 
-    const handleByOld = () => {
-        const sortedByOld = [...data]?.sort((a, b) => new Date(a.meta.createdAt) - new Date(b.meta.createdAt));
-        setitem(sortedByOld);
-    };
+    const handleByNew = () => {
+        if (item && item.length > 0) {
+          const sortedByNew = [...item].sort((a, b) => {
+            const dateA = new Date(b.createAt);
+            const dateB = new Date(a.createAt);
+            return dateA - dateB;
+          });
+          setitem(sortedByNew);
+        }
+      };
+      
+      const handleByOld = () => {
+        if (item && item.length > 0) {
+          const sortedByOld = [...item].sort((a, b) => {
+            const dateA = new Date(b.createAt);
+            const dateB = new Date(a.createAt);
+            return dateB - dateA;
+          });
+          setitem(sortedByOld);
+        }
+      };
 
     const handlefilter = filter => {
         const filterItem = data?.filter(items => items.category === filter);
@@ -215,17 +229,19 @@ const Shop = () => {
                                     <p>Sort by:</p>
                                     <select
                                         onChange={(e) => {
+                                            console.log(e.target.value);  // Log the selected value to check if the event is firing
                                             if (e.target.value === "new") {
                                                 handleByNew();
                                             } else if (e.target.value === "old") {
                                                 handleByOld();
                                             }
                                         }}
-                                        name="sort" id="sort" className='text-[#737373] text-[16px] font-normal border border-[#e8e8e8] py-1 px-5'>
-
-                                        <option value="new">new</option>
-                                        <option value="old">old</option>
-
+                                        name="sort"
+                                        id="sort"
+                                        className="text-[#737373] text-[16px] font-normal border border-[#e8e8e8] py-1 px-5"
+                                    >
+                                        <option value="new">New</option>
+                                        <option value="old">Old</option>
                                     </select>
                                 </div>
                                 <div className='flex  items-center gap-4'>

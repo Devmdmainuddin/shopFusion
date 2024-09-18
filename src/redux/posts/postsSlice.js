@@ -35,10 +35,10 @@ export const checkout = createAsyncThunk(
 // get checkout
 export const getCheckout = createAsyncThunk(
     'posts/getCheckout',
-    async (_, { rejectWithValue }) => {
+    async (email, { rejectWithValue }) => {
         try {
             const response = await axios.get(
-                'https://shop-fusion-server-one.vercel.app/checkout',  // Endpoint for general checkout data
+                `https://shop-fusion-server-one.vercel.app/checkout/${email}`,  // Endpoint for general checkout data
                 {
                     withCredentials: true,
                 }

@@ -36,7 +36,7 @@ const Checkout = () => {
         const county = form.county.value
         const postnumber = form.postnumber.value
         const number = form.number.value
-        const email = form.email.value
+        // const email = form.email.value
         const info = {
             fname: fname,
             lname: lname,
@@ -46,7 +46,7 @@ const Checkout = () => {
             county: county,
             postnumber: postnumber,
             number: number,
-            email: email,
+            email: user?.email,
             productQuntity: totalQuntity,
             productPrice: totalprice + 100,
         }
@@ -54,9 +54,9 @@ const Checkout = () => {
         try {
             dispatch(checkout(info))
                 .unwrap()
-                .then((res) => console.log("Checkout success:", res))
+                .then((res) => navigate(`/payment`))
                 .catch((err) => console.log("Checkout failed:", err));
-                navigate(`/payment`)
+                
 
         } catch (err) {
             console.log(err);
@@ -250,11 +250,6 @@ const Checkout = () => {
                                     </div>
 
                                 </div>
-
-
-
-
-
                             </div>
                         </div>
                       

@@ -12,8 +12,8 @@ const Payment = () => {
     const { selectedCheckout, isLoading, error } = useSelector((state) => state.posts);
     console.log(selectedCheckout);
     useEffect(() => {
-        dispatch(getCheckout());
-    }, [dispatch]);
+        dispatch(getCheckout(user.email));
+    }, [dispatch,user.email]);
 
     if (isLoading) {
         return <div>Loading...</div>;

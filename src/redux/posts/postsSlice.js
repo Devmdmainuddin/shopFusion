@@ -36,21 +36,21 @@ export const checkout = createAsyncThunk(
 export const getCheckout = createAsyncThunk(
     'posts/getCheckout',
     async (email, { rejectWithValue }) => {
-        try {
-            const response = await axios.get(
-                `https://shop-fusion-server-one.vercel.app/checkout/${email}`,  // Endpoint for general checkout data
-                {
-                    withCredentials: true,
-                }
-            );
-            return response.data;
-        } catch (error) {
-            // Log error and return it with rejectWithValue for better error handling
-            console.error("Get Checkout error:", error);
-            return rejectWithValue(error.response ? error.response.data : error.message);
-        }
+      try {
+        const response = await axios.get(
+          `https://shop-fusion-server-one.vercel.app/checkout/${email}`,  // Correct email in URL
+          { withCredentials: true }  // Include credentials if necessary
+        );
+        return response.data;  // Return the data from the response
+      } catch (error) {
+        console.error("Get Checkout error:", error);  // Log the error for debugging
+        return rejectWithValue(
+          error.response ? error.response.data : error.message
+        );  // Handle rejection properly
+      }
     }
-);
+  );
+  
 // delete checkout
 export const deleteCheckout = createAsyncThunk(
     'posts/deleteCheckout',

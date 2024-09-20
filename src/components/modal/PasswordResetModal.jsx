@@ -27,7 +27,6 @@ const PasswordResetModal = ({ setIsOpen, isOpen, }) => {
 
 
             try {
-             
                 await resetPassword(email);
                 setLoading(false)
                 setIsOpen(false)

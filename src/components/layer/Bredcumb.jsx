@@ -11,7 +11,7 @@ const Bredcumb = () => {
                     <h2 className='text-[#262626] text-2xl md:text-5xl font-bold capitalize'>{`${window.location.pathname.split("/")[1]}`}</h2>
                     <p></p>
                     <ul className='flex items-center gap-2 mt-3'>
-                        <li className='text-xl font-normal text-[#6D6D60] flex items-center'><Link to='/'>Home  </Link><Link >{` - ${window.location.pathname.split("/")[1]}`}</Link></li>
+                        <li className='text-xl font-normal text-[#6D6D60] flex items-center'><Link to='/'>Home  </Link><span >{` - ${window.location.pathname.split("/")[1]}`}</span></li>
 
                     </ul>
                 </div>

@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { deleteCheckout } from "../redux/posts/postsSlice";
 import { clearCart } from "../redux/state/cartSlice";
 import { useNavigate } from "react-router-dom";
+import PropTypes from 'prop-types'
 
 const ChackoutForm = ({total,id}) => {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ const ChackoutForm = ({total,id}) => {
 
     event.preventDefault();
     if (!clientSecret) {
-      console.error("Client Secret is missing!");
+     
       return;
     }
     if (!stripe || !elements) {
@@ -58,7 +59,7 @@ const ChackoutForm = ({total,id}) => {
     if (error) {
       console.log('error', error);
     } else {
-      console.log('paymentMethod', paymentMethod);
+    
       setError('')
     }
     const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
@@ -71,12 +72,12 @@ const ChackoutForm = ({total,id}) => {
       },
     });
     
-    console.log("Payment Intent:", paymentIntent); // Debugging
+    
     if (confirmError) {
-      console.error("Confirm Error:", confirmError); // Debugging
+     
       return;
     } else {
-      console.log('payment intent', paymentIntent)
+     
       if (paymentIntent.status === 'succeeded') {
         setTransactionId(paymentIntent.id);
         const payment = {
@@ -135,5 +136,9 @@ const ChackoutForm = ({total,id}) => {
       </form>
     </div>
   );
+}
+ChackoutForm.propTypes = {
+  total: PropTypes.number,
+  id: PropTypes.string,
 }
 export default ChackoutForm;

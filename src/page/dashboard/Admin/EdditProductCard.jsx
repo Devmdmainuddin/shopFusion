@@ -37,10 +37,7 @@ const EdditProductCard = () => {
         const tag04 = form.tag04.value;
         const update = (new Date()).toDateString();
         const productid = product?._id
-
-
         const info = {
-
             title,
             brand,
             price,
@@ -325,7 +322,7 @@ const EdditProductCard = () => {
                         <input
                             className=" py-4 px-10 border border-[#262626] bg-[#262626] text-white hover:text-[#262626] hover:border-[#262626] hover:bg-transparent transition-all duration-500 ease-in-out"
                             type="submit"
-                            value="Add product"
+                            value="Edit product"
                         />
                     </div>
                 </div>

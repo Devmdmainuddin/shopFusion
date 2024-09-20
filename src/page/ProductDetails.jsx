@@ -43,65 +43,6 @@ const ProductDetails = () => {
         },
     })
 
-    // useEffect(() => {
-    //     dispatch(fetchPosts())
-    // }, [dispatch])
-
-
-
-    // add comment/reviews
-    // const { mutateAsync: addReviews } = useMutation({
-    //     mutationFn: async commentData => {
-    //         const { data } = await axiosSecure.post(`/comment`, commentData)
-    //         return data
-    //     },
-    //     onSuccess: () => {
-    //         Swal.fire({
-    //             position: "top-end",
-    //             icon: "success",
-    //             title: "Your comment has been added",
-    //             showConfirmButton: false,
-    //             timer: 1500
-    //         });
-
-    //         // console.log("data add successfully")
-    //     }
-    // })
-    // add to cart
-    // const { mutateAsync: submitData } = useMutation({
-    //     mutationFn: async updateData => {
-    //         const { data } = await axiosCommon.put(`/cart`, updateData)
-    //         return data
-    //     },
-    //     onSuccess: () => {
-
-    //         Swal.fire({
-    //             position: "top-end",
-    //             icon: "success",
-    //             title: "Your product has been add to cart",
-    //             showConfirmButton: false,
-    //             timer: 1500
-    //         });
-    //     }
-    // })
-    // add to Wishlist
-    // const { mutateAsync: submitWishlist } = useMutation({
-    //     mutationFn: async updateData => {
-    //         const { data } = await axiosCommon.put(`/wishlist`, updateData)
-    //         return data
-    //     },
-    //     onSuccess: () => {
-
-    //         Swal.fire({
-    //             position: "top-end",
-    //             icon: "success",
-    //             title: "Your product has been add to cart",
-    //             showConfirmButton: false,
-    //             timer: 1500
-    //         });
-    //     }
-    // })
-
 
     // add comment/reviews
     const handelReview = async (e) => {
@@ -253,9 +194,9 @@ const ProductDetails = () => {
                                         <div><FaPlus className={`absolute right-2 top-1/2 -translate-y-1/2 transition-all duration-150 ${open ? "opacity-0 rotate-90" : "opacity-100"}`}></FaPlus><FaMinus className={`absolute right-2 top-1/2 -translate-y-1/2 transition-all duration-150 ${open ? "opacity-100 " : "opacity-0 rotate-90"}`}></FaMinus></div>
                                     </div>
                                     {open &&
-                                        <div className="collapse-content text-[#767676]">
-                                            <h2>descaption</h2>
-                                            {products?.descaption} {/* <p>tabindex={0} attribute is necessary to make the div focusable</p> */}
+                                        <div className=" text-[#767676]">
+                                            <h2>{products?.descaption}</h2>
+                                             {/* <p>tabindex={0} attribute is necessary to make the div focusable</p> */}
                                         </div>
                                     }
                                 </div>
@@ -266,8 +207,14 @@ const ProductDetails = () => {
                                         <div><FaPlus className={`absolute right-2 top-1/2 -translate-y-1/2 transition-all duration-150 ${open1 ? "opacity-0 rotate-90" : "opacity-100"}`}></FaPlus><FaMinus className={`absolute right-2 top-1/2 -translate-y-1/2 transition-all duration-150 ${open1 ? "opacity-100 " : "opacity-0 rotate-90"}`}></FaMinus></div>
                                     </div>
                                     {open1 &&
-                                        <div className="collapse-content text-[#767676]">
-                                            {products.shippingInformation} {/* <p>tabindex={0} attribute is necessary to make the div focusable</p> */}
+                                        <div className=" text-[#767676]">
+                                            <h3 className="text-3xl ">{products.title}</h3>
+                                            <ul>
+                                                <li>weight: {products.shipping_information.weight} kg</li>
+                                                <li>dimensions: {products.shipping_information.dimensions}</li>
+                                                <li>shipping_cost: {products.shipping_information.shipping_cost} $</li>
+                                            </ul>
+                                            {/* <p>tabindex={0} attribute is necessary to make the div focusable</p> */}
                                         </div>
                                     }
                                 </div>

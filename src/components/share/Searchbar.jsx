@@ -5,7 +5,7 @@ import { HiBars2 } from "react-icons/hi2";
 import { RiContactsFill } from "react-icons/ri";
 import Li from "../layer/Li";
 import { IoMdClose } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Container from "../layer/Container";
 import MegaMenuLi from "../layer/MegaMenuLi";
 import useAuth from "../../hooks/useAuth";
@@ -15,12 +15,16 @@ import useWishlist from "../../hooks/useWishlist";
 import { useDispatch, useSelector } from "react-redux";
 import { changeQuantity, deleteItem } from "../../redux/state/cartSlice";
 import PropTypes from 'prop-types';
+import { useGetproductsQuery } from "../../services/productApi";
 
 
 const Searchbar = ({ searchFilter, handleInput, searchInput, handleLink }) => {
+    const { data, error, isLoading, } = useGetproductsQuery()
     const { user, logOut } = useAuth()
+    const navigate = useNavigate();
     const carts = useSelector((state) => state.cart.cartItem)
     const [wishlist, , refash, wishlistTotal] = useWishlist()
+    const [cetegorey, setCategorey] = useState([])
     const [catOpen, setCatOpen] = useState(false)
     const [proOpen, setProOpen] = useState(false);
     const [wishlistOpen, setWishListOpen] = useState(false);
@@ -111,9 +115,16 @@ const Searchbar = ({ searchFilter, handleInput, searchInput, handleLink }) => {
     }
     useEffect(() => {
         const cartTotal = carts.reduce((acc, items) => acc + parseInt(items.price * items.qun), 0)
-
         setTotalPrice(cartTotal)
-    }, [carts])
+        setCategorey([... new Set(data?.map(item => item.category))])
+
+
+
+    }, [carts, data])
+
+    const handleCategoryFilter = (category) => {
+        navigate(`/shops?category=${encodeURIComponent(category)}`);
+      };
 
 
     return (
@@ -127,10 +138,13 @@ const Searchbar = ({ searchFilter, handleInput, searchInput, handleLink }) => {
                     <p className="ml-2 hidden md:block">Shop by Category</p>
 
                 </div>
-
                 <ul className={`${catOpen ? 'opacity-100 visible' : 'opacity-0 invisible'} categoryUl w-[163px] lg:w-[263px] bg-[#2D2D2D] p-6   absolute left-6 top-full translate-y-6 z-50`}>
+                    {cetegorey.map((item, key) =>
+                    <li onClick={()=>handleCategoryFilter(item)} key={key} className="text-[#ffffffc7] hover:text-white py-4  hover:pl-8 block text-sm font-bold transition-all duration-300 ">{item}</li>)}
 
-                    <Li to='/' megaMenu='h-full' content='Accesories' className='text-[#ffffffc7] hover:text-white py-4 font-normal hover:pl-8 block' >
+
+
+                    {/*   <Li to='/' megaMenu='h-full' content='Accesories' className='text-[#ffffffc7] hover:text-white py-4 font-normal hover:pl-8 block' >
                         <ul>
                             <h3>camera</h3>
                             <MegaMenuLi content="Phone 01" />
@@ -184,7 +198,7 @@ const Searchbar = ({ searchFilter, handleInput, searchInput, handleLink }) => {
 
                     <Li to='/' megaMenu='hidden' content='Electronics' className='text-[#ffffffc7] hover:text-white py-4 font-normal hover:px-8 block' ></Li>
 
-                    <Li to='/' megaMenu='hidden' content='Clothes' className='text-[#ffffffc7] hover:text-white py-4 font-normal hover:pl-8 block' ></Li>
+                    <Li to='/' megaMenu='hidden' content='Clothes' className='text-[#ffffffc7] hover:text-white py-4 font-normal hover:pl-8 block' ></Li> */}
 
                 </ul>
 

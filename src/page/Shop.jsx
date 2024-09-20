@@ -4,7 +4,7 @@ import { FaMinus, FaPlus, FaThList } from 'react-icons/fa';
 import Bredcumb from '../components/layer/Bredcumb';
 import { IoGrid } from 'react-icons/io5';
 import PaginatedItems from '../components/PaginatedItems';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useGetproductsQuery } from '../services/productApi';
 
 
@@ -19,36 +19,54 @@ const Shop = () => {
     const [open2, setOpen2] = useState(true)
     const [open3, setOpen3] = useState(true)
     const [open4, setOpen4] = useState(true);
+    const location = useLocation();
+    
+    
+
+
+    // console.log(data);
+    useEffect(() => {
+        const getCategoryFromQuery = () => {
+            const params = new URLSearchParams(location.search);
+            return params.get('category');
+        };
+        const category = getCategoryFromQuery();
+        if (data) {
+            if (category) {
+                const filtered = data.filter((product) => product.category === category);
+                setitem(filtered);
+            } else {
+                setitem(data);
+            }
+        }
+    }, [data, location]);
     useEffect(() => {
         setCategorey([... new Set(data?.map(item => item.category))])
         setBrand([... new Set(data?.map(item => item.brand))])
-        if (data) {
-            setitem(data); 
-          }
+        // if (data) {
+        //     setitem(data);
+        // }
     }, [data])
-
     const handleByNew = () => {
         if (item && item.length > 0) {
-          const sortedByNew = [...item].sort((a, b) => {
-            const dateA = new Date(b.createAt);
-            const dateB = new Date(a.createAt);
-            return dateA - dateB;
-          });
-          setitem(sortedByNew);
+            const sortedByNew = [...item].sort((a, b) => {
+                const dateA = new Date(b.createAt);
+                const dateB = new Date(a.createAt);
+                return dateA - dateB;
+            });
+            setitem(sortedByNew);
         }
-      };
-      
-      const handleByOld = () => {
+    };
+    const handleByOld = () => {
         if (item && item.length > 0) {
-          const sortedByOld = [...item].sort((a, b) => {
-            const dateA = new Date(b.createAt);
-            const dateB = new Date(a.createAt);
-            return dateB - dateA;
-          });
-          setitem(sortedByOld);
+            const sortedByOld = [...item].sort((a, b) => {
+                const dateA = new Date(b.createAt);
+                const dateB = new Date(a.createAt);
+                return dateB - dateA;
+            });
+            setitem(sortedByOld);
         }
-      };
-
+    };
     const handlefilter = filter => {
         const filterItem = data?.filter(items => items.category === filter);
         setitem(filterItem);
@@ -62,12 +80,9 @@ const Shop = () => {
         if (filterItem.length > 0) {
             setitem(filterItem);
         } else {
-            setitem("")
+            setitem([])
         }
-
     }
-
-
     const handleAllProduct = () => {
         setitem(data)
     }
@@ -188,21 +203,23 @@ const Shop = () => {
                             </div>
                             {open4 &&
                                 <div className={` `}>
-                                    <div onClick={() => handlePricefilter({ low: 0, high: 9.99 })} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
-                                        <p>$0.00 - $9.99</p>
+                                    <div onClick={() => handlePricefilter({ low:0, high:199 })} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
+                                        <p>$0.00 - $199</p>
                                     </div>
-                                    <div onClick={() => handlePricefilter({ low: 10.00, high: 19.99 })} className='flex justify-between py-4 border-b border-b-[#F0F0F0] px-4 leading-relaxed text-[13px] font-normal'>
-                                        <p>$10.00 - $19.99</p>
+                                    <div onClick={() => handlePricefilter({ low:200, high:299 })} className='flex justify-between py-4 border-b border-b-[#F0F0F0] px-4 leading-relaxed text-[13px] font-normal'>
+                                        <p>$200 - $299</p>
                                     </div>
-                                    <div onClick={() => handlePricefilter({ low: 20.00, high: 29.99 })} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
-                                        <p>$20.00 - $29.99</p>
+                                    <div onClick={() => handlePricefilter({ low:300, high:399 })} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
+                                        <p>$300 - $399</p>
                                     </div>
-                                    <div onClick={() => handlePricefilter({ low: 30.00, high: 39.99 })} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
-                                        <p>$30.00 - $39.99</p>
+                                    <div onClick={() => handlePricefilter({ low:400, high:499 })} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
+                                        <p>$400 - $499</p>
                                     </div>
-                                    <div onClick={() => handlePricefilter({ low: 40.00, high: 69.99 })} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
-                                        <p>$40.00 - $69.99</p>
+                                    <div onClick={() => handlePricefilter({ low:500, high:5000 })} className='flex justify-between py-4 px-4 border-b border-b-[#F0F0F0] leading-relaxed text-[13px] font-normal'>
+                                        <p>$500 - $1000</p>
                                     </div>
+
+                                  
 
                                 </div>
                             }
@@ -229,7 +246,7 @@ const Shop = () => {
                                     <p>Sort by:</p>
                                     <select
                                         onChange={(e) => {
-                                            console.log(e.target.value);  // Log the selected value to check if the event is firing
+                                            // Log the selected value to check if the event is firing
                                             if (e.target.value === "new") {
                                                 handleByNew();
                                             } else if (e.target.value === "old") {

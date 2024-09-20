@@ -29,6 +29,8 @@ import ErrorPage from './page/ErrorPage';
 import PrivateRoute from './routes/PrivateRoute';
 import Payment from './payment/Payment';
 import AdminHome from './page/dashboard/Admin/AdminHome';
+import AdminRoute from './routes/AdminRoute';
+import Profile from './page/dashboard/Profile/Profile';
 
 const router = createBrowserRouter([
   {
@@ -101,34 +103,43 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     // element: <DashboardLayout></DashboardLayout>,
-    element: <Dashboard/>,
+    element:<PrivateRoute><Dashboard/></PrivateRoute> ,
     children:[
+      // commone route
+      // {
+      //   path: "/dashboard/",
+      //   element: <PrivateRoute><AdminHome/></PrivateRoute> ,
+      // },
       {
-        path: "/dashboard/",
-        element: <AdminHome/>,
+        path: "/dashboard",
+        element: <PrivateRoute><Profile/></PrivateRoute> ,
       },
+      // admin && seller route
       {
         path: "/dashboard/addProduct",
-        element: <AddProducts/>,
+        element:<PrivateRoute><AdminRoute> <AddProducts/></AdminRoute></PrivateRoute>,
       },
       {
         path: "/dashboard/edditProduct/:id",
-        element: <EdditProductCard/>,
+        element: <PrivateRoute><AdminRoute><EdditProductCard/></AdminRoute></PrivateRoute>,
         loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/product/${params.id}`)
       },
       {
         path: "/dashboard/manageProduct",
-        element: <ManageProduct/>,
+        element:<PrivateRoute><AdminRoute><ManageProduct/></AdminRoute></PrivateRoute> ,
+      },
+        // admin  route
+      {
+        path: "/dashboard/manageUsers",
+        element:<PrivateRoute><AdminRoute><ManageUsers/></AdminRoute> </PrivateRoute> ,
       },
 
+        // user route
       {
         path: "/dashboard/cart",
         element: <Cart/>,
       },
-      {
-        path: "/dashboard/manageUsers",
-        element: <ManageUsers/>,
-      },
+      
     ]
   }
   

@@ -70,7 +70,7 @@ const Navbar = () => {
                 <div className="cursor2  fixed w-2 h-2 bg-[#0ae9cf] rounded-full left-0 top-0 -translate-y-1/2 -translate-x-1/2 z-50 transition-all duration-200"></div>
                 <nav className="flex justify-end md:justify-center items-center relative md:py-8 py-3 px-3 md:px-0 ">
                     <div className="logo">
-                        <Image src={logo} alt="logo image" className="absolute left-6 top-1/2 -translate-y-1/2" ></Image>
+                     <Link to='/'>  <Image src={logo} alt="logo image" className="absolute left-6 top-1/2 -translate-y-1/2" ></Image></Link>  
                         {/* <img src={logo} alt="" className="absolute left-6 top-1/2 -translate-y-1/2" /> */}
                     </div>
                     {/*  ${show ? "opacity-100 visible z-50" : " opacity-0 invisible"}`} */}

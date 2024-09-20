@@ -45,11 +45,12 @@ const Dashboard = () => {
 
                 <ul className="mt-4">
 
-                    <SitebarLi to='' icon={<IoMdSettings />} text='Dashboard'></SitebarLi>
+                    <SitebarLi to='/dashboard/profile' icon={<IoMdSettings />} text='profile'></SitebarLi>
                     {role ==='user' && <GuestMenu />}
                     {role ==='Seller' && <SellerMenu />}
                     {role ==='admin' && <AdminMenu />}
-                    <SitebarLi to='' icon={<RiLockPasswordFill />} text='Settings'></SitebarLi>
+                    <button onClick={logOut} className="py-2 px-4 text-gray-600 hover:text-gray-700  rounded-md group-[.active]:bg-gray-700 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">logOut</button>
+                    {/* <SitebarLi to='' icon={<RiLockPasswordFill />} text='logOut'></SitebarLi> */}
                    
                    
                 </ul>

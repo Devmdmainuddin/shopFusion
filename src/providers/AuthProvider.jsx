@@ -10,9 +10,13 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
+  updatePassword,
+  EmailAuthProvider, reauthenticateWithCredential
 } from 'firebase/auth'
 import { app } from '../firebase/firebase.config'
 import useAxiosCommon from '../hooks/useAxiosCommon'
+import toast from 'react-hot-toast'
+import Swal from 'sweetalert2'
 export const AuthContext = createContext(null)
 const auth = getAuth(app)
 const googleProvider = new GoogleAuthProvider()
@@ -21,7 +25,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const axiosCommon = useAxiosCommon()
-  
+
   const createUser = (email, password) => {
     setLoading(true)
     return createUserWithEmailAndPassword(auth, email, password)
@@ -36,7 +40,25 @@ const AuthProvider = ({ children }) => {
     setLoading(true)
     return signInWithPopup(auth, googleProvider)
   }
+  const handleUpdatePassword =async (password, currentPassword) => {
+    const currentuser = auth.currentUser;
+    const credential = EmailAuthProvider.credential(currentuser.email, currentPassword);
+   
+    try {
+      await reauthenticateWithCredential(currentuser, credential);
+      await updatePassword(user, password);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your password has been updated",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) {
+      toast.error(error.message);
+    }
 
+  }
   const resetPassword = email => {
     setLoading(true)
     return sendPasswordResetEmail(auth, email)
@@ -55,16 +77,16 @@ const AuthProvider = ({ children }) => {
       photoURL: photo,
     })
   }
-//  const saveUser = async user =>{
-//     const currentUser= {
-//       name:user?.displayName,
-//       email:user?.email,
-//       role:'user',
-//       status:'verified',
-//     }
-//     const {data} = await axiosCommon.put(`/user`,currentUser)
-//     return data
-//   }
+  //  const saveUser = async user =>{
+  //     const currentUser= {
+  //       name:user?.displayName,
+  //       email:user?.email,
+  //       role:'user',
+  //       status:'verified',
+  //     }
+  //     const {data} = await axiosCommon.put(`/user`,currentUser)
+  //     return data
+  //   }
 
 
   useEffect(() => {
@@ -104,6 +126,7 @@ const AuthProvider = ({ children }) => {
     resetPassword,
     logOut,
     updateUserProfile,
+    handleUpdatePassword
   }
 
   return (

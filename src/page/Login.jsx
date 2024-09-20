@@ -1,17 +1,22 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Container from "../components/layer/Container";
 import Bredcumb from "../components/layer/Bredcumb";
-import Button02 from "../components/layer/Button02";
 import Button01 from "../components/layer/Button01";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
+import { useState } from "react";
+import PasswordResetModal from "../components/modal/PasswordResetModal";
 
 
 const Login = () => {
-    const { signIn, setLoading } = useAuth()
+    const { signIn,resetPassword, setLoading } = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
+    const [isOpen, setIsOpen] = useState(false)
     const from = location?.state || '/'
+
+
+
     const handleSubmit = async e => {
         e.preventDefault()
         const form = e.target
@@ -68,7 +73,8 @@ const Login = () => {
 
                         </div>
                         {/* <Button02 className=' mt-7' text='Log in'></Button02> */}
-
+                        <div className="flex justify-end w-[508px]"> <button onClick={()=>setIsOpen(!isOpen)} className="text-red-600 uppercase border border-red-600 p-2" >forget password</button></div>
+                       <PasswordResetModal isOpen={isOpen} setIsOpen={setIsOpen}></PasswordResetModal>
                     </div>
                     <div className='mt-10 mb-[140px]'>
                         <h2 className='text-3xl font-bold mb-[38px]'>New Customer</h2>

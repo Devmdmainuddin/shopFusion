@@ -11,7 +11,8 @@ import {
   signOut,
   updateProfile,
   updatePassword,
-  EmailAuthProvider, reauthenticateWithCredential
+  EmailAuthProvider,
+   reauthenticateWithCredential
 } from 'firebase/auth'
 import { app } from '../firebase/firebase.config'
 import useAxiosCommon from '../hooks/useAxiosCommon'
@@ -126,7 +127,8 @@ const AuthProvider = ({ children }) => {
     resetPassword,
     logOut,
     updateUserProfile,
-    handleUpdatePassword
+    handleUpdatePassword,
+    sendPasswordResetEmail
   }
 
   return (

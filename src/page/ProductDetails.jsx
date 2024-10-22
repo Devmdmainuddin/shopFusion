@@ -64,7 +64,7 @@ const ProductDetails = () => {
             Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: " create product  ",
+                title: " create review  ",
                 showConfirmButton: false,
                 timer: 1500
             });
@@ -195,8 +195,7 @@ const ProductDetails = () => {
                                     </div>
                                     {open &&
                                         <div className=" text-[#767676]">
-                                            <h2>{products?.descaption}</h2>
-                                             {/* <p>tabindex={0} attribute is necessary to make the div focusable</p> */}
+                                            <h2>{products?.descaption}</h2> 
                                         </div>
                                     }
                                 </div>
@@ -214,26 +213,11 @@ const ProductDetails = () => {
                                                 <li>dimensions: {products.shipping_information.dimensions}</li>
                                                 <li>shipping_cost: {products.shipping_information.shipping_cost} $</li>
                                             </ul>
-                                            {/* <p>tabindex={0} attribute is necessary to make the div focusable</p> */}
+                                         
                                         </div>
                                     }
                                 </div>
 
-                                {/* <div tabIndex={0} className="collapse collapse-plus ">
-                                    <div className="collapse-title text-[#262626] text-[16px] font-bold">FEATURES  & DETAILS</div>
-                                    <div className="collapse-content text-[#767676]">
-                                        {products.descaption} 
-                                    </div>
-                                </div> */}
-                                {/* <div tabIndex={0} className="collapse collapse-plus ">
-                                    <div className="collapse-title text-[#262626] text-[16px] font-bold">SHIPPING & RETURNS</div>
-                                    <div className="collapse-content text-[#767676]">
-                                        <p>tabindex={0} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-                                        </p>
-                                    </div>
-                                </div> */}
-                                {/* tabs */}
                                 <div>
                                     <Tabs>
                                         <TabList className=" flex gap-16 items-center text-xl py-6 ">

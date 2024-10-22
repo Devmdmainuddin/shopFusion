@@ -36,6 +36,7 @@ export const productApi = createApi({
             }),
             invalidatesTags:  [{ type: 'product', id: 'LIST' },] 
         }),
+        
         // update product
         updateProduct: builder.mutation({
             query: ({id,updateProduct}) => ({

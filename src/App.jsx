@@ -15,14 +15,14 @@ import Account from './page/Account';
 import Dashboard from './page/dashboard/Dashboard';
 import ProductDetails from './page/ProductDetails';
 import Login from './page/Login';
-// import SignUp from './page/SignUp';
+
 import Registation from './page/Registation';
 import ManageUsers from './page/dashboard/Admin/ManageUsers';
 import AddProducts from './components/form/AddProducts';
 // import Cart from './page/dashboard/user/Cart';
 import EdditProductCard from './page/dashboard/Admin/EdditProductCard';
 import ManageProduct from './page/dashboard/Admin/ManageProduct';
-import SignUp from './page/SignUp';
+
 import Cart from './page/Cart'
 import Checkout from './page/Checkout';
 import ErrorPage from './page/ErrorPage';
@@ -66,10 +66,10 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login/>,
       },
-      {
-        path: "/signup",
-        element: <SignUp/>,
-      },
+      // {
+      //   path: "/signup",
+      //   element: <SignUp/>,
+      // },
       {
         path: "/registation",
         element: <Registation/>,

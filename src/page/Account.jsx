@@ -2,12 +2,9 @@
 import { IoIosArrowForward } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import Container from '../components/layer/Container';
-import useUser from '../hooks/useUser';
+
 
 const Account = () => {
-    const [users] = useUser()
-
-
     return (
         <>
         <div>

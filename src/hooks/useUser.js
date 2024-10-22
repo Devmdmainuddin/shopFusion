@@ -11,8 +11,6 @@ const useUser = () => {
             return data
         },
     })
-
-
     // const cartTotal = product.reduce((acc,items)=> acc + parseInt(items.price),0)
     return [users, loading, refetch,]
 };

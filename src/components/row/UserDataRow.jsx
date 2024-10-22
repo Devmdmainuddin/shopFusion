@@ -7,36 +7,7 @@ const UserDataRow = ({ user,refetch}) => {
   const [isOpen, setIsOpen] = useState(false)
   const axiosSecure = useAxiosSecure()
 
-//   const { mutateAsync } = useMutation({
-//     mutationFn: async role => {
-//       const { data } = await axiosSecure.patch(`/users/update/${user.email}`, role)
-//       return data
-//     },
-//     onSuccess: data => {
-//       refetch()
-//       // console.log(data)
-//       toast.success('user role update successfully')
-//       setIsOpen(false)
-
-//     }
-//   })
-
-
-//   const modalHandler = async selected => {
-//     const userRole = {
-//       role: selected,
-//       status: 'verified',
-//     }
-//     try {
-//       refetch()
-//        await mutateAsync(userRole) 
-//     } catch (err) {
-//       console.log(err.message);
-//       toast.error(err.message)
-//     }
-//   }
-
-
+  
   const handleDelet = id => {
     Swal.fire({
         title: "Are you sure?",

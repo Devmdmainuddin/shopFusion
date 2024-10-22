@@ -1,8 +1,8 @@
 import Container from "../layer/Container";
 import Image from "../layer/Image";
-import banner_1 from '/banner-1.jpg'
-import banner_2 from '/banner-2.jpg'
-import banner_3 from '/banner-3.jpg'
+import banner_1 from '/b10.jpg'
+import banner_2 from '/b2.jpg'
+import banner_3 from '/b3.jpg'
 const Banner = () => {
     return (
         <div className="mt-[128px]">

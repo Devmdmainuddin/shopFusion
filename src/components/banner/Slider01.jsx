@@ -3,7 +3,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useState } from "react";
 import Image from "../layer/Image";
-import b1 from '/banner.jpg'
+import b1 from '/hero/b2.jpg'
+import b2 from '/hero/b6.jpg'
+import b3 from '/hero/b7.jpg'
 const Slider01 = () => {
   let [active, setActive] = useState(0)
 
@@ -109,10 +111,10 @@ const Slider01 = () => {
           <Image className="w-full" src={b1} href="#" />
         </div>
         <div className=' bg-slate-400'>
-          <Image className="w-full" src={b1} href="#" />
+          <Image className="w-full" src={b2} href="#" />
         </div>
         <div className=' bg-slate-400'>
-          <Image className="w-full" src={b1} href="#" />
+          <Image className="w-full" src={b3} href="#" />
         </div>
 
       </Slider>

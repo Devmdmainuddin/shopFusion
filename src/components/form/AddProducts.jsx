@@ -5,17 +5,7 @@ import { imageUpload } from "../../utils";
 import { useAddProductMutation } from "../../services/productApi";
 
 
-// const InputFilds = ({ laberText, placeholder, type, name }) => {
-//     return <div className={`border-b w-full md:w-[508px] border-[#73dcf9]`}>
-//         <label className='font-bold uppercase' htmlFor={name}>{laberText}</label>
-//         <input
-//             name={name}
-//             id=''
-//             className='block w-full pb-4 mt-4 outline-none bg-transparent'
-//             type={type}
-//             placeholder={placeholder} />
-//     </div>
-// }
+
 const AddProducts = () => {
     const { user } = useAuth() || {}
     const [addProduct]=useAddProductMutation()

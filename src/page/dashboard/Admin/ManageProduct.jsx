@@ -1,13 +1,14 @@
 import Swal from "sweetalert2";
 import ManageProductRow from "../../../components/row/ManageProductRow";
 import { useDeleteProductMutation, useGetproductsQuery } from "../../../services/productApi";
+import useProduct from "../../../hooks/useProduct";
 
 
 const ManageProduct = () => {
   const { data, error, isLoading, } = useGetproductsQuery()
   const [deleteProduct] = useDeleteProductMutation()
- 
-  
+ const [product]=useProduct()
+  console.log(product);
   const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",

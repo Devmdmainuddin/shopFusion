@@ -6,7 +6,6 @@ import useAxiosCommon from "../../../hooks/useAxiosCommon";
 
 const Cart = () => {
     const [cartItems, ,refetch,cartTotal] = useCartItems()
-    // const totalprice = cart.reduce((total, item) => total + parseInt(item.price), 0)
     const axiosCommon = useAxiosCommon()
     const handleDelet = id => {
 

@@ -71,7 +71,7 @@ const PasswordResetModal = ({ setIsOpen, isOpen, }) => {
                                 as='h3'
                                 className='text-lg font-medium text-center leading-6 text-gray-900'
                             >
-                                Update profile
+                                Password Send
                             </DialogTitle>
                             <IoClose onClick={() => setIsOpen(false)} className="text-3xl ml-auto bg-red-300 rounded" />
                             <form action="" onSubmit={handleSubmit}>

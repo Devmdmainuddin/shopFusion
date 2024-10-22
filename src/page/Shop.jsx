@@ -10,7 +10,7 @@ import { useGetproductsQuery } from '../services/productApi';
 
 const Shop = () => {
     const { data, error, isLoading, } = useGetproductsQuery()
-    const [item, setitem] = useState(data)
+    const [item, setitem] = useState([])
     const [cetegorey, setCategorey] = useState([])
     const [activeMulti, setActiveMulti] = useState('')
     const [brand, setBrand] = useState([])
@@ -40,12 +40,10 @@ const Shop = () => {
             }
         }
     }, [data, location]);
+    
     useEffect(() => {
         setCategorey([... new Set(data?.map(item => item.category))])
         setBrand([... new Set(data?.map(item => item.brand))])
-        // if (data) {
-        //     setitem(data);
-        // }
     }, [data])
     const handleByNew = () => {
         if (item && item.length > 0) {
@@ -94,11 +92,6 @@ const Shop = () => {
     const handelActive = () => {
         setActiveMulti("active")
     }
-
-    // if (loading ) return <p>loadding.................</p>
-    // useEffect(() => {
-    //     dispatch(fetchPosts())
-    // }, [dispatch])
 
     let content;
     if (isLoading) {

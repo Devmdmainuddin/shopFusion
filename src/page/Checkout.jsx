@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { checkout } from "../redux/posts/postsSlice";
 import useUser from "../hooks/useUser";
 import useAuth from "../hooks/useAuth";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 

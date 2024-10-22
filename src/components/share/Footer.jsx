@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Container from "../layer/Container";
-import logo from '/logo.png'
+// import logo from '/logo.png'
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 const FooterLi = ({ text,to, className }) => {
@@ -73,7 +73,8 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div className="flex justify-center items-center">
-                        <img src={logo} alt="" />
+                        {/* <img src={logo} alt="" /> */}
+                        <h2 className="text-2xl flex items-center text-teal-500">Shop <span className="text-[#262624]">Fusion </span>  </h2>
                     </div>
                 </div>
                 <div className="flex flex-col lg:flex-row items-center justify-between pt-8 lg:pt-16 pb-[59px] gap-y-8 ">
